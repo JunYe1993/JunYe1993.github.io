@@ -70,9 +70,10 @@
 .hljs {
   display: block;
   overflow-x: auto;
-  background: #22221b;
-  color: #929181;
+  background: #282b2e;
+  color: #cacac4;
   padding: 0.5em;
+  border-radius: 4px;
 }
 
 .hljs-emphasis {
