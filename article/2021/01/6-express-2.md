@@ -7,6 +7,7 @@ Express - Route parameters
 
 *   server.js
     
+    ```js
             import express from 'express'
         
             // 建立 express 這 module
@@ -37,9 +38,11 @@ Express - Route parameters
                 var port = server.address().port
                 console.log("Example app listening at http://%s:%s", host, port)
             })
+    ```
     
 *   Testing ( [curl筆記](https://junye1993.blogspot.com/2021/01/linux-curl.html) )
     
+    ```bash
             $ curl -X GET http://localhost:8888/users/34/books/8989
             {"userId":"34","bookId":"8989"}
         
@@ -51,6 +54,7 @@ Express - Route parameters
         
             $ curl -X GET http://localhost:8888/users/
             /users
+    ```
     
 
 Express - Route handler
@@ -59,7 +63,8 @@ Express - Route handler
  Route handler 的 callback function 可以使用複數個，只要呼叫 next() 這個 function，便可執行下一個 callback function。
 
 *   server.js
-    
+
+    ```js    
             import express from 'express'
         
             // 建立 express 這 module
@@ -99,16 +104,20 @@ Express - Route handler
                 var port = server.address().port
                 console.log("Example app listening at http://%s:%s", host, port)
             })
+    ```
     
 *   Testing - client( [curl筆記](https://junye1993.blogspot.com/2021/01/linux-curl.html) )
     
+    ```bash
             $ curl -X GET http://localhost:8888/normal
             Hi, this is the second callback function!
             $ curl -X GET http://localhost:8888/array
             Hi, this is callbackC!
-    
+    ```
+
 *   Testing - server( [curl筆記](https://junye1993.blogspot.com/2021/01/linux-curl.html) )
-    
+
+    ```bash
             $ node Learning/11.Express\&ES6/Route_handler.js 
             Example app listening at http://:::8888
             Hello from the first callback function!
@@ -116,6 +125,7 @@ Express - Route handler
             Hello from callbackA function!
             Hello from callbackB function!
             Hello from callbackC function!
+    ```
     
 
 參考資料 :
