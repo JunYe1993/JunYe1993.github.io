@@ -1,0 +1,122 @@
+<p class="has-line-data" data-line-start="0" data-line-end="1"><a href="https://1.bp.blogspot.com/-AgLLG1tMStA/X45P5F8kF8I/AAAAAAAACc8/H8kNYyJT4jQH79A93yd05xr0I82-7GH7gCLcBGAsYHQ/s2048/Development.jpg"><img src="https://1.bp.blogspot.com/-AgLLG1tMStA/X45P5F8kF8I/AAAAAAAACc8/H8kNYyJT4jQH79A93yd05xr0I82-7GH7gCLcBGAsYHQ/w640-h426/Development.jpg" alt=""></a></p>
+<h2 class="code-line" data-line-start=2 data-line-end=4 ><a id="Express__Route_parameters_2"></a>Express - Route parameters</h2>
+<p class="has-line-data" data-line-start="5" data-line-end="6">Route parameters 可以用來擷取 URL 上的 value。</p>
+<ul>
+<li class="has-line-data" data-line-start="7" data-line-end="42">
+<p class="has-line-data" data-line-start="7" data-line-end="8">server.js</p>
+<pre><code class="has-line-data" data-line-start="10" data-line-end="41" class="language-js">        <span class="hljs-keyword">import</span> express <span class="hljs-keyword">from</span> <span class="hljs-string">'express'</span>
+    
+        // 建立 express 這 module
+        var app = express()
+        const port = 8888
+    
+        // 回傳 { <span class="hljs-string">"userId"</span>: xxx, <span class="hljs-string">"bookId"</span>: xxx }
+        app.get(<span class="hljs-string">'/users/:userId/books/:bookId'</span>, function (req, res) {
+            res.send(req.params)
+        })
+    
+        // 可以用 <span class="hljs-string">"-"</span> 分割，回傳 { <span class="hljs-string">"userId"</span>: xxx, <span class="hljs-string">"authorId"</span>: xxx, <span class="hljs-string">"bookId"</span>: xxx }
+        app.get(<span class="hljs-string">'/users/:userId-:authorId-:bookId'</span>, function (req, res) {
+            res.send(req.params)
+        })
+    
+        // 可以用 <span class="hljs-string">"."</span> 分割，回傳 { <span class="hljs-string">"userId"</span>: xxx, <span class="hljs-string">"authorId"</span>: xxx, <span class="hljs-string">"bookId"</span>: xxx }
+        app.get(<span class="hljs-string">'/users/:userId.:authorId.:bookId'</span>, function (req, res) {
+            res.send(req.params)
+        })
+    
+        app.get(<span class="hljs-string">'/users'</span>, function (req, res) {
+            res.send(<span class="hljs-string">"/users\n"</span>)
+        })
+    
+        var server = app.listen(port, function () {
+            var host = server.address().address
+            var port = server.address().port
+            console.log(<span class="hljs-string">"Example app listening at http://%s:%s"</span>, host, port)
+        })
+</code></pre>
+</li>
+<li class="has-line-data" data-line-start="42" data-line-end="57">
+<p class="has-line-data" data-line-start="42" data-line-end="43">Testing ( <a href="https://junye1993.blogspot.com/2021/01/linux-curl.html">curl筆記</a> )</p>
+<pre><code class="has-line-data" data-line-start="45" data-line-end="57" class="language-bash">        $ curl -X GET http://localhost:<span class="hljs-number">8888</span>/users/<span class="hljs-number">34</span>/books/<span class="hljs-number">8989</span>
+        {<span class="hljs-string">"userId"</span>:<span class="hljs-string">"34"</span>,<span class="hljs-string">"bookId"</span>:<span class="hljs-string">"8989"</span>}
+    
+        $ curl -X GET http://localhost:<span class="hljs-number">8888</span>/users/<span class="hljs-number">34</span>-<span class="hljs-number">789</span>-<span class="hljs-number">456</span>
+        {<span class="hljs-string">"userId"</span>:<span class="hljs-string">"34"</span>,<span class="hljs-string">"authorId"</span>:<span class="hljs-string">"789"</span>,<span class="hljs-string">"bookId"</span>:<span class="hljs-string">"456"</span>}
+    
+        $ curl -X GET http://localhost:<span class="hljs-number">8888</span>/users/<span class="hljs-number">34.123</span>.<span class="hljs-number">258</span>
+        {<span class="hljs-string">"userId"</span>:<span class="hljs-string">"34"</span>,<span class="hljs-string">"authorId"</span>:<span class="hljs-string">"123"</span>,<span class="hljs-string">"bookId"</span>:<span class="hljs-string">"258"</span>}
+    
+        $ curl -X GET http://localhost:<span class="hljs-number">8888</span>/users/
+        /users
+</code></pre>
+</li>
+</ul>
+<h2 class="code-line" data-line-start=59 data-line-end=61 ><a id="Express__Route_handler_59"></a>Express - Route handler</h2>
+<p class="has-line-data" data-line-start="62" data-line-end="63">Route handler 的 callback function 可以使用複數個，只要呼叫 next() 這個 function，便可執行下一個 callback function。</p>
+<ul>
+<li class="has-line-data" data-line-start="64" data-line-end="108">
+<p class="has-line-data" data-line-start="64" data-line-end="65">server.js</p>
+<pre><code class="has-line-data" data-line-start="67" data-line-end="107" class="language-js">        <span class="hljs-keyword">import</span> express <span class="hljs-keyword">from</span> <span class="hljs-string">'express'</span>
+    
+        // 建立 express 這 module
+        var app = express()
+        const port = 8888
+    
+        // 可以塞複數個 callback, 只要確保你有傳和呼叫 next()
+        app.get(<span class="hljs-string">'/normal'</span>, function (req, res, next) {
+            console.log(<span class="hljs-string">'Hello from the first callback function!'</span>)
+            next()
+        }, function (req, res) {
+            console.log(<span class="hljs-string">'Hello from the second callback function!'</span>)
+            res.send(<span class="hljs-string">"Hi, this is the second callback function!\n"</span>)
+            res.end()
+        })
+    
+        // array 版
+        function callbackA(req, res, next) {
+            console.log(<span class="hljs-string">'Hello from callbackA function!'</span>)
+            next()
+        }
+        function callbackB(req, res, next) {
+            console.log(<span class="hljs-string">'Hello from callbackB function!'</span>)
+            next()
+        }
+        function callbackC(req, res) {
+            console.log(<span class="hljs-string">'Hello from callbackC function!'</span>)
+            res.send(<span class="hljs-string">"Hi, this is callbackC!\n"</span>)
+            res.end()
+        }
+    
+        app.get(<span class="hljs-string">'/array'</span>, [callbackA, callbackB, callbackC])
+    
+    
+        var server = app.listen(port, function () {
+            var host = server.address().address
+            var port = server.address().port
+            console.log(<span class="hljs-string">"Example app listening at http://%s:%s"</span>, host, port)
+        })
+</code></pre>
+</li>
+<li class="has-line-data" data-line-start="108" data-line-end="117">
+<p class="has-line-data" data-line-start="108" data-line-end="109">Testing - client( <a href="https://junye1993.blogspot.com/2021/01/linux-curl.html">curl筆記</a> )</p>
+<pre><code class="has-line-data" data-line-start="111" data-line-end="116" class="language-bash">        $ curl -X GET http://localhost:<span class="hljs-number">8888</span>/normal
+        Hi, this is the second callback <span class="hljs-keyword">function</span>!
+        $ curl -X GET http://localhost:<span class="hljs-number">8888</span>/array
+        Hi, this is callbackC!
+</code></pre>
+</li>
+<li class="has-line-data" data-line-start="117" data-line-end="128">
+<p class="has-line-data" data-line-start="117" data-line-end="118">Testing - server( <a href="https://junye1993.blogspot.com/2021/01/linux-curl.html">curl筆記</a> )</p>
+<pre><code class="has-line-data" data-line-start="120" data-line-end="128" class="language-bash">        $ node Learning/<span class="hljs-number">11</span>.Express\&amp;ES6/Route_handler.js 
+        Example app listening at http://:::<span class="hljs-number">8888</span>
+        Hello from the first callback <span class="hljs-keyword">function</span>!
+        Hello from the second callback <span class="hljs-keyword">function</span>!
+        Hello from callbackA <span class="hljs-keyword">function</span>!
+        Hello from callbackB <span class="hljs-keyword">function</span>!
+        Hello from callbackC <span class="hljs-keyword">function</span>!
+</code></pre>
+</li>
+</ul>
+<p class="has-line-data" data-line-start="130" data-line-end="131">參考資料 :</p>
+<p class="has-line-data" data-line-start="132" data-line-end="133">1. <a href="http://expressjs.com/en/guide/routing.html">Express 官網</a></p>
