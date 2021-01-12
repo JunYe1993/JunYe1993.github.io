@@ -1,198 +1,200 @@
 <head>
     <style>/* Base16 Atelier Estuary Dark - Theme */
-        /* by Bram de Haan (http://atelierbram.github.io/syntax-highlighting/atelier-schemes/estuary) */
-        /* Original Base16 color scheme by Chris Kempson (https://github.com/chriskempson/base16) */
-        
-        /* Atelier-Estuary Comment */
-        .hljs-comment,
-        .hljs-quote {
-          color: #878573;
-        }
-        
-        /* Atelier-Estuary Red */
-        .hljs-variable,
-        .hljs-template-variable,
-        .hljs-attribute,
-        .hljs-tag,
-        .hljs-name,
-        .hljs-regexp,
-        .hljs-link,
-        .hljs-name,
-        .hljs-selector-id,
-        .hljs-selector-class {
-          color: #ba6236;
-        }
-        
-        /* Atelier-Estuary Orange */
-        .hljs-number,
-        .hljs-meta,
-        .hljs-built_in,
-        .hljs-builtin-name,
-        .hljs-literal,
-        .hljs-type,
-        .hljs-params {
-          color: #ae7313;
-        }
-        
-        /* Atelier-Estuary Green */
-        .hljs-string,
-        .hljs-symbol,
-        .hljs-bullet {
-          color: #7d9726;
-        }
-        
-        /* Atelier-Estuary Blue */
-        .hljs-title,
-        .hljs-section {
-          color: #36a166;
-        }
-        
-        /* Atelier-Estuary Purple */
-        .hljs-keyword,
-        .hljs-selector-tag {
-          color: #5f9182;
-        }
-        
-        .hljs-deletion,
-        .hljs-addition {
-          color: #22221b;
-          display: inline-block;
-          width: 100%;
-        }
-        
-        .hljs-deletion {
-          background-color: #ba6236;
-        }
-        
-        .hljs-addition {
-          background-color: #7d9726;
-        }
-        
-        .hljs {
-          display: block;
-          overflow-x: auto;
-          background: #282b2e;
-          color: #cacac4;
-          padding: 0.5em;
-          border-radius: 4px;
-        }
-        
-        .hljs-emphasis {
-          font-style: italic;
-        }
-        
-        .hljs-strong {
-          font-weight: bold;
-        }</style>
+/* by Bram de Haan (http://atelierbram.github.io/syntax-highlighting/atelier-schemes/estuary) */
+/* Original Base16 color scheme by Chris Kempson (https://github.com/chriskempson/base16) */
+
+/* Atelier-Estuary Comment */
+.hljs-comment,
+.hljs-quote {
+  color: #878573;
+}
+
+/* Atelier-Estuary Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-attribute,
+.hljs-tag,
+.hljs-name,
+.hljs-regexp,
+.hljs-link,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class {
+  color: #ba6236;
+}
+
+/* Atelier-Estuary Orange */
+.hljs-number,
+.hljs-meta,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params {
+  color: #ae7313;
+}
+
+/* Atelier-Estuary Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet {
+  color: #7d9726;
+}
+
+/* Atelier-Estuary Blue */
+.hljs-title,
+.hljs-section {
+  color: #36a166;
+}
+
+/* Atelier-Estuary Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+  color: #5f9182;
+}
+
+.hljs-deletion,
+.hljs-addition {
+  color: #22221b;
+  display: inline-block;
+  width: 100%;
+}
+
+.hljs-deletion {
+  background-color: #ba6236;
+}
+
+.hljs-addition {
+  background-color: #7d9726;
+}
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  background: #282b2e;
+  color: #cacac4;
+  padding: 0.5em;
+  border-radius: 4px;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}</style>
     <script src='//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.2/build/highlight.min.js'></script>
     <script>hljs.initHighlightingOnLoad();</script>
 </head>
 <body>
-    <div class="separator" style="clear: both; text-align: center;"><a href="https://1.bp.blogspot.com/-AgLLG1tMStA/X45P5F8kF8I/AAAAAAAACc8/H8kNYyJT4jQH79A93yd05xr0I82-7GH7gCLcBGAsYHQ/s2048/Development.jpg" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="1365" data-original-width="2048" height="426" src="https://1.bp.blogspot.com/-AgLLG1tMStA/X45P5F8kF8I/AAAAAAAACc8/H8kNYyJT4jQH79A93yd05xr0I82-7GH7gCLcBGAsYHQ/w640-h426/Development.jpg" width="640" /></a></div>
-    <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;"><span style="font-size: large;">Express - Route parameters</span></h2>
-    <font face="helvetica" size="4">&nbsp; &nbsp; Route parameters 可以用來擷取 URL 上的 value。</font>
-    <ul style="text-align: left;">
-    <li><font face="helvetica" size="4">server.js</font>
-        <pre style="width: 95%;"><code class="javascript">    import express from 'express'
+<div class="JunYeContainer" style="clear: both; margin: auto; width: 60%; padding: 10px;">
+<div class="separator" style="clear: both; text-align: center;"><a href="https://1.bp.blogspot.com/-AgLLG1tMStA/X45P5F8kF8I/AAAAAAAACc8/H8kNYyJT4jQH79A93yd05xr0I82-7GH7gCLcBGAsYHQ/s2048/Development.jpg" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="1365" data-original-width="2048" height="426" src="https://1.bp.blogspot.com/-AgLLG1tMStA/X45P5F8kF8I/AAAAAAAACc8/H8kNYyJT4jQH79A93yd05xr0I82-7GH7gCLcBGAsYHQ/w640-h426/Development.jpg" width="640" /></a></div>
+<h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;"><span style="font-size: large;">Express - Route parameters</span></h2>
+<font face="helvetica" size="4">&nbsp; &nbsp; Route parameters 可以用來擷取 URL 上的 value。</font>
+<ul style="text-align: left;">
+<li><font face="helvetica" size="4">server.js</font>
+    <pre style="width: 95%;"><code class="javascript">    import express from 'express'
 
-        // 建立 express 這 module
-        var app = express()
-        const port = 8888
+    // 建立 express 這 module
+    var app = express()
+    const port = 8888
 
-        // 回傳 { "userId": xxx, "bookId": xxx }
-        app.get('/users/:userId/books/:bookId', function (req, res) {
-            res.send(req.params)
-        })
+    // 回傳 { "userId": xxx, "bookId": xxx }
+    app.get('/users/:userId/books/:bookId', function (req, res) {
+        res.send(req.params)
+    })
 
-        // 可以用 "-" 分割，回傳 { "userId": xxx, "authorId": xxx, "bookId": xxx }
-        app.get('/users/:userId-:authorId-:bookId', function (req, res) {
-            res.send(req.params)
-        })
+    // 可以用 "-" 分割，回傳 { "userId": xxx, "authorId": xxx, "bookId": xxx }
+    app.get('/users/:userId-:authorId-:bookId', function (req, res) {
+        res.send(req.params)
+    })
 
-        // 可以用 "." 分割，回傳 { "userId": xxx, "authorId": xxx, "bookId": xxx }
-        app.get('/users/:userId.:authorId.:bookId', function (req, res) {
-            res.send(req.params)
-        })
+    // 可以用 "." 分割，回傳 { "userId": xxx, "authorId": xxx, "bookId": xxx }
+    app.get('/users/:userId.:authorId.:bookId', function (req, res) {
+        res.send(req.params)
+    })
 
-        app.get('/users', function (req, res) {
-            res.send("/users\n")
-        })
+    app.get('/users', function (req, res) {
+        res.send("/users\n")
+    })
 
-        var server = app.listen(port, function () {
-            var host = server.address().address
-            var port = server.address().port
-            console.log("Example app listening at http://%s:%s", host, port)
-        })</code></pre></li>
-    <li><font face="helvetica" size="4">Testing ( <a href="https://junye1993.blogspot.com/2021/01/linux-curl.html">curl筆記</a> )</font>
-        <pre style="width: 95%;"><code class="bash">    $ curl -X GET http://localhost:8888/users/34/books/8989
-        {"userId":"34","bookId":"8989"}
+    var server = app.listen(port, function () {
+        var host = server.address().address
+        var port = server.address().port
+        console.log("Example app listening at http://%s:%s", host, port)
+    })</code></pre></li>
+<li><font face="helvetica" size="4">Testing ( <a href="https://junye1993.blogspot.com/2021/01/linux-curl.html">curl筆記</a> )</font>
+    <pre style="width: 95%;"><code class="bash">    $ curl -X GET http://localhost:8888/users/34/books/8989
+    {"userId":"34","bookId":"8989"}
 
-        $ curl -X GET http://localhost:8888/users/34-789-456
-        {"userId":"34","authorId":"789","bookId":"456"}
+    $ curl -X GET http://localhost:8888/users/34-789-456
+    {"userId":"34","authorId":"789","bookId":"456"}
 
-        $ curl -X GET http://localhost:8888/users/34.123.258
-        {"userId":"34","authorId":"123","bookId":"258"}
+    $ curl -X GET http://localhost:8888/users/34.123.258
+    {"userId":"34","authorId":"123","bookId":"258"}
 
-        $ curl -X GET http://localhost:8888/users/
-        /users</code></pre></li>
-    </ul>
-    <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 24px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;"><span style="font-size: large;">Express - Route handler</span></h2>
-    <font face="helvetica" size="4">&nbsp; &nbsp; Route handler 的 callback function 可以使用複數個，只要呼叫 next() 這個 function，便可執行下一個 callback function。</font>
-    <ul style="text-align: left;">
-    <li><font face="helvetica" size="4">server.js</font>
-        <pre style="width: 95%;"><code class="javascript">    import express from 'express'
+    $ curl -X GET http://localhost:8888/users/
+    /users</code></pre></li>
+</ul>
+<h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 24px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;"><span style="font-size: large;">Express - Route handler</span></h2>
+<font face="helvetica" size="4">&nbsp; &nbsp; Route handler 的 callback function 可以使用複數個，只要呼叫 next() 這個 function，便可執行下一個 callback function。</font>
+<ul style="text-align: left;">
+<li><font face="helvetica" size="4">server.js</font>
+    <pre style="width: 95%;"><code class="javascript">    import express from 'express'
 
-        // 建立 express 這 module
-        var app = express()
-        const port = 8888
+    // 建立 express 這 module
+    var app = express()
+    const port = 8888
 
-        // 可以塞複數個 callback, 只要確保你有傳和呼叫 next()
-        app.get('/normal', function (req, res, next) {
-            console.log('Hello from the first callback function!')
-            next()
-        }, function (req, res) {
-            console.log('Hello from the second callback function!')
-            res.send("Hi, this is the second callback function!\n")
-            res.end()
-        })
+    // 可以塞複數個 callback, 只要確保你有傳和呼叫 next()
+    app.get('/normal', function (req, res, next) {
+        console.log('Hello from the first callback function!')
+        next()
+    }, function (req, res) {
+        console.log('Hello from the second callback function!')
+        res.send("Hi, this is the second callback function!\n")
+        res.end()
+    })
 
-        // array 版
-        function callbackA(req, res, next) {
-            console.log('Hello from callbackA function!')
-            next()
-        }
-        function callbackB(req, res, next) {
-            console.log('Hello from callbackB function!')
-            next()
-        }
-        function callbackC(req, res) {
-            console.log('Hello from callbackC function!')
-            res.send("Hi, this is callbackC!\n")
-            res.end()
-        }
+    // array 版
+    function callbackA(req, res, next) {
+        console.log('Hello from callbackA function!')
+        next()
+    }
+    function callbackB(req, res, next) {
+        console.log('Hello from callbackB function!')
+        next()
+    }
+    function callbackC(req, res) {
+        console.log('Hello from callbackC function!')
+        res.send("Hi, this is callbackC!\n")
+        res.end()
+    }
 
-        app.get('/array', [callbackA, callbackB, callbackC])
+    app.get('/array', [callbackA, callbackB, callbackC])
 
 
-        var server = app.listen(port, function () {
-            var host = server.address().address
-            var port = server.address().port
-            console.log("Example app listening at http://%s:%s", host, port)
-        })</code></pre></li>
-    <li><font face="helvetica" size="4">Testing - client( <a href="https://junye1993.blogspot.com/2021/01/linux-curl.html">curl筆記</a> )</font>
-        <pre style="width: 95%;"><code class="bash">    $ curl -X GET http://localhost:8888/normal
-        Hi, this is the second callback function!
-        $ curl -X GET http://localhost:8888/array
-        Hi, this is callbackC!</code></pre></li>
-    <li><font face="helvetica" size="4">Testing - server( <a href="https://junye1993.blogspot.com/2021/01/linux-curl.html">curl筆記</a> )</font>
-        <pre style="width: 95%;"><code class="bash">    $ node Learning/11.Express\&ES6/Route_handler.js 
-        Example app listening at http://:::8888
-        Hello from the first callback function!
-        Hello from the second callback function!
-        Hello from callbackA function!
-        Hello from callbackB function!
-        Hello from callbackC function!</code></pre></li>
-    </ul>
-    <div style="margin-top: 36px;"><span style="font-size: large;">參考資料 : </span></div>
-    <div>1. <a href="http://expressjs.com/en/guide/routing.html" style="font-size: large;">Express 官網</a></div>
+    var server = app.listen(port, function () {
+        var host = server.address().address
+        var port = server.address().port
+        console.log("Example app listening at http://%s:%s", host, port)
+    })</code></pre></li>
+<li><font face="helvetica" size="4">Testing - client( <a href="https://junye1993.blogspot.com/2021/01/linux-curl.html">curl筆記</a> )</font>
+    <pre style="width: 95%;"><code class="bash">    $ curl -X GET http://localhost:8888/normal
+    Hi, this is the second callback function!
+    $ curl -X GET http://localhost:8888/array
+    Hi, this is callbackC!</code></pre></li>
+<li><font face="helvetica" size="4">Testing - server( <a href="https://junye1993.blogspot.com/2021/01/linux-curl.html">curl筆記</a> )</font>
+    <pre style="width: 95%;"><code class="bash">    $ node Learning/11.Express\&ES6/Route_handler.js 
+    Example app listening at http://:::8888
+    Hello from the first callback function!
+    Hello from the second callback function!
+    Hello from callbackA function!
+    Hello from callbackB function!
+    Hello from callbackC function!</code></pre></li>
+</ul>
+<div style="margin-top: 36px;"><span style="font-size: large;">參考資料 : </span></div>
+<div>1. <a href="http://expressjs.com/en/guide/routing.html" style="font-size: large;">Express 官網</a></div>
+</div>
 </body>
