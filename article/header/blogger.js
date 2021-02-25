@@ -1,7 +1,5 @@
 // Include highlight CDN
-var highlight = document.createElement('script');  
-highlight.setAttribute('src','//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.2/build/highlight.min.js');
-document.head.appendChild(highlight);
+import hljs from 'highlight.js';
 
 // Active highlight
 hljs.initHighlightingOnLoad();
