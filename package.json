@@ -1,0 +1,22 @@
+{
+  "name": "myblogger",
+  "version": "1.0.0",
+  "description": "# highlight.js original version     js  : Highlight.js 10.1.2 (edd73d24)     css : atelier-estuary-dark.css         https://github.com/highlightjs/highlight.js/blob/master/src/styles/atelier-estuary-dark.css",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JunYe1993/MyBlogger.git"
+  },
+  "author": "JunYe1993",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JunYe1993/MyBlogger/issues"
+  },
+  "homepage": "https://github.com/JunYe1993/MyBlogger#readme",
+  "dependencies": {
+    "jquery": "^3.5.1"
+  }
+}
