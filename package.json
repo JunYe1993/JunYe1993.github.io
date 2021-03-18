@@ -15,8 +15,5 @@
   "bugs": {
     "url": "https://github.com/JunYe1993/MyBlogger/issues"
   },
-  "homepage": "https://github.com/JunYe1993/MyBlogger#readme",
-  "dependencies": {
-    "jquery": "^3.5.1"
-  }
+  "homepage": "https://github.com/JunYe1993/MyBlogger#readme"
 }
