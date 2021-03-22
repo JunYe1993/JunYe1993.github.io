@@ -1,6 +1,11 @@
 ## MyBlogger
 
-# highlight.js original version
-    js  : Highlight.js 10.1.2 (edd73d24)
-    css : atelier-estuary-dark.css
-        https://github.com/highlightjs/highlight.js/blob/master/src/styles/atelier-estuary-dark.css
+### Python
+* pip install requests
+* pip install beautifulsoup4
+* pip install lxml
+
+## Usage
+
+### Sync blogger
+python -m sync.bloggerCrawler
