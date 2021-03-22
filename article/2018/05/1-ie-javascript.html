@@ -1,0 +1,85 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-5519038846114117382">
+   我本人非專業寫網頁，大學沒寫過是進公司才學的，因為沒人維護XD
+   <br/>
+   公司常用瀏覽器是 IE，因為IE可以直接讓你以檔案總管的方式直接開啟 file://... 的超連結，其他瀏覽器都會擋，詳細原因我不知道，但這個可以讓你方便調用 SERVER 上資料，方便很多，其實其他瀏覽器也可以辦到，但要做設定，但不可能你叫公司員工都做這設定，所以大家都用 IE，離題了...
+   <br/>
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     JS 檔放到 Server 後無反應
+    </span>
+   </h3>
+   我自己在寫程式時，第一個問題是為什麼我
+   <b>
+    改.JS檔放到SERVER後無反應
+   </b>
+   <br/>
+   這裡
+   <b>
+    無反應
+   </b>
+   是指像什麼都沒改過一樣，搞了很久才發現原來
+   <b>
+    .JS檔會被瀏覽器存進快取
+   </b>
+   <br/>
+   所以只要檔名一樣，他就會跑之前的.JS 造成所謂無反應。
+   <br/>
+   <pre><code class="xml"> src="xxxx.js?2018032833"</code></pre>
+   想要解決又不想改檔名就靠這個
+   <b>
+    加流水號
+   </b>
+   ，簡單又方便
+   <br/>
+   <br/>
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     為什麼我的 IE 可以跑，別人的不行
+    </span>
+   </h3>
+   但這個又讓我引來第二個問題，
+   <b>
+    為什麼我的IE可以跑，別人的不行
+   </b>
+   <br/>
+   後來發現因為我對第一個問題有陰影，所以我總是進入
+   <b>
+    開發者模式
+   </b>
+   (IE 按F12)
+   <br/>
+   <b>
+    IE
+   </b>
+   只有在
+   <b>
+    開發者模式
+   </b>
+   才會認識 Javascript 的 console 這個物件
+   <br/>
+   沒開啟就不認識 console 導致
+   <b>
+    Javascript
+   </b>
+   又
+   <b>
+    失效
+   </b>
+   <br/>
+   所以放進 SERVER 前刪除所有 console 才是唯一解
+   <br/>
+   <br/>
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     IE 讀不了 JS，報錯
+    </span>
+   </h3>
+   有可能原因跟 CSS 一樣，用版本過舊的 IE 去讀取，可以參考這篇
+   <a href="https://junye1993.blogspot.com/2019/05/ie-css.html">
+    CSS 在 IE 瀏覽器下失效
+   </a>
+  </div>
+ </body>
+</html>

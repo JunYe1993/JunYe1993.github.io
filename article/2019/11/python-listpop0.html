@@ -1,0 +1,75 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-372309340786806679">
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; font-size: 20px; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     Python list.pop(0)
+    </span>
+   </h3>
+   <div>
+    <br/>
+   </div>
+   <div>
+    <span style="font-size: medium;">
+     python 的 list 為 dynamic array，
+    </span>
+    <span style="font-size: medium;">
+     python.pop() default 值為 -1
+    </span>
+   </div>
+   <div>
+    <ul>
+     <li>
+      <span style="font-size: medium;">
+       python.pop()     # 時間複雜度 : O()
+      </span>
+     </li>
+     <li>
+      <span style="font-size: medium;">
+       python.pop(0)   #
+      </span>
+      <span style="font-size: medium;">
+       時間複雜度 : O(n)
+      </span>
+     </li>
+    </ul>
+   </div>
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; font-size: 20px; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     Python deque.popleft()
+    </span>
+   </h3>
+   <div>
+    <span style="font-size: medium;">
+     <br/>
+    </span>
+   </div>
+   <div>
+    <span style="font-size: medium;">
+     deque = double - ended - queue，deque.popleft() 的時間複雜度為 O(1)
+    </span>
+   </div>
+   <div>
+    <span style="font-size: medium;">
+     <br/>
+    </span>
+   </div>
+   <div>
+    <span style="font-size: medium;">
+     所以當變數為 list 且頻繁地操作
+    </span>
+    <span style="font-size: medium;">
+     pop(0)，不妨考慮
+    </span>
+   </div>
+   <pre><code class="python">     tokens = collections.deque(mylist)
+     x = tokens.popleft()</code></pre>
+   <br/>
+   <br/>
+   參考資料 :
+   <a href="https://stackoverflow.com/questions/32543608/deque-popleft-and-list-pop0-is-there-performance-difference">
+    https://stackoverflow.com/questions/32543608/deque-popleft-and-list-pop0-is-there-performance-difference
+   </a>
+  </div>
+ </body>
+</html>

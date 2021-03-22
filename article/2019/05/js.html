@@ -1,0 +1,52 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-1218517446912471406">
+   <h4>
+    JavaScipt 日期操作
+   </h4>
+   <br/>
+   <ol>
+    <li>
+     <b>
+      宣告
+     </b>
+    </li>
+    <pre><code class="js">var now = new Date();
+var targetDate = new Date("2018/11/24");
+
+// IE 要注意的地方，IE date 格式為 yyyy/mm/dd
+var somedate = "2019-5-17";
+var targetDate = new Date(somedate.replace("-","/"));</code></pre>
+    <br/>
+    *  不照IE格式會顯示 NaN-NaN-NaN ().(
+    <a href="http://www.hongxuejing.com/hulianwang/article-84.html">
+     更多參考資訊
+    </a>
+    )
+    <br/>
+    <br/>
+    <li>
+     <b>
+      加減、指定數值
+     </b>
+    </li>
+    <pre><code class="js">var mydate = new Date("2018/11/24");
+mydate.setFullYear(mydate.getFullYear()+1); // FullYear 為西元4碼
+mydate.setMonth(mydate.getMonth()+1);       // Month 為 0 ~ 11
+mydate.setDate(mydate.getDate()+1);         // Date 為 1 ~ 31</code></pre>
+   </ol>
+   <br/>
+   參考資料 :
+   <br/>
+   1.
+   <a href="http://www.ucamc.com/e-learning/javascript/265-javascript-set-date-function.html">
+    http://www.ucamc.com/e-learning/javascript/265-javascript-set-date-function.html
+   </a>
+   <br/>
+   2.
+   <a href="https://dotblogs.com.tw/tiffany/2012/05/16/72207">
+    https://dotblogs.com.tw/tiffany/2012/05/16/72207
+   </a>
+  </div>
+ </body>
+</html>

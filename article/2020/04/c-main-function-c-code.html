@@ -1,0 +1,75 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-2210930471058456898">
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     編譯多個含有 main function 的 C code
+    </span>
+   </h2>
+   <br/>
+   <span style="font-size: large;">
+    理論上是不行，GCC 無法自行繞過某某函式去編譯，通常是給條件去讓編譯器來達到
+    <b>
+     <u>
+      "只有一個你想要的 main function"
+     </u>
+    </b>
+    編譯目的。有人會問為什麼會有多個 main function，我想多半是因為想 Debug。
+   </span>
+   <br/>
+   <br/>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     1. 利用 #ifdef
+    </span>
+   </h2>
+   <ul>
+    <li>
+     <span style="font-size: large;">
+      other.c
+     </span>
+    </li>
+   </ul>
+   <pre><code class="cpp" style="width: 90%;">    #ifdef DEBUG
+    int main ()
+    {
+        return 0;
+    }
+    #endif</code></pre>
+   <li>
+    <span style="font-size: large;">
+     gcc
+    </span>
+   </li>
+   <pre><code class="gcc" style="width: 90%;">    gcc -DEBUG other.c -o other.x</code></pre>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     2. 利用 __attribute__((weak))
+    </span>
+   </h2>
+   <ul>
+    <li>
+     <span style="font-size: large;">
+      other.h ( __attribute__((weak)) 只能在宣告 function 時作 )
+     </span>
+    </li>
+   </ul>
+   <pre><code class="cpp" style="width: 90%;">    int main() __attribute__((weak));</code></pre>
+   <li>
+    <span style="font-size: large;">
+     other.c
+    </span>
+   </li>
+   <pre><code class="gcc" style="width: 90%;">    int main ()
+    {
+        return 0;
+    }</code></pre>
+   <br/>
+   參考資料 :
+   <br/>
+   <a href="https://stackoverflow.com/questions/35510670/compile-c-code-without-its-main-function">
+    https://stackoverflow.com/questions/35510670/compile-c-code-without-its-main-function
+   </a>
+  </div>
+ </body>
+</html>

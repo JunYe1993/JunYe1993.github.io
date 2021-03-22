@@ -1,9 +1,23 @@
-<div class="separator" style="clear: both; text-align: center;"><a href="https://1.bp.blogspot.com/-AgLLG1tMStA/X45P5F8kF8I/AAAAAAAACc8/H8kNYyJT4jQH79A93yd05xr0I82-7GH7gCLcBGAsYHQ/s2048/Development.jpg" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="1365" data-original-width="2048" height="426" src="https://1.bp.blogspot.com/-AgLLG1tMStA/X45P5F8kF8I/AAAAAAAACc8/H8kNYyJT4jQH79A93yd05xr0I82-7GH7gCLcBGAsYHQ/w640-h426/Development.jpg" width="640" /></a></div>
-<h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;"><span style="font-size: large;">Express - Route parameters</span></h2>
-<font face="helvetica" size="4">&nbsp; &nbsp; Route parameters 可以用來擷取 URL 上的 value。</font>
-<ul style="text-align: left;">
-<li><font face="helvetica" size="4">server.js</font>
-    <pre style="width: 95%;"><code class="javascript">    import express from 'express'
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-1231909891798919765">
+   <div class="separator" style="clear: both; text-align: center;">
+    <a href="https://junye1993.github.io/image/Development.jpg" style="margin-left: 1em; margin-right: 1em;">
+     <img border="0" data-original-height="1365" data-original-width="2048" height="426" src="https://junye1993.github.io/image/Development.jpg" width="640"/>
+    </a>
+   </div>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify; font-size: large; padding: 10px;">
+    Express - Route parameters
+   </h2>
+   <font face="helvetica" size="4">
+    Route parameters 可以用來擷取 URL 上的 value。
+   </font>
+   <ul style="text-align: left;">
+    <li>
+     <font face="helvetica" size="4">
+      server.js
+     </font>
+     <pre style="width: 95%;"><code class="javascript">    import express from 'express'
 
     // 建立 express 這 module
     var app = express()
@@ -32,9 +46,17 @@
         var host = server.address().address
         var port = server.address().port
         console.log("Example app listening at http://%s:%s", host, port)
-    })</code></pre></li>
-<li><font face="helvetica" size="4">Testing ( <a href="https://junye1993.blogspot.com/2021/01/linux-curl.html">curl筆記</a> )</font>
-    <pre style="width: 95%;"><code class="bash">    $ curl -X GET http://localhost:8888/users/34/books/8989
+    })</code></pre>
+    </li>
+    <li>
+     <font face="helvetica" size="4">
+      Testing (
+      <a href="https://junye1993.blogspot.com/2021/01/linux-curl.html">
+       curl筆記
+      </a>
+      )
+     </font>
+     <pre style="width: 95%;"><code class="bash">    $ curl -X GET http://localhost:8888/users/34/books/8989
     {"userId":"34","bookId":"8989"}
 
     $ curl -X GET http://localhost:8888/users/34-789-456
@@ -44,13 +66,21 @@
     {"userId":"34","authorId":"123","bookId":"258"}
 
     $ curl -X GET http://localhost:8888/users/
-    /users</code></pre></li>
-</ul>
-<h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 24px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;"><span style="font-size: large;">Express - Route handler</span></h2>
-<font face="helvetica" size="4">&nbsp; &nbsp; Route handler 的 callback function 可以使用複數個，只要呼叫 next() 這個 function，便可執行下一個 callback function。</font>
-<ul style="text-align: left;">
-<li><font face="helvetica" size="4">server.js</font>
-    <pre style="width: 95%;"><code class="javascript">    import express from 'express'
+    /users</code></pre>
+    </li>
+   </ul>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 24px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify; font-size: large; padding: 10px;">
+    Express - Route handler
+   </h2>
+   <font face="helvetica" size="4">
+    Route handler 的 callback function 可以使用複數個，只要呼叫 next() 這個 function，便可執行下一個 callback function。
+   </font>
+   <ul style="text-align: left;">
+    <li>
+     <font face="helvetica" size="4">
+      server.js
+     </font>
+     <pre style="width: 95%;"><code class="javascript">    import express from 'express'
 
     // 建立 express 這 module
     var app = express()
@@ -88,20 +118,69 @@
         var host = server.address().address
         var port = server.address().port
         console.log("Example app listening at http://%s:%s", host, port)
-    })</code></pre></li>
-<li><font face="helvetica" size="4">Testing - client( <a href="https://junye1993.blogspot.com/2021/01/linux-curl.html">curl筆記</a> )</font>
-    <pre style="width: 95%;"><code class="bash">    $ curl -X GET http://localhost:8888/normal
+    })</code></pre>
+    </li>
+    <li>
+     <font face="helvetica" size="4">
+      Testing - client(
+      <a href="https://junye1993.blogspot.com/2021/01/linux-curl.html">
+       curl筆記
+      </a>
+      )
+     </font>
+     <pre style="width: 95%;"><code class="bash">    $ curl -X GET http://localhost:8888/normal
     Hi, this is the second callback function!
     $ curl -X GET http://localhost:8888/array
-    Hi, this is callbackC!</code></pre></li>
-<li><font face="helvetica" size="4">Testing - server( <a href="https://junye1993.blogspot.com/2021/01/linux-curl.html">curl筆記</a> )</font>
-    <pre style="width: 95%;"><code class="bash">    $ node Learning/11.Express\&ES6/Route_handler.js 
+    Hi, this is callbackC!</code></pre>
+    </li>
+    <li>
+     <font face="helvetica" size="4">
+      Testing - server(
+      <a href="https://junye1993.blogspot.com/2021/01/linux-curl.html">
+       curl筆記
+      </a>
+      )
+     </font>
+     <pre style="width: 95%;"><code class="bash">    $ node Learning/11.Express\&amp;ES6/Route_handler.js 
     Example app listening at http://:::8888
     Hello from the first callback function!
     Hello from the second callback function!
     Hello from callbackA function!
     Hello from callbackB function!
-    Hello from callbackC function!</code></pre></li>
-</ul>
-<div style="margin-top: 36px;"><span style="font-size: large;">參考資料 : </span></div>
-<div>1. <a href="http://expressjs.com/en/guide/routing.html" style="font-size: large;">Express 官網</a></div>
+    Hello from callbackC function!</code></pre>
+    </li>
+   </ul>
+   <div style="margin-top: 36px;">
+    <span style="font-size: large;">
+     上一篇 :
+    </span>
+   </div>
+   <div>
+    <a href="https://junye1993.blogspot.com/2021/01/6-express.html" style="font-size: large;">
+     重新踏入網頁開發 (6) - Express - 1
+    </a>
+   </div>
+   <div style="margin-top: 12px;">
+    <span style="font-size: large;">
+     下一篇 :
+    </span>
+   </div>
+   <div>
+    <a href="https://junye1993.blogspot.com/2021/01/6-express-3.html" style="font-size: large;">
+     重新踏入網頁開發 (6) - Express - 3
+    </a>
+   </div>
+   <div style="margin-top: 36px;">
+    <span style="font-size: large;">
+     參考資料 :
+    </span>
+   </div>
+   <div>
+    1.
+    <a href="http://expressjs.com/en/guide/routing.html" style="font-size: large;">
+     Express 官網
+    </a>
+   </div>
+  </div>
+ </body>
+</html>

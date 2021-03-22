@@ -1,0 +1,57 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-6221146842084639374">
+   <b>
+    Adding event listeners to dynamically added elements
+   </b>
+   <br/>
+   <b>
+    <br/>
+   </b>
+   拿 click 舉例
+   <br/>
+   <pre><code class="javascipt">$(".myclass").click(function(){
+     // do something
+});</code></pre>
+   若在整個網頁讀取完後，才新增 class = 'myclass' 的 element 不會有這個 Event Listener
+   <br/>
+   <br/>
+   這時要用
+   <b>
+    on
+   </b>
+   <br/>
+   <pre><code class="javascipt">$('#mydiv').on('click', '.myclass', function(){
+     // do something
+});</code></pre>
+   但
+   <b>
+    on
+   </b>
+   在
+   <b>
+    Jquery 1.7
+   </b>
+   才出現
+   <br/>
+   <br/>
+   這裡提供 Jquery &gt; 1.4.2 的方法
+   <br/>
+   <pre><code class="javascipt">$('#mydiv').delegate('.myclass', 'click', function(){
+     // do something
+});</code></pre>
+   <br/>
+   參考資料 :
+   <br/>
+   1.
+   <a href="https://stackoverflow.com/questions/12065329/jquery-adding-event-listeners-to-dynamically-added-elements">
+    Adding event listeners to dynamically added elements
+   </a>
+   <br/>
+   2.
+   <a href="https://stackoverflow.com/questions/21625231/on-is-not-a-function-jquery-error">
+    https://stackoverflow.com/questions/21625231/on-is-not-a-function-jquery-error
+   </a>
+  </div>
+ </body>
+</html>

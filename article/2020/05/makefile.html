@@ -1,0 +1,59 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-5672032964523136895">
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     Makefile 範本 (OS: Windows)
+    </span>
+   </h2>
+   <font face="helvetica" size="4">
+    教學網路上很多，這裡記錄下我目前測試程式碼的 Makefile
+   </font>
+   <pre><code class="makefile">    # 通用編譯參數
+    CC     = gcc
+    CFLAGS = -g -Wall
+
+    # Objects = 為要與 main 連結的 .o 檔
+    OBJECTS = hello.o pointer.o unsignedChar.o struct.o
+    SOURCE_PATH  = source/
+    INCLUDE_PATH = include/
+
+    program: main.o ${OBJECTS}
+        ${CC} ${CFLAGS} -o program.exe main.o ${OBJECTS}
+
+    # 告訴編譯器 在當前目錄下找 main.c
+    main.o: main.c
+        $(CC) -I$(INCLUDE_PATH) $(CFLAGS) -c $&lt;
+
+    # 告訴編譯找 在 source/ 找 %.c 在 include/ 找 %.h
+    %.o: $(SOURCE_PATH)%.c $(INCLUDE_PATH)%.h
+        $(CC) -I$(INCLUDE_PATH) $(CFLAGS) -c $&lt;
+
+    clean:
+        del main.o ${OBJECTS} program.exe</code></pre>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 24px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     -I$(INCLUDE_PATH)
+    </span>
+   </h2>
+   <font face="helvetica" size="4">
+    這個是告訴程式碼在 include 時可以在這個目錄找，所以我的 main.c 在 include 時能如下，而不用#include "include/hello.h"
+   </font>
+   <pre><code class="C">    #include "hello.h"
+    #include "struct.h"
+    #include "pointer.h"
+    #include "pthread.h"
+    #include "unsignedChar.h"</code></pre>
+   <div style="margin-top: 36px;">
+    <span style="font-size: large;">
+     相關文章 :
+    </span>
+   </div>
+   <div>
+    <a href="https://junye1993.blogspot.com/2020/09/makefile-2.html" style="font-size: large;">
+     Makefile 筆記 (2)
+    </a>
+   </div>
+  </div>
+ </body>
+</html>

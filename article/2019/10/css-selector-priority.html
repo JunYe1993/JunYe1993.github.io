@@ -1,0 +1,42 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-5014687153789201810">
+   CSS
+   <br/>
+   <br/>
+   在套用的時候，是有優先順序的。
+   <br/>
+   <br/>
+   沒研究前我以為是程式碼先後或最靠近的element
+   <br/>
+   <pre><code class="html">&lt;table id='table'&gt;
+ &lt;tr&gt;
+  &lt;td&gt;&lt;table class='subtable'&gt;...&lt;/table&gt;&lt;/td&gt;
+  &lt;td&gt;&lt;table class='subtable'&gt;...&lt;/table&gt;&lt;/td&gt;
+  &lt;td&gt;&lt;table class='subtable'&gt;...&lt;/table&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+&lt;/table&gt;
+</code></pre>
+   我在將上面的 HTML 套用 CSS
+   <br/>
+   <pre><code class="css">#table {
+ XXX
+}
+.subtable {
+ YYY
+}</code></pre>
+   所有的 table 都照著 XXX 顯示，所以在設計時，要盡量避免 id selector 的使用當你的 element 還包含很多 elements 的時候。以下為 CSS Selector 的 Priority
+   <br/>
+   <br/>
+   <div class="separator" style="clear: both; text-align: center;">
+    <a href="https://1.bp.blogspot.com/-QQy1yfzoXIU/XbrIApvGeeI/AAAAAAAABeA/yBxqpfh9E_8lQFiOi-JWnn9PNUxZVQHIwCLcBGAsYHQ/s1600/Untitled.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;">
+     <img border="0" data-original-height="453" data-original-width="425" height="320" src="https://1.bp.blogspot.com/-QQy1yfzoXIU/XbrIApvGeeI/AAAAAAAABeA/yBxqpfh9E_8lQFiOi-JWnn9PNUxZVQHIwCLcBGAsYHQ/s320/Untitled.png" width="300"/>
+    </a>
+   </div>
+   參考資料 :
+   <a href="http://qnimate.com/dive-into-css-specificity/Colum">
+    http://qnimate.com/dive-into-css-specificity/Colum
+   </a>
+  </div>
+ </body>
+</html>

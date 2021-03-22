@@ -1,0 +1,74 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-770620424308458215">
+   <div class="separator" style="clear: both; text-align: center;">
+    <a href="https://junye1993.github.io/image/Development.jpg" style="margin-left: 1em; margin-right: 1em;">
+     <img border="0" data-original-height="1365" data-original-width="2048" height="426" src="https://junye1993.github.io/image/Development.jpg" width="640"/>
+    </a>
+   </div>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify font-size: large; padding: 10px;">
+    Express - App v.s. Router
+   </h2>
+   <font face="helvetica" size="4">
+    Express 通常都是用 app.Method 來做 request 的 routing。而 Express 4.0 加入的 router 則可視為可以掛載的迷你 app。
+   </font>
+   <pre><code class="javascript">    import express from 'express'
+
+    var app = express()
+    var router = express.Router() 
+    const port = 8888
+
+    // Some router level function
+    function logger (req, res, next) {
+        console.log('Request URL:', req.url)
+        console.log('Request Type:', req.method)
+        next()
+    }
+    function welcome (req, res) {
+        res.send("Welcome to the localhost!\n")
+    }
+    function hello (req, res, next) {
+        res.send("Hello " + req.params.userName + "\n")
+        next()
+    }
+
+    router.use(logger)
+    router.get('/', welcome)
+    router.get('/user/:userName', hello)
+
+    // load router，就可獲得兩個 page ( '/' 跟 '/user/:userName' )
+    // 這裡要注意的是要掛載 router 的 app 要用 app.use() 而不能是 app.Method()
+    // 若用 app.Method()，'/user/:userName' 就會被 app.Method() 濾掉
+    // 只剩一個 page
+    app.use('/', router)
+    app.listen(port)</code></pre>
+   <div style="margin-top: 36px;">
+    <span style="font-size: large;">
+     上一篇 :
+    </span>
+   </div>
+   <div>
+    <a href="https://junye1993.blogspot.com/2021/01/6-express-3.html" style="font-size: large;">
+     重新踏入網頁開發 (6) - Express - 3
+    </a>
+   </div>
+   <div style="margin-top: 36px;">
+    <span style="font-size: large;">
+     參考資料 :
+    </span>
+   </div>
+   <div>
+    1.
+    <a href="http://expressjs.com/en/guide/routing.html" style="font-size: large;">
+     Express 官網
+    </a>
+   </div>
+   <div>
+    1.
+    <a href="https://blog.gtwang.org/programming/learn-to-use-the-new-router-in-expressjs-4/" style="font-size: large;">
+     Express.js 4.0 的路由（Router）功能用法教學
+    </a>
+   </div>
+  </div>
+ </body>
+</html>

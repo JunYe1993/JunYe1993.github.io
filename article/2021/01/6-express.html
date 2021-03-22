@@ -1,0 +1,187 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-239412824296989889">
+   <div class="separator" style="clear: both; text-align: center;">
+    <a href="https://junye1993.github.io/image/Development.jpg" style="margin-left: 1em; margin-right: 1em;">
+     <img border="0" data-original-height="1365" data-original-width="2048" height="426" src="https://junye1993.github.io/image/Development.jpg" width="640"/>
+    </a>
+   </div>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify; font-size: large; padding: 10px;">
+    Express
+   </h2>
+   <font face="helvetica" size="4">
+    Fast, unopinionated, minimalist web framework for Node.js，這是 Express 的自我介紹。這裡的 unopinionated 之於 opinionated 較為信任開發者，所以你可以擁有很多作法去達到相同的目的，例如像 PERL/PHP。而 opinionated 的 software 則會只提供一個方法去達到目的，例如撰寫維基百科。沒寫過維基百科，但很顯然維基百科有他的格式存在，而格式都是維基百科的設計師所規定的。他不會讓你自由地的操作 HTML 把它當成你的部落格在寫，你只能照他的方式去更新內容。
+   </font>
+   <div style="margin-top: 12px;">
+    <font face="helvetica" size="4" style="background-color: #fff7e9;">
+     <b>
+      <u>
+       安裝
+      </u>
+     </b>
+    </font>
+   </div>
+   <pre><code class="bash">    npm install express</code></pre>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 24px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify; font-size: large; padding: 10px;">
+    Express - Routing
+   </h2>
+   <font face="helvetica" size="4">
+    之前 Routing 的實作是用原生 module: http、url 和自製的 dict 去實現，現在用 express 來達成。
+   </font>
+   <ul style="text-align: left;">
+    <li>
+     <font face="helvetica" size="4">
+      server.js
+     </font>
+     <pre style="width: 95%;"><code class="javascript">   import express from 'express'
+
+   // 建立 express 這 module
+   var app = express()
+   const port = 8888
+
+   // This responds a GET request for the homepage
+   app.get('/', (req, res) =&gt; {
+      console.log("Got a GET request for the homepage");
+      res.send('Hello GET!\n')
+   })
+
+   // This responds a POST request for the homepage
+   app.post('/', function (req, res) {
+      console.log("Got a POST request for the homepage");
+      res.send('Hello POST\n');
+   })
+
+   // This responds a GET request for the /list_user page.
+   app.get('/list_user', function (req, res) {
+      console.log("Got a GET request for /list_user");
+      res.send('Page Listing\n');
+   })
+
+   var server = app.listen(port, function () {
+      var host = server.address().address
+      var port = server.address().port
+      console.log("Example app listening at http://%s:%s", host, port)
+   })</code></pre>
+    </li>
+    <li>
+     <font face="helvetica" size="4">
+      Testing (
+      <a href="https://junye1993.blogspot.com/2021/01/linux-curl.html">
+       curl筆記
+      </a>
+      )
+     </font>
+     <pre style="width: 95%;"><code class="bash">    $ curl -X GET http://localhost:8888/
+    Hello GET!
+    $ curl -X POST http://localhost:8888/
+    Hello POST
+    $ curl -X GET http://localhost:8888/list_user
+    Page Listing</code></pre>
+    </li>
+   </ul>
+   <div style="margin-top: 12px;">
+    <font face="helvetica" size="4" style="background-color: #fff7e9;">
+     <b>
+      <u>
+       第一個參數，字串支援 Regular Expression
+      </u>
+     </b>
+    </font>
+   </div>
+   <ul style="text-align: left;">
+    <li>
+     <font face="helvetica" size="4">
+      server.js
+     </font>
+     <pre style="width: 95%;"><code class="javascript">   // This responds a GET request for ab*cd, abxcd, ab123cd, and so on
+   app.get('/ab*cd', function(req, res) {   
+      console.log("Got a GET request for /ab*cd");
+      res.send('Page Pattern Match\n');
+   })
+
+   // This responds a GET request for book1, book2 and book3
+   app.get('/book[123]', function(req, res) {   
+      console.log("Got a GET request for /ab*cd");
+      res.send('Page Pattern Match\n');
+   })</code></pre>
+    </li>
+    <li>
+     <font face="helvetica" size="4">
+      Testing (
+      <a href="https://junye1993.blogspot.com/2021/01/linux-curl.html">
+       curl筆記
+      </a>
+      )
+     </font>
+     <pre style="width: 95%;"><code class="bash">    $ curl -X GET http://localhost:8888/ab123cd
+    Page Pattern Match
+
+    $ curl -X GET http://localhost:8888/ab123456cd
+    Page Pattern Match
+
+    $ curl -X GET http://localhost:8888/book1
+    Page Pattern Match
+
+    $ curl -X GET http://localhost:8888/book2
+    Page Pattern Match
+
+    $ curl -X GET http://localhost:8888/book3
+    Page Pattern Match
+
+    $ curl -X GET http://localhost:8888/book4
+    &lt;!DOCTYPE html&gt;
+    &lt;html lang="en"&gt;
+    &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;Error&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+    &lt;pre&gt;Cannot GET /book4&lt;/pre&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;</code></pre>
+    </li>
+   </ul>
+   <div style="margin-top: 36px;">
+    <span style="font-size: large;">
+     上一篇 :
+    </span>
+   </div>
+   <div>
+    <a href="https://junye1993.blogspot.com/2020/11/5.html" style="font-size: large;">
+     重新踏入網頁開發 (5) - Blocking &amp; Non-Blocking
+    </a>
+   </div>
+   <div style="margin-top: 12px;">
+    <span style="font-size: large;">
+     下一篇 :
+    </span>
+   </div>
+   <div>
+    <a href="https://junye1993.blogspot.com/2021/01/6-express-2.html" style="font-size: large;">
+     重新踏入網頁開發 (6) - Express - 2
+    </a>
+   </div>
+   <div style="margin-top: 36px;">
+    <span style="font-size: large;">
+     參考資料 :
+    </span>
+   </div>
+   <div>
+    1.
+    <a href="http://expressjs.com/en/guide/routing.html" style="font-size: large;">
+     Express 官網
+    </a>
+   </div>
+   <div>
+    2.
+    <a href="https://stackoverflow.com/questions/802050/what-is-opinionated-software" style="font-size: large;">
+     what-is-opinionated-software-stackoverflow
+    </a>
+   </div>
+   <div class="separator" style="clear: both; text-align: center;">
+    <br/>
+   </div>
+   <br/>
+  </div>
+ </body>
+</html>

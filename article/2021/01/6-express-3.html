@@ -1,0 +1,163 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-3375450411227925990">
+   <div class="separator" style="clear: both; text-align: center;">
+    <a href="https://junye1993.github.io/image/Development.jpg" style="margin-left: 1em; margin-right: 1em;">
+     <img border="0" data-original-height="1365" data-original-width="2048" height="426" src="https://junye1993.github.io/image/Development.jpg" width="640"/>
+    </a>
+   </div>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify; font-size: large; padding: 10px;">
+    Express - Middleware
+   </h2>
+   <font face="helvetica" size="4">
+    Middleware 是會處理 req, res, next 三個物件並在 routing 時執行之 function，基本上就是 routing 時會處理的 callback function。是 Express 中蠻重要的概念。但用例子來理解比較容易。
+   </font>
+   <pre><code class="javascript">    import express from 'express'
+
+    // 建立 express 這 module
+    var app = express()
+    const port = 8888
+    var userName = "Unknown"
+
+    function hello(req, res) {
+        res.send("Hello " + userName + "\n")
+        res.end()
+    }
+
+    // 中間的匿名 function 就是 Middleware
+    app.get('/hello/:userName.:userPassword', function (req, res, next){
+        userName = req.params.userName
+        console.log(userName)
+        next()
+    },  hello)
+    
+    app.listen(8888)
+</code></pre>
+   <font face="helvetica" size="4">
+    所以 Express 可以用這些
+    <font face="helvetica" size="4" style="background-color: #fff7e9;">
+     <u>
+      <b>
+       Middleware 來作到流程控制
+      </b>
+     </u>
+    </font>
+    ，而非使用傳統的 if else。
+   </font>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 24px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify; font-size: large; padding: 10px;">
+    Express - Middleware Using
+   </h2>
+   <font face="helvetica" size="4">
+    Middleware 除了自己塞也可以有 2 種 Express 提供的方式使用。
+   </font>
+   <ul style="text-align: left;">
+    <li>
+     <font face="helvetica" size="4" style="background-color: #fff7e9;">
+      <u>
+       <b>
+        Application-level
+       </b>
+      </u>
+     </font>
+     <pre style="width: 95%;"><code class="javascript">    import express from 'express'
+
+    // 建立 express 這 module
+    var app = express()
+    const port = 8888
+
+    function reqType (req, res, next){
+        console.log('Request Type:', req.method)
+        next()
+    }
+
+    function timer (req, res, next){
+        var date = new Date()
+        console.log('Time:', date.toString())
+        if (req.params.userName == "Admin") {
+            next('route') // 只能在 app.Method() 使用，在 use() 裡就會只是普通的 next()
+        } else {
+            next()
+        }
+    }
+
+    function logger (req, res, next){
+        console.log
+        (
+            'User Date:', '\n',
+            'User:', req.params.userName, '\n',
+            'Password:', req.params.userPassword, '\n'
+        )
+        res.end()
+    }
+
+    function warning(req, res, next) {  
+        console.log("Warning: Your village is under attack\n")
+        res.end()
+    }
+
+    // app.use() 在 route 之前，所以會先執行 use 裡的 Middleware function
+    // 之後在依照 Request Method 去找相對的 app.Method() 做 Reuest Handle
+    app.use('/hello/:userName.:userPassword', reqType)
+
+    // 正常來講，若 Request 是 GET 且 URL 符合的話，會依照順序執行 routing function
+    // 但 timer 裡有 next('route')，符合條件的話會直接把控制權交給下個 routing function，
+    // 忽略它本身後面的 Middleware function，這裡就是 logger。
+    app.get('/hello/:userName.:userPassword', timer, logger)
+    app.get('/hello/:userName.:userPassword', warning)
+    app.listen(8888)</code></pre>
+    </li>
+    <li>
+     <font face="helvetica" size="4" style="background-color: #fff7e9;">
+      <u>
+       <b>
+        Router-level
+       </b>
+      </u>
+     </font>
+     <div style="margin-top: 12px">
+      <font face="helvetica" size="4">
+       使用方法跟 app (express()) 一模一樣，差把 app 改成 router (express.Router())
+      </font>
+     </div>
+    </li>
+   </ul>
+   <div style="margin-top: 36px;">
+    <span style="font-size: large;">
+     上一篇 :
+    </span>
+   </div>
+   <div>
+    <a href="https://junye1993.blogspot.com/2021/01/6-express-2.html" style="font-size: large;">
+     重新踏入網頁開發 (6) - Express - 2
+    </a>
+   </div>
+   <div style="margin-top: 12px;">
+    <span style="font-size: large;">
+     下一篇 :
+    </span>
+   </div>
+   <div>
+    <a href="https://junye1993.blogspot.com/2021/01/6-express-4.html" style="font-size: large;">
+     重新踏入網頁開發 (6) - Express - 4
+    </a>
+   </div>
+   <div style="margin-top: 36px;">
+    <span style="font-size: large;">
+     參考資料 :
+    </span>
+   </div>
+   <div>
+    1.
+    <a href="http://expressjs.com/en/guide/routing.html" style="font-size: large;">
+     Express 官網
+    </a>
+   </div>
+   <div>
+    1.
+    <a href="https://www.jollen.org/blog/2013/11/expressjs-middleware.html" style="font-size: large;">
+     Node.js + Express.js 應用 - Middleware 觀念解說
+    </a>
+   </div>
+  </div>
+ </body>
+</html>

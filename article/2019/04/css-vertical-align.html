@@ -1,0 +1,64 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-8507535556252609572">
+   有時候
+   <b>
+    Input
+   </b>
+   的
+   <b>
+    text
+   </b>
+   或
+   <b>
+    textarea
+   </b>
+   有時候
+   <b>
+    預設的對齊
+   </b>
+   可能不盡理想
+   <br/>
+   <br/>
+   這時候可以用 vertical-align，這主要是用來對齊圖片的
+   <br/>
+   <br/>
+   但有時候你會想讓 textarea 對齊隔壁的物件，因為沒有此參數的話他會對齊 textarea 的底線
+   <br/>
+   <pre><code class="css">textarea {
+  vertical-align:25px; // 向上修正 25px
+}</code></pre>
+   也有支援其他參數，但
+   <a href="https://www.w3schools.com/cssref/pr_pos_vertical-align.asp">
+    w3schools
+   </a>
+   已有列表這邊不在贅述
+   <br/>
+   <br/>
+   這裡再列個w3沒列到的參數
+   <br/>
+   <pre><code class="css">// for firefox
+textarea {
+  vertical-align: -moz-middle-with-baseline;
+}
+// for chrome
+textarea {
+  vertical-align: -webkit-baseline-middle
+}</code></pre>
+   效果為對齊text的底線
+   <br/>
+   <br/>
+   參考資料 :
+   <br/>
+   1)
+   <a href="https://www.w3schools.com/cssref/pr_pos_vertical-align.asp">
+    https://www.w3schools.com/cssref/pr_pos_vertical-align.asp
+   </a>
+   <br/>
+   2)
+   <a href="https://stackoverflow.com/questions/45852388/webkit-baseline-middle-and-moz-middle-with-baseline">
+    https://stackoverflow.com/questions/45852388/webkit-baseline-middle-and-moz-middle-with-baseline
+   </a>
+  </div>
+ </body>
+</html>

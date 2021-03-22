@@ -1,0 +1,82 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-669965338686236016">
+   <h4>
+    寫有介面的程式時常會需要跳出訊息
+    <br/>
+    這裡介紹Application-&gt;MessageBox int MessageBox(const char* Text, const char* Caption, int Flags);
+   </h4>
+   這裡沒啥好講的
+   <br/>
+   想寫的幾乎都會變照抄網上的東西，所以就給連結當備份吧
+   <br/>
+   1.
+   <a href="http://yanjuns.blogspot.tw/2015/06/cbuilder-vcl.html">
+    http://yanjuns.blogspot.tw/2015/06/cbuilder-vcl.html
+   </a>
+   <br/>
+   2.
+   <a href="http://nelson.pixnet.net/blog/post/217684-%5Bbcb%5D-messagebox-%E7%9A%84%E5%8F%83%E6%95%B8%E8%AA%AA%E6%98%8E">
+    http://nelson.pixnet.net/blog/post/217684-%5Bbcb%5D-messagebox-%E7%9A%84%E5%8F%83%E6%95%B8%E8%AA%AA%E6%98%8E
+   </a>
+   <br/>
+   <br/>
+   <br/>
+   <h4>
+    如何令 ComboBox 顯示的字不會被更改
+   </h4>
+   答案就是將
+   <b>
+    ComboBox
+   </b>
+   的
+   <b>
+    style
+   </b>
+   屬性改為
+   <b>
+    csDropDownList
+   </b>
+   <br/>
+   因為我總是用 BCB10 給的元件去設定 ( Object Inspector )
+   <br/>
+   所以再寫新程式的時候，總忘記當初怎改的
+   <br/>
+   ( 因為公司並不會一直要求我去寫資料彙整的程式，久久寫一次 )
+   <br/>
+   <br/>
+   <h4>
+    令 ComboBox 顯示的字不會被更改
+   </h4>
+   深入了解 ComboBox 後來發現另一招
+   <br/>
+   當 ComboBox 顯示框文字被修改時
+   <br/>
+   會自動尋找是否為 ComboBox 其中一個 Item
+   <br/>
+   是 ItemIndex 修改為該Item 的
+   <br/>
+   否 ItemIndex = -1
+   <br/>
+   此為 BCB10 程式碼
+   <br/>
+   <pre><code class="cpp">int tempindex;
+void __fastcall TMainForm::CSTestSiteComboBoxChange(TObject *Sender)
+{
+    if(CSTestSiteComboBox-&gt;ItemIndex == -1){
+        CSTestSiteComboBox-&gt;ItemIndex = tempindex;
+    }
+    tempindex = CSTestSiteComboBox-&gt;ItemIndex;
+}</code></pre>
+   如上所示
+   <br/>
+   文字被修改後若不屬於原有 Item (也就是ItemIndex == -1)
+   <br/>
+   修改回來後達到類似無法修改的效果
+   <br/>
+   通常不給修改是為了防呆
+   <br/>
+   所以只能顯示範疇內的東西也是防呆的一種
+  </div>
+ </body>
+</html>

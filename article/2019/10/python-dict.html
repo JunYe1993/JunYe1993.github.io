@@ -1,0 +1,54 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-3376125030648313890">
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; font-size: 20px; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     Check if a given key exists in a dict
+    </span>
+   </h3>
+   <br/>
+   要檢查 dictionary 是否存在索引值
+   <br/>
+   直接查會直接 KeyError
+   <br/>
+   <pre><code class="python">&gt;&gt;&gt; d = {}
+&gt;&gt;&gt; d['a']
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+KeyError: 'a'
+</code></pre>
+   這時就要靠 collections.defaultdict(default_factory)
+   <br/>
+   <pre><code class="python">&gt;&gt;&gt; from collections import defaultdict
+&gt;&gt;&gt; d = defaultdict(int)
+&gt;&gt;&gt; d['a']
+0</code></pre>
+   再回到檢查 dictionary 是否存在索引值的地方
+   <br/>
+   <pre><code class="python">from collections import defaultdict
+
+s = 'mississippi'
+my_dict = defaultdict(int) 
+for key in s:
+     if key in my_dict:
+          my_dict[key] += 1
+     else:
+          my_dict[key] = 1
+
+print(my_dict)</code></pre>
+   結果
+   <br/>
+   <pre><code class="python">defaultdict(<class int="">, {'m': 1, 'i': 4, 's': 4, 'p': 2})</class></code></pre>
+   <br/>
+   參考資料 :
+   <br/>
+   <a href="https://docs.python.org/3/library/collections.html#defaultdict-examples">
+    https://docs.python.org/3/library/collections.html#defaultdict-examples
+   </a>
+   <br/>
+   <a href="https://stackoverflow.com/questions/473099/check-if-a-given-key-already-exists-in-a-dictionary-and-increment-it">
+    https://stackoverflow.com/questions/473099/check-if-a-given-key-already-exists-in-a-dictionary-and-increment-it
+   </a>
+  </div>
+ </body>
+</html>

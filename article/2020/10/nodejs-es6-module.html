@@ -1,0 +1,100 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-3381436040300329622">
+   <div class="separator" style="clear: both; text-align: center;">
+    <a href="https://1.bp.blogspot.com/-1W9apwpnL84/X5lF9DPtEJI/AAAAAAAACds/gUskyrGnrzcipdL2_QzsXxdfT2UWYQDugCPcBGAYYCw/s1280/node-js.png" style="margin-left: 1em; margin-right: 1em;">
+     <img border="0" data-original-height="640" data-original-width="1280" height="320" src="https://1.bp.blogspot.com/-1W9apwpnL84/X5lF9DPtEJI/AAAAAAAACds/gUskyrGnrzcipdL2_QzsXxdfT2UWYQDugCPcBGAYYCw/w640-h320/node-js.png" width="640"/>
+    </a>
+   </div>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     Nodejs 支援 ES6 module
+    </span>
+   </h2>
+   <font face="helvetica" size="4">
+    要讓 nodejs 去支援 ES6 module，必須去改寫 package.json。
+   </font>
+   <div style="margin-top: 12px;">
+    <font face="helvetica" size="4">
+     <b>
+      <u>
+       開啟一個新的 nodejs project
+      </u>
+     </b>
+    </font>
+   </div>
+   <ul style="text-align: left;">
+    <li>
+     <font face="helvetica" size="4">
+      首先是 node package manager
+     </font>
+     <pre style="width: 95%;"><code class="bash">    npm init
+    # 應該會有一堆要填的，若沒任何想法可以改下 npm init -y 自動幫你填完</code></pre>
+    </li>
+    <li>
+     <font face="helvetica" size="4">
+      這時候多一個 package.json 的檔案，裡面有你剛填的資料
+     </font>
+     <pre style="width: 95%;"><code class="json">    {
+      "name": "react",
+      "version": "1.0.0",
+      "description": "",
+      "main": "index.js",
+      "scripts": {
+        "test": "echo \"Error: no test specified\" &amp;&amp; exit 1"
+      },
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/JunYe1993/React.git"
+      },
+      "author": "JunYe1993",
+      "license": "ISC",
+      "bugs": {
+        "url": "https://github.com/JunYe1993/React/issues"
+      },
+      "homepage": "https://github.com/JunYe1993/React#readme"
+    }</code></pre>
+    </li>
+    <li>
+     <font face="helvetica" size="4">
+      package.json 裡多加一個設定
+     </font>
+     <pre style="width: 95%;"><code class="json">    ...
+      "type": "module"
+    }</code></pre>
+    </li>
+   </ul>
+   <div style="margin-top: 12px;">
+    <font face="helvetica" size="4">
+     <b>
+      <u>
+       若 node 版本低於 v13, 會噴 Warning。
+      </u>
+     </b>
+    </font>
+   </div>
+   <ul style="text-align: left;">
+    <li>
+     <font face="helvetica" size="4">
+      node 版本低於 v13
+     </font>
+     <pre style="width: 95%;"><code class="bash">    $ node HelloWorld.js 
+    (node:29009) ExperimentalWarning: The ESM module loader is 
+    experimental.
+    Hello World</code></pre>
+    </li>
+   </ul>
+   <div style="margin-top: 36px;">
+    <span style="font-size: large;">
+     參考資料 :
+    </span>
+   </div>
+   <div>
+    1.
+    <a href="https://eddychang.me/node-es6-module" style="font-size: large;">
+     Node.js使用ES6 Module
+    </a>
+   </div>
+  </div>
+ </body>
+</html>

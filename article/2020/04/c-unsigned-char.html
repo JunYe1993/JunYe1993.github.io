@@ -1,0 +1,78 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-4310340340940297799">
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     <span style="letter-spacing: 1.44px;">
+      char 與 unsigned char 的區別
+     </span>
+    </span>
+   </h3>
+   單看兩個變數類型是沒有差別的，
+   <b>
+    char
+   </b>
+   -128 ~ 127，
+   <b>
+    unsigned char
+   </b>
+   0 ~ 255，範圍大小一樣，並沒差別。
+   <b>
+    唯一差別是在賦值的時候
+   </b>
+   。
+   <br/>
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     <span style="letter-spacing: 1.44px;">
+      賦值的時候 char 與 unsigned char 的區別
+     </span>
+    </span>
+   </h3>
+   (signed) char 有
+   <b>
+    <u>
+     符號 bit
+    </u>
+   </b>
+   ，這會導致你在賦予值時，(signed) char 會依照情況去賦予值。
+   <br/>
+   <pre><code class="C">    void unsignedcharTest(unsigned char value)
+    {
+        char c = value;
+        unsigned char uc = value;
+        int char_to_int = c;
+        int unchar_to_int = uc;
+        unsigned int char_to_unint = c;
+        unsigned int unchar_to_unint = uc;
+        printf("%%c: %c, %c\n", c, uc);
+        printf("%%X: %X, %X\n", c, uc);
+        printf("%%d: %d, %d\n", char_to_int, unchar_to_int);
+        printf("%%u: %u, %u\n", char_to_unint, unchar_to_unint);
+    }
+
+    int main()
+    {
+        unsignedcharTest(0x7F); // 0111 1111 符號 bit 為 0 不會擴展
+        unsignedcharTest(0x80); // 1000 0000 符號 bit 為 1 會擴展，補 1  
+        return 0;
+    }</code></pre>
+   結果 :
+   <br/>
+   <pre><code class="terminal">    %c: , 
+    %X: 7F, 7F
+    %d: 127, 127
+    %u: 127, 127
+    %c: , 
+    %X: FFFFFF80, 80
+    %d: -128, 128
+    %u: 4294967168, 128</code></pre>
+   <br/>
+   參考資料 :
+   <br/>
+   <a href="https://www.itread01.com/content/1547130625.html">
+    https://www.itread01.com/content/1547130625.html
+   </a>
+  </div>
+ </body>
+</html>

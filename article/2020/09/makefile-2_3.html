@@ -1,0 +1,63 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-4421897767490008617">
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     Makefile 範本 (OS: Linux)
+    </span>
+   </h2>
+   <font face="helvetica" size="4">
+    這個 Makefile 有結合 .c 跟 .cpp 檔案, 並且使用一些字串處理 function。
+   </font>
+   <pre><code class="language-makefile">    # gcc compiler 參數
+    CC      := gcc
+    CFLAGS  := -g -Wall -Werror -std=c99
+    # g++ compiler 參數
+    CXX     := g++
+    CXXFLAG := -Wall -Werror -std=c++17
+
+
+    # 宣告 source 資料夾
+    SRC_DIRS = ./source
+    # 把 source 資料夾裡的 cpp 跟 c 全部找出來
+    SRCS := $(shell find $(SRC_DIRS) -name "*.cpp" -or -name "*.c")
+    # 取檔名並把副檔名加上 .o
+    OBJS := $(addsuffix .o,$(notdir $(SRCS))) main.o
+
+    # include 參數 (適用於多個 include 資料夾, 成果會是 gcc -I/dir1 I/dir2)
+    INC_DIRS  := ./include 
+    INC_FLAGS := $(addprefix -I,$(INC_DIRS))
+
+    all: program
+
+    program: $(OBJS)
+        $(CXX) $(CXXFLAG) $(OBJS) -o $@ 
+
+    main.o: main.cpp
+        $(CXX) $(INC_FLAGS) $(CXXFLAG) -c $&lt; -o $@
+
+    # .cpp.o 找 .cpp 編譯
+    %.cpp.o: $(SRC_DIRS)/%.cpp
+        $(CXX) $(INC_FLAGS) $(CXXFLAG) -c $&lt; -o $@
+
+    # .c.o 找 .c 編譯
+    %.c.o: $(SRC_DIRS)/%.c
+        $(CC)  $(INC_FLAGS) $(CFLAGS) -c $&lt; -o $@
+
+    .PHONY: clean
+
+    clean:
+        rm -rf ${OBJS} program</code></pre>
+   <div style="margin-top: 36px;">
+    <span style="font-size: large;">
+     相關文章 :
+    </span>
+   </div>
+   <div>
+    <a href="https://junye1993.blogspot.com/2020/05/makefile.html" style="font-size: large;">
+     Makefile 筆記 (1)
+    </a>
+   </div>
+  </div>
+ </body>
+</html>

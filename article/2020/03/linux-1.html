@@ -1,0 +1,96 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-4584259797028094242">
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     Linux是一個作業系統
+    </span>
+   </h3>
+   <br/>
+   相較其他作業系統特殊的地方就是 Linux 為 GPL 授權軟體，Open source 的一種。使用者可以免費下載使用且隨意更改原始碼，只要你不修改其 GPL 授權或販賣簡單軟體 ( 簡單軟體指得是 Linux 上開發的軟體，但開發商還是能販售所謂的"服務" )。
+   <br/>
+   <br/>
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     Virtual Box 安裝 Linux
+    </span>
+   </h3>
+   <br/>
+   基本上我是照著
+   <a href="http://linux.vbird.org/linux_basic/0157installcentos7.php">
+    鳥哥的 Linux 私房菜
+   </a>
+   裝的，只是我是用 Virtual Box，不一樣的是 Virtual Box 預設沒有支援 CentOS，所以先新增一個 Red Hat，再將存放裝置讀取從
+   <a href="https://www.centos.org/download/">
+    CentOS.org
+   </a>
+   所載的 iso 檔，然後注意開機 boot 的順序即可 ( 光碟 &gt; 硬碟 )。
+   <br/>
+   <br/>
+   <div class="separator" style="clear: both; text-align: center;">
+    <a href="https://1.bp.blogspot.com/-0o9MAUIm1Rk/XmjDllq17uI/AAAAAAAACDw/g3gRWB-GxYsOWhkKzyJ3MaLA0KjVfkUegCLcBGAsYHQ/s1600/1.png" style="margin-left: 1em; margin-right: 1em;">
+     <img border="0" data-original-height="572" data-original-width="789" height="289" src="https://1.bp.blogspot.com/-0o9MAUIm1Rk/XmjDllq17uI/AAAAAAAACDw/g3gRWB-GxYsOWhkKzyJ3MaLA0KjVfkUegCLcBGAsYHQ/s400/1.png" width="400"/>
+    </a>
+   </div>
+   <br/>
+   <div class="separator" style="clear: both; text-align: center;">
+    <a href="https://1.bp.blogspot.com/-aAeeP76yUIs/XmjDnbkvwAI/AAAAAAAACD0/2M1Uw5so1qw9znSvc-bNYLDM_yK_D4mzwCLcBGAsYHQ/s1600/2.png" style="margin-left: 1em; margin-right: 1em;">
+     <img border="0" data-original-height="572" data-original-width="789" height="288" src="https://1.bp.blogspot.com/-aAeeP76yUIs/XmjDnbkvwAI/AAAAAAAACD0/2M1Uw5so1qw9znSvc-bNYLDM_yK_D4mzwCLcBGAsYHQ/s400/2.png" width="400"/>
+    </a>
+   </div>
+   <br/>
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     如想嘗試完全照抄鳥哥的安裝法
+    </span>
+   </h3>
+   <br/>
+   鳥哥用 GPT 去切割硬碟，如果想要照抄，得先開啟 EFI ( 也叫 UEFI，EFI 似乎是早期的名子 )，然後多切割一個 /boot/efi ，容量 300 ~ 500 M 就好了。
+   <br/>
+   <br/>
+   <div class="separator" style="clear: both; text-align: center;">
+    <a href="https://1.bp.blogspot.com/-XxJvc8vt3oE/XmoGay4AfmI/AAAAAAAACGs/Ptjb9y1CShgjPqdU7XoGLE7ctIuxGyMBgCLcBGAsYHQ/s1600/1.png" style="margin-left: 1em; margin-right: 1em;">
+     <img border="0" data-original-height="572" data-original-width="789" height="231" src="https://1.bp.blogspot.com/-XxJvc8vt3oE/XmoGay4AfmI/AAAAAAAACGs/Ptjb9y1CShgjPqdU7XoGLE7ctIuxGyMBgCLcBGAsYHQ/s320/1.png" width="320"/>
+    </a>
+   </div>
+   <br/>
+   <div class="separator" style="clear: both; text-align: center;">
+    <a href="https://1.bp.blogspot.com/-a59EWvrBqXw/XmoGa0ew95I/AAAAAAAACGw/iR9TDf2e1l8Awas2oX5BJVszdWAeZ4rIQCLcBGAsYHQ/s1600/%25E6%2593%25B7%25E5%258F%2596.PNG" style="margin-left: 1em; margin-right: 1em;">
+     <img border="0" data-original-height="263" data-original-width="539" height="156" src="https://1.bp.blogspot.com/-a59EWvrBqXw/XmoGa0ew95I/AAAAAAAACGw/iR9TDf2e1l8Awas2oX5BJVszdWAeZ4rIQCLcBGAsYHQ/s320/%25E6%2593%25B7%25E5%258F%2596.PNG" width="320"/>
+    </a>
+   </div>
+   <br/>
+   <br/>
+   <br/>
+   <div>
+    下一篇：
+    <div>
+     <a href="http://junye1993.blogspot.com/2020/03/linux-2.html">
+      Linux 初學 (2)
+     </a>
+    </div>
+   </div>
+   <div>
+    <br/>
+   </div>
+   <div>
+    <br/>
+   </div>
+   <div>
+    參考資料 :
+    <br/>
+    <a href="http://linux.vbird.org/linux_basic/0157installcentos7.php">
+     鳥哥的Linux私房菜
+    </a>
+    <br/>
+    <a href="https://blog.yowko.com/virtualbox-centos-7/">
+     VirtualBox 如何安裝 Centos 7 並設定網路
+    </a>
+    <br/>
+    <a href="https://www.geek-share.com/detail/2726313848.html">
+     Virtual Box GPT 分割
+    </a>
+   </div>
+  </div>
+ </body>
+</html>

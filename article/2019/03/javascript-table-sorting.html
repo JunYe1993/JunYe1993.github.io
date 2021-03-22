@@ -1,0 +1,96 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-4387566258274323111">
+   <b>
+    用 Javascript 作 Table Sorting
+   </b>
+   <br/>
+   <div>
+    <br/>
+   </div>
+   <div>
+    這裡寫 2 種自己的做法
+   </div>
+   <div>
+    <br/>
+   </div>
+   <div>
+    第一種
+    <a href="https://www.w3schools.com/howto/howto_js_sort_table.asp">
+     w3schools
+    </a>
+   </div>
+   <br/>
+   <pre><code class="javascript">function sortTable() {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("myTable");
+  switching = true;
+  /* Make a loop that will continue until
+  no switching has been done: */
+  while (switching) {
+    // Start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /* Loop through all table rows (except the
+    first, which contains table headers): */
+    for (i = 1; i &lt; (rows.length - 1); i++) {
+      // Start by saying there should be no switching:
+      shouldSwitch = false;
+      /* Get the two elements you want to compare,
+      one from current row and one from the next: */
+      x = rows[i].getElementsByTagName("TD")[0];
+      y = rows[i + 1].getElementsByTagName("TD")[0];
+      // Check if the two rows should switch place:
+      if (x.innerHTML.toLowerCase() &gt; y.innerHTML.toLowerCase()) {
+        // If so, mark as a switch and break the loop:
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      /* If a switch has been marked, make the switch
+      and mark that a switch has been done: */
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}</code></pre>
+   第二種 自己亂寫的
+   <br/>
+   <pre><code class="javascript">function sort_table(col){
+     var i, j, arr = new Array(), arr2 = new Array();
+     var table = document.getElementById("mytable");
+     var rows  = table.rows;
+     // 從 1 開始，因為 0 是欄位的標題 (th)) 
+     for (i = 1; i &lt; rows.length; i++) {
+          // 得 TD 內 innerHTML，加 i 是因應 innerHTML 完全一樣的 CASE
+          arr[i-1] = rows[i].getElementsByTagName("TD")[col].innerHTML.toLowerCase() + i;
+          // 用 MAP 紀錄 
+          arr2[arr[i-1]] = i;
+     }
+     arr.sort();
+     // 利用 insertBefore 來重新排序
+     // 缺點有可能會影響 map 裡存的 index
+     // 所以要記錄以移動的 cell
+     var index = new Array();
+     for(i = 0; i &lt; arr.length; i++){
+          var offset = 0;
+          // 看過往 cell 的移動是否會影響現在的 index
+          for(j = 0; j &lt; i; j++){
+               if(arr2[arr[i]] &lt; index[j])offset++;
+          }
+          rows[1].parentNode.insertBefore(rows[arr2[arr[i]]+offset], rows[1]);
+          // 紀錄 cell
+          index[i] = arr2[arr[i]];
+     }
+}</code></pre>
+   <br/>
+   <br/>
+   參考資料 :
+   <br/>
+   <a href="https://www.w3schools.com/howto/howto_js_sort_table.asp">
+    https://www.w3schools.com/howto/howto_js_sort_table.asp
+   </a>
+  </div>
+ </body>
+</html>

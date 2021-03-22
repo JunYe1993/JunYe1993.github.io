@@ -1,0 +1,57 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-6077370427580942196">
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     C++ 的 &amp;
+    </span>
+   </h2>
+   <br/>
+   <span style="font-size: large;">
+    C++ 的 &amp; 比起 C 語言的提取位置，還多了
+    <b>
+     宣告引用
+    </b>
+    (
+    <font color="#d52c1f">
+     必須在定義時候就進行初始化
+    </font>
+    )。
+   </span>
+   <pre><code class="cpp">    int a = 5;
+    int &amp;b = a;
+    std::cout &lt;&lt; "a value\t\t" &lt;&lt; a &lt;&lt; "\n";
+    std::cout &lt;&lt; "a address\t" &lt;&lt; &amp;a &lt;&lt; "\n";
+    std::cout &lt;&lt; "b value\t\t" &lt;&lt; b &lt;&lt; "\n";
+    std::cout &lt;&lt; "b address\t" &lt;&lt; &amp;b &lt;&lt; "\n";
+    int c = 50;
+    b = c;
+    std::cout &lt;&lt; "a value\t\t" &lt;&lt; a &lt;&lt; "\n";
+    std::cout &lt;&lt; "a address\t" &lt;&lt; &amp;a &lt;&lt; "\n";
+    std::cout &lt;&lt; "b value\t\t" &lt;&lt; b &lt;&lt; "\n";
+    std::cout &lt;&lt; "b address\t" &lt;&lt; &amp;b &lt;&lt; "\n";
+    std::cout &lt;&lt; "c value\t\t" &lt;&lt; c &lt;&lt; "\n";
+    std::cout &lt;&lt; "c address\t" &lt;&lt; &amp;c &lt;&lt; "\n";</code></pre>
+   <span style="font-size: large;">
+    <pre class="output" style="-webkit-font-smoothing: antialiased; background: rgb(242, 242, 242); border-color: rgb(238, 238, 238) rgb(238, 238, 238) rgb(238, 238, 238) rgb(112, 112, 112); border-image: initial; border-radius: 4px; border-style: solid; border-width: 1px 1px 1px 4px; box-sizing: border-box; color: #111111; font-family: menlo, monaco, monospace; font-size: 14px; line-height: 21px; margin-bottom: 1.5em; margin-top: 1em; max-width: 100%; overflow-wrap: break-word; overflow: auto; padding: 0.5em 0.5em 0.5em 1em;">a value         5
+a address       0x61ff08
+b value         5
+b address       0x61ff08
+a value         50
+a address       0x61ff08
+b value         50
+b address       0x61ff08
+c value         50
+c address       0x61ff04</pre>
+   </span>
+   <br/>
+   <br/>
+   參考資料 :
+   <div>
+    <a href="https://www.itread01.com/content/1542680643.html">
+     https://www.itread01.com/content/1542680643.html
+    </a>
+   </div>
+  </div>
+ </body>
+</html>

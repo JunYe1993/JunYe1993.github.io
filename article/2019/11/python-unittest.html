@@ -1,0 +1,174 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-5045624764863654862">
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     Unit Test
+    </span>
+   </h3>
+   <div>
+    <br/>
+   </div>
+   <div>
+    <span style="font-size: medium;">
+     單元測試有一個通用模式
+     <b>
+      AAA原則
+     </b>
+     ，理解了就可以開始實作
+    </span>
+    <br/>
+    <ul>
+     <li>
+      <span style="font-size: medium;">
+       Arrange   : 初始化物件、要用到的參數
+      </span>
+     </li>
+     <li>
+      <span style="font-size: medium;">
+       Act   : 呼叫要測試的方法
+      </span>
+     </li>
+     <li>
+      <span style="font-size: medium;">
+       Assert   : 驗證測試結果
+      </span>
+     </li>
+    </ul>
+   </div>
+   <div>
+    <ul>
+    </ul>
+   </div>
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; font-size: 20px; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     Python Unit Test
+    </span>
+   </h3>
+   <div>
+    <span style="font-size: medium;">
+     <br/>
+    </span>
+   </div>
+   <div>
+    <span style="font-size: medium;">
+     unittest — Unit testing framework，下面是官方給的範例
+    </span>
+   </div>
+   <pre><code class="python">import unittest
+
+class TestStringMunittestethods(unittest.TestCase):
+
+     def test_upper(self):
+          self.assertEqual('foo'.upper(), 'FOO')
+
+     def test_isupper(self):
+          self.assertTrue('FOO'.isupper())
+          self.assertFalse('Foo'.isupper())
+
+     def test_split(self):
+          s = 'hello world'
+          self.assertEqual(s.split(), ['hello', 'world'])
+          # check that s.split fails when the separator is not a string
+          with self.assertRaises(TypeError):
+               s.split(2)
+
+if __name__ == '__main__':
+     unittest.main()</code></pre>
+   <span style="font-size: medium;">
+    unittest.main() 會執行所有 test_ 開頭的 function，主要判斷的 function 是 assert
+   </span>
+   <br/>
+   <ul>
+    <li>
+     <span style="font-size: medium;">
+      assertEqual - 確認是否符合期望的值
+     </span>
+    </li>
+    <li>
+     <span style="font-size: medium;">
+      assertTrue、assertFalse -  確認是否符合期望的判斷
+     </span>
+    </li>
+    <li>
+     <span style="font-size: medium;">
+      assertRaise - 確認是否有特定 exception raise
+     </span>
+    </li>
+   </ul>
+   <span style="font-size: medium;">
+    接著就是執行以上這 python 檔
+   </span>
+   <br/>
+   <pre><code class="cmd">D:\temp\JunYe\MyPython\Python3\LeetCode\UnitTest&gt;python3 UnitTest.py
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.001s
+
+OK
+
+D:\temp\JunYe\MyPython\Python3\LeetCode\UnitTest&gt;</code></pre>
+   <span style="font-size: medium;">
+    然後就是我自己的實作，拿 LeetCode - 0736 當範例
+   </span>
+   <br/>
+   <pre><code class="python">import unittest
+import Solution
+
+class TestMethods(unittest.TestCase):
+
+     def test_case1(self):
+          # Arrange 
+          testclass = Solution.Solution()
+          spec = '(add 1 2)'
+
+          # Act &amp; Assert
+          self.assertEqual(testclass.evaluate(spec), 3)
+
+     def test_case2(self):
+          # Arrange 
+          testclass = Solution.Solution()
+          spec = '(mult 3 (add 2 3))'
+
+          # Act &amp; Assert
+          self.assertEqual(testclass.evaluate(spec), 15)
+     
+     def test_case3(self):
+          # Arrange 
+          testclass = Solution.Solution()
+          spec = '(let x 2 (mult x 5))'
+
+          # Act &amp; Assert
+          self.assertEqual(testclass.evaluate(spec), 10)
+
+if __name__ == '__main__':
+     unittest.main()</code></pre>
+   <span style="font-size: medium;">
+    <br/>
+   </span>
+   <span style="font-size: medium;">
+    <br/>
+   </span>
+   <br/>
+   <span style="font-size: medium;">
+    參考資料 :
+   </span>
+   <br/>
+   <br/>
+   <ol>
+    <li>
+     <span style="font-size: medium;">
+      <a href="https://docs.python.org/3/library/unittest.html">
+       https://docs.python.org/3/library/unittest.html
+      </a>
+     </span>
+    </li>
+    <li>
+     <a href="http://www.codedata.com.tw/python/python-tutorial-the-6th-class-1-unittest/">
+      http://www.codedata.com.tw/python/python-tutorial-the-6th-class-1-unittest
+     </a>
+    </li>
+   </ol>
+  </div>
+ </body>
+</html>

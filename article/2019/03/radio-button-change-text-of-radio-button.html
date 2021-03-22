@@ -1,0 +1,51 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-8329846411130028376">
+   如果你想要在網頁 Update Radio Button 的文字
+   <br/>
+   <div>
+    <br/>
+   </div>
+   <div>
+    通常用的 .val(), .text(), .html() 都沒有辦法
+   </div>
+   <div>
+    <br/>
+   </div>
+   <div>
+    這時應該做的是在 HTML 裡把 Radio Button 的文字用一個Label包起來
+    <br/>
+    <br/>
+   </div>
+   <div>
+    然後再使用 .next().html() 去Update Radio Button 的文字
+   </div>
+   <div>
+    <br/>
+   </div>
+   <div>
+    這裡的 Label 我使用的是 span
+   </div>
+   <div>
+    <br/>
+   </div>
+   <div>
+    HTML :
+   </div>
+   <pre><code class="html">&lt;input type="radio" name="year" value='1'&gt;&lt;span&gt; 1 年 &lt;/span&gt;
+&lt;input type="radio" name="year" value='2'&gt;&lt;span&gt; 2 年 &lt;/span&gt;
+&lt;input type="radio" name="year" value='3'&gt;&lt;span&gt; 3 年 &lt;/span&gt;
+</code></pre>
+   JS :
+   <br/>
+   <pre><code class="javascript">tmp = $("input[name='year'][value='3']").next().html();</code></pre>
+   <br/>
+   <br/>
+   參考資料 :
+   <br/>
+   <a href="https://stackoverflow.com/questions/9945748/how-to-change-the-text-of-a-radio-button">
+    https://stackoverflow.com/questions/9945748/how-to-change-the-text-of-a-radio-button
+   </a>
+  </div>
+ </body>
+</html>

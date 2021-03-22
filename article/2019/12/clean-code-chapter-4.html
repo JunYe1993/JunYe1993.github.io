@@ -1,0 +1,87 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-5188828483393664707">
+   <h3>
+    <span style="font-size: large;">
+     Chapter 4 - 註解
+    </span>
+   </h3>
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     不要替糟糕的程式碼寫註解 - 重寫它
+    </span>
+   </h3>
+   <span style="font-size: medium;">
+    <br/>
+   </span>
+   <span style="font-size: medium;">
+    註解為必要之惡，用來
+    <b>
+     彌補我們用程式碼表達意圖失敗
+    </b>
+    的狀況。註解在絕大多數的情況無法跟著程式演進，導致過時且偏離當初的程式碼解釋。最後的真相只會存於程式碼。
+   </span>
+   <br/>
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     有益的註解
+    </span>
+   </h3>
+   <h5>
+    <span style="font-size: medium;">
+     <u>
+      法律型的註解
+     </u>
+    </span>
+   </h5>
+   <pre><code class="java">    // Copyright 2011-2019 The Bootstrap Authors
+    // Copyright 2011-2019 Twitter, Inc.</code></pre>
+   <h5>
+    <span style="font-size: medium;">
+     <u>
+      資訊型註解
+     </u>
+    </span>
+   </h5>
+   <span style="font-size: medium;">
+    資訊型註解提供一些基本資訊，但還是很容易被好的程式碼命名給取代
+   </span>
+   <br/>
+   <pre><code class="java">     // Returns an instance of the Responder being tested.
+     protected abstract Responder responderInstance();</code></pre>
+   <h5>
+    <span style="font-size: medium;">
+     <u>
+      對意圖的解釋
+     </u>
+    </span>
+   </h5>
+   <pre><code class="java">     // This is our best attempt to get a race condition
+     // by creating large number of threads.</code></pre>
+   <h5>
+    <span style="font-size: medium;">
+     <u>
+      對後果的告誡
+     </u>
+    </span>
+   </h5>
+   <pre><code class="java">     // Don't run unless you
+     // have some time to kill
+
+     // SimpleDateFormat is not thread safe,
+     // so we need to create each instance independently</code></pre>
+   <br/>
+   上一篇：
+   <br/>
+   <a href="https://junye1993.blogspot.com/2019/12/clean-code-chapter-3-2.html">
+    讀書心得 - Clean Code - Chapter 3 (2)
+   </a>
+   <br/>
+   下一篇：
+   <br/>
+   <a href="https://junye1993.blogspot.com/2020/01/clean-code-chapter-5.html">
+    讀書心得 - Clean Code - Chapter 5
+   </a>
+  </div>
+ </body>
+</html>

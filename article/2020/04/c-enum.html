@@ -1,0 +1,45 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-4547060311734656423">
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     enum - 列舉
+    </span>
+   </h3>
+   <pre><code class="cpp">    enum direction
+    {
+        North, // 0
+        South, // 1
+        East,  // 2
+        West   // 3
+    };</code></pre>
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     可搭配 typedef
+    </span>
+   </h3>
+   <pre><code class="cpp">    typedef enum direction Direction;
+
+    enum direction
+    {
+        North,
+        South,
+        East,
+        West
+    };
+
+    int main(void)
+    {
+        Direction dest = East;
+
+        return 0;
+    }</code></pre>
+   <br/>
+   參考資料 :
+   <br/>
+   <a href="https://michaelchen.tech/c-programming/enumeration/">
+    https://michaelchen.tech/c-programming/enumeration/
+   </a>
+  </div>
+ </body>
+</html>

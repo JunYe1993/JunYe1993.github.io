@@ -1,0 +1,19 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-6577800608080008543">
+   升級 PHP 後
+   <br/>
+   <br/>
+   會遇到錯誤回報
+   <b>
+    Strict Standards: Only variables should be passed by reference in
+   </b>
+   <br/>
+   <pre><code class="php">$SQL-&gt;bindParam(':page', getenv('REQUEST_URI'));</code></pre>
+   看到這報錯後，我變更改成以下
+   <br/>
+   <pre><code class="php">$temp = getenv('REQUEST_URI');
+$SQL-&gt;bindParam(':page', $temp);</code></pre>
+  </div>
+ </body>
+</html>

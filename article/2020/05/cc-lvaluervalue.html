@@ -1,0 +1,72 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-6848070103839367738">
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <font size="4" style="letter-spacing: 1.44px;">
+     lvalue
+    </font>
+    <font size="4">
+     <span style="letter-spacing: 1.44px;">
+      、rvalue 基本概念
+     </span>
+    </font>
+   </h2>
+   <span style="font-size: large;">
+    <pre class="output" style="-webkit-font-smoothing: antialiased; background: rgb(242, 242, 242); border-color: rgb(238, 238, 238) rgb(238, 238, 238) rgb(238, 238, 238) rgb(112, 112, 112); border-image: initial; border-radius: 4px; border-style: solid; border-width: 1px 1px 1px 4px; box-sizing: border-box; color: #111111; font-family: menlo, monaco, monospace; font-size: 14px; line-height: 21px; margin-bottom: 1.5em; margin-top: 1em; max-width: 100%; overflow-wrap: break-word; overflow: auto; padding: 0.5em 0.5em 0.5em 1em;">左值 (lvalue) : 一個佔據某個特定記憶體的值。
+右值 (rvalue) : 一個 expression 結束後就消失的值。
+基本上這兩個定義包含了全部的值，非左即右，非右即左。</pre>
+   </span>
+   <pre><code class="cpp">    int var = 4;    // var 參數佔據記憶體 = lvalue
+    4 = var;        // 4 不佔據記憶體 = rvalue
+    (var + 1) = 4;  // var + 1 也不佔據記憶體 = rvalue<br/></code></pre>
+   <span style="font-size: large;">
+    以上 2 跟 3 行會報錯，lvalue required as left operand of assignment。表示這個賦值程式碼錯在給不存在的記憶體空間賦值。所以只要是 lvalue 就能賦予值，即使是 function 也一樣，下面的 function
+    <b>
+     引用一個左值
+    </b>
+    ( globalvar )，所以可以賦予值。
+   </span>
+   <pre><code class="cpp">    int globalvar = 20;
+
+    int &amp;foo() {
+        return globalvar;
+    }
+
+    int main() {
+        foo() = 10;
+        std::cout &lt;&lt; globalvar; // 10
+        return 0;
+    }</code></pre>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <font size="4" style="letter-spacing: 1.44px;">
+     lvalue
+    </font>
+    <font size="4">
+     <span style="letter-spacing: 1.44px;">
+      、rvalue 轉換
+     </span>
+    </font>
+   </h2>
+   <br/>
+   <span style="font-size: large;">
+    左值能直接的轉換成右
+   </span>
+   <span style="font-size: large;">
+    值，但右值卻不行，這時就會需要 ' * ' 。
+   </span>
+   <pre><code class="cpp">    int a = 1;
+    int b = a + 1;  // 這裡的 a 被直接視為右值
+    int arr[] = {a, b};
+    int *p = arr;
+    *(p + 1) = 10;  // 利用 * 將右值 (p + 1) 傳換成左值</code></pre>
+   <br/>
+   <br/>
+   參考資料 :
+   <div>
+    <a href="https://nettee.github.io/posts/2018/Understanding-lvalues-and-rvalues-in-C-and-C/">
+     https://nettee.github.io/posts/2018/Understanding-lvalues-and-rvalues-in-C-and-C/
+    </a>
+   </div>
+  </div>
+ </body>
+</html>

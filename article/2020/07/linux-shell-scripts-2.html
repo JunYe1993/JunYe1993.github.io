@@ -1,0 +1,87 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-8860245380850366948">
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     sh vs bash
+    </span>
+   </h2>
+   <font face="helvetica" size="4">
+    我有時候用 sh 會讓 shell script 執行不過，通常會報 Bad substitution 之類的錯誤。其實是因為我用 ubuntu，ubuntu 的 sh 其實是指到 dash 而非 bash。dash 在這不作多介紹，
+把它想像成輕量型的 bash，所以支援的功能有限，所以有機會報錯。
+   </font>
+   <pre class="output" style="-webkit-font-smoothing: antialiased; background: rgb(242, 242, 242); border-color: rgb(238, 238, 238) rgb(238, 238, 238) rgb(238, 238, 238) rgb(112, 112, 112); border-image: initial; border-radius: 4px; border-style: solid; border-width: 1px 1px 1px 4px; box-sizing: border-box; color: #111111; font-family: menlo, monaco, monospace; font-size: 14px; line-height: 21px; margin-bottom: 1.5em; margin-top: 1em; max-width: 100%; overflow-wrap: break-word; overflow: auto; padding: 0.5em 0.5em 0.5em 1em;">ubuntu: cd /bin/
+ubuntu: /bin$ ls -l
+lrwxrwxrwx 1 root root       4  4月  9 16:36 sh -&gt; dash</pre>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 36px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     shell 字串操作
+    </span>
+   </h2>
+   <pre><code class="sh">    #!/bin/bash
+    # Shell 字串操作
+    # 執行 bash string.sh
+
+        file=/dir1/dir2/dir3/my.file.txt
+
+        # 字串刪減
+        # '#' 專刪右邊
+        echo ${file#*/}   # 從左邊開始批配，刪掉 / 自身和其左邊的字串：dir1/dir2/dir3/my.file.txt
+        echo ${file##*/}  # 從右邊開始批配，刪掉 / 自身和其左邊的字串：my.file.txt
+        echo ${file#*.}   # 從左邊開始批配，刪掉 . 自身和其左邊的字串：file.txt
+        echo ${file##*.}  # 從右邊開始批配，刪掉 . 自身和其左邊的字串：txt
+        # '%' 專刪右邊
+        echo ${file%/*}   # 從右邊開始批配，刪掉 / 自身和其右邊的字串：/dir1/dir2/dir3
+        echo ${file%%/*}  # 從左邊開始批配，刪掉 / 自身和其右邊的字串：
+        echo ${file%.*}   # 從右邊開始批配，刪掉 . 自身和其右邊的字串：/dir1/dir2/dir3/my.file
+        echo ${file%%.*}  # 從左邊開始批配，刪掉 . 自身和其右邊的字串：/dir1/dir2/dir3/my
+
+        # 取子字串
+        echo ${file:0:5}  # 從 index 為 0 之字元，往後取 5 個：/dir1
+        echo ${file:5:5}  # 從 index 為 5 之字元，往後取 5 個：/dir2
+
+        # 字串取代
+        echo ${file/dir/path}  # 將第一個 dir 取代成 path：/path1/dir2/dir3/my.file.txt
+        echo ${file//dir/path} # 將全部的 dir 取代成 path：/path1/path2/path3/my.file.txt
+
+    exit 0</code></pre>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 36px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     shell 陣列操作
+    </span>
+   </h2>
+   <pre><code class="sh">    # Array 操作
+
+        declare -a ARRAY      # 宣告 array 可以省略
+        ARRAY=(first second third)
+        echo ${ARRAY[0]}      # first
+        echo ${ARRAY[1]}      # second
+        echo ${ARRAY[2]}      # third
+        echo ${ARRAY[*]}      # first second third
+        echo ${ARRAY[*]:1:2}  # second third
+        echo ${ARRAY[@]:1:2}  # second third
+        
+    exit 0</code></pre>
+   <div style="margin-top: 36px;">
+    <span style="font-size: large;">
+     上一篇 :
+    </span>
+   </div>
+   <div>
+    <a href="http://junye1993.blogspot.com/2020/07/linux-shell-scripts-1.html" style="font-size: large;">
+     Linux - Shell Scripts (1)
+    </a>
+   </div>
+   <div style="margin-top: 36px;">
+    <span style="font-size: large;">
+     下一篇 :
+    </span>
+   </div>
+   <div>
+    <a href="http://junye1993.blogspot.com/2020/07/linux-shell-scripts-3-pipe-grep.html" style="font-size: large;">
+     Linux - Shell Scripts (3) (pipe : grep)
+    </a>
+   </div>
+  </div>
+ </body>
+</html>

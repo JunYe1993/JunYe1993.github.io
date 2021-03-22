@@ -1,0 +1,120 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-4722223486042509762">
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     function pointer 概念
+    </span>
+   </h2>
+   <br/>
+   <span style="font-size: large;">
+    基本上有 data 的 pointer 就會有 function 的 pointer。
+   </span>
+   <br/>
+   <ul>
+    <li>
+     <span style="font-size: large;">
+      正確的 ( 回傳 int 的 function )
+     </span>
+    </li>
+   </ul>
+   <pre><code class="cpp" style="width: 90%;">    int (*pfi)();</code></pre>
+   <li>
+    <span style="font-size: large;">
+     <span style="color: red;">
+      錯誤的
+     </span>
+     ( 回傳 int pointer 的 function )
+    </span>
+   </li>
+   <pre><code class="cpp" style="width: 90%;">    int *pfi();</code></pre>
+   <br/>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     function pointer 宣告
+    </span>
+   </h2>
+   <br/>
+   <span style="font-size: large;">
+    利用 typedef，然後一樣用 &amp; 取 function pointer
+   </span>
+   <br/>
+   <pre><code class="cpp" style="margin-left: 3%; width: 90%;">    extern int f1();
+    
+    typedef int (*funcptr)();
+    funcptr pfi;
+    pfi = &amp;f1;</code></pre>
+   <span style="font-size: large;">
+    <b>
+     <u>
+      實際上你可以省略 &amp;，因為 function 若不呼叫，他就只能回傳 pointer
+     </u>
+    </b>
+    ( 原文 : When you mention the name of a function but are not calling it, there's nothing else you could possibly be trying to do except generate a pointer to it. )
+   </span>
+   <br/>
+   <pre><code class="cpp" style="margin-left: 3%; width: 90%;">    pfi = f1;</code></pre>
+   <br/>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     function pointer 呼叫
+    </span>
+   </h2>
+   <ul>
+    <li>
+     <span style="font-size: large;">
+      正確的 ( 回傳 int 的 function )
+     </span>
+    </li>
+   </ul>
+   <pre><code class="cpp" style="width: 90%;">    int (*pfi)(arg1, arg2);</code></pre>
+   <li>
+    <span style="font-size: large;">
+     <span style="color: red;">
+      錯誤的
+     </span>
+     ( 回傳 int pointer 的 function )
+    </span>
+   </li>
+   <pre><code class="cpp" style="width: 90%;">    int *pfi(arg1, arg2);</code></pre>
+   <li>
+    <span style="font-size: large;">
+     <span style="color: blue;">
+      省略的
+     </span>
+     (
+     <b>
+      <u>
+       原理同上，function pointer 除了 Call function 只能 assign 另一 pointer 或比較其值，所以 Compiler 會將 pfi 視為 (*pfi)。
+      </u>
+     </b>
+     ) ( 原文 : There's nothing you can do with a function pointer except assign it to another function pointer, compare it to another function pointer, or call the function that it points to. )
+    </span>
+   </li>
+   <pre><code class="cpp" style="width: 90%;">    int pfi(arg1, arg2);</code></pre>
+   <br/>
+   <span style="font-size: large;">
+    下一篇 :
+   </span>
+   <div>
+    <span style="font-size: large;">
+     <span style="background-color: white; color: rgba(0, 0, 0, 0.52); font-family: roboto, robotodraft, helvetica, arial, sans-serif; font-size: 14px;">
+      <a href="http://junye1993.blogspot.com/2020/05/cc-function-pointer-callback-function.html" id="http://junye1993.blogspot.com/2020/05/cc-function-pointer-callback-function.html" rel="nofollow">
+       C/C++ - Function Pointer 應用 CallBack Function
+      </a>
+     </span>
+    </span>
+   </div>
+   <div>
+    <br/>
+   </div>
+   <div>
+    參考資料 :
+    <br/>
+    <a href="https://www.eskimo.com/~scs/cclass/int/sx10a.html">
+     https://www.eskimo.com/~scs/cclass/int/sx10a.html
+    </a>
+   </div>
+  </div>
+ </body>
+</html>

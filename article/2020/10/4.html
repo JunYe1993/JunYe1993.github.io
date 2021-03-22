@@ -1,0 +1,190 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-1534191244216003964">
+   <div class="separator" style="clear: both; text-align: center;">
+    <a href="https://junye1993.github.io/image/Development.jpg" style="margin-left: 1em; margin-right: 1em;">
+     <img border="0" data-original-height="1365" data-original-width="2048" height="426" src="https://junye1993.github.io/image/Development.jpg" width="640"/>
+    </a>
+   </div>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     耦合性 (Coupling，dependency)
+    </span>
+   </h2>
+   <font face="helvetica" size="4">
+    <b>
+     <u>
+      耦合性是指一程式中，模組及模組之間資訊或參數依賴的程度。低耦合性是結構良好程式的特性，低耦合性程式的可讀性及可維護性會比較好。
+     </u>
+    </b>
+    舉例來說 Module A 使用了 Module B 功能, 今天 Module B 更改了功能而造成 Module A 必須也更改使用其功能的邏輯, 則會說 Module A 對 Module B 依賴程度高, 具有高耦合性。所以你要維護 B 就要一起維護 A, 邏輯參在一起想必 module 的可重複使用率也低。
+   </font>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 24px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     解耦 &gt; Dependency injection
+    </span>
+   </h2>
+   <font face="helvetica" size="4">
+    高耦合 &gt; 解耦 &gt; 低耦合。解耦方法很多這裡使用的是 Dependency injection (依賴注入&gt;///&lt;)。拿前幾些章節裡的 Server 跟 Route 舉例。
+   </font>
+   <div style="margin-top: 12px;">
+    <font face="helvetica" size="4" style="background-color: #fff7e9;">
+     <b>
+      <u>
+       沒有依賴注入的 Server + Route
+      </u>
+     </b>
+    </font>
+   </div>
+   <ul style="text-align: left;">
+    <li>
+     <font face="helvetica" size="4">
+      route.js
+     </font>
+     <pre style="width: 95%;"><code class="javascript">    export function regular_route(pathname) {
+        console.log("Start routing path name \"" + pathname + "\"");
+    }</code></pre>
+    </li>
+    <li>
+     <font face="helvetica" size="4">
+      Server.js
+     </font>
+     <pre style="width: 95%;"><code class="javascript">    import http from 'http'
+    import url from 'url'
+    import { regular_route } from './route.js';
+
+    export function serverStart() {
+        function onRequest(request, response) {
+            var path_name = url.parse(request.url).pathname;
+            console.log("Request for " + path_name + " received");
+            
+            // my Route function
+            regular_route(path_name);
+
+            response.writeHead(200, {"Content-Type": "text/plain"});
+            response.write("Hello World.\n");
+            response.end();
+        }
+        http.createServer(onRequest).listen(8888);
+        console.log("Server has started...");
+    }</code></pre>
+    </li>
+    <li>
+     <font face="helvetica" size="4">
+      index.js
+     </font>
+     <pre style="width: 95%;"><code class="javascript">    import {serverStart} from './Server.js'
+    serverStart();</code></pre>
+    </li>
+   </ul>
+   <div style="margin-top: 12px;">
+    <font face="helvetica" size="4">
+     老實說看起來像最佳解, 但當你要換另一種 routing function, 你正常來說要更改 2 個地方。import 的部份可能要改, 因為是新的檔案或其他大 module 裡的 route function。function name 可能要改, 因為新的 routing function 不叫 regular_route。驗證了上面所說的你改 B 結果 A 也要跟著改，量子糾纏...阿不對是"高耦合"。才 2 個看起來還好，但隨著專案擴的越大，你改 routing function 的時間成本也越大，甚至改天不用 route 用其它東西去處理 URL，那就更慘了。
+    </font>
+   </div>
+   <div style="margin-top: 12px;">
+    <font face="helvetica" size="4" style="background-color: #fff7e9;">
+     <b>
+      <u>
+       依賴注入的 Server + Route
+      </u>
+     </b>
+    </font>
+   </div>
+   <div style="margin-top: 12px;">
+    <font face="helvetica" size="4">
+     這邊切入的點是 Server 這 module 主要不變工作應該只有接收與回覆，中間的 routing function 是會依照時空背景不同去更動(沒錯,就是這麼彈性且有價值,誰說整天看政治新聞沒用的)，可以被抽象化成一個動作，而這個動作可以當作參數傳進 Server 這 module。(說穿了就是做 callback function)
+    </font>
+   </div>
+   <ul style="text-align: left;">
+    <li>
+     <font face="helvetica" size="4">
+      route.js (沒變)
+     </font>
+     <pre style="width: 95%;"><code class="javascript">    export function regular_route(pathname) {
+        console.log("Start routing path name \"" + pathname + "\"");
+    }</code></pre>
+    </li>
+    <li>
+     <font face="helvetica" size="4">
+      Server.js
+     </font>
+     <pre style="width: 95%;"><code class="javascript">    import http from 'http'
+    import url from 'url'
+
+    export function serverStart(route) {
+        function onRequest(request, response) {
+            var path_name = url.parse(request.url).pathname;
+            console.log("Request for " + path_name + " received");
+            
+            // my Route function
+            route(path_name);
+
+            response.writeHead(200, {"Content-Type": "text/plain"});
+            response.write("Hello World.\n");
+            response.end();
+        }
+        http.createServer(onRequest).listen(8888);
+        console.log("Server has started...");
+    }</code></pre>
+    </li>
+    <li>
+     <font face="helvetica" size="4">
+      index.js
+     </font>
+     <pre style="width: 95%;"><code class="javascript">    import { serverStart } from './Server.js'
+    import { regular_route } from './route.js';
+    serverStart(regular_route);</code></pre>
+    </li>
+   </ul>
+   <div style="margin-top: 12px;">
+    <font face="helvetica" size="4">
+     這樣你改 routing function 就不會需要動到 Server.js (改成動index.js...)，甚至改傳吃豬肉這 function，Server 也照執行沒什麼問題。
+    </font>
+   </div>
+   <div style="margin-top: 36px;">
+    <span style="font-size: large;">
+     上一篇 :
+    </span>
+   </div>
+   <div>
+    <a href="https://junye1993.blogspot.com/2020/10/3.html" style="font-size: large;">
+     重新踏入網頁開發 (3) - Route
+    </a>
+   </div>
+   <div style="margin-top: 12px;">
+    <span style="font-size: large;">
+     下一篇 :
+    </span>
+   </div>
+   <div>
+    <a href="https://junye1993.blogspot.com/2020/11/5.html" style="font-size: large;">
+     重新踏入網頁開發 (5) - Blocking &amp; Non-Blocking
+    </a>
+   </div>
+   <div style="margin-top: 36px;">
+    <span style="font-size: large;">
+     參考資料 :
+    </span>
+   </div>
+   <div>
+    1.
+    <a href="https://www.nodebeginner.org/index-zh-tw.html#hello-world" style="font-size: large;">
+     https://www.nodebeginner.org/index-zh-tw.html#hello-world
+    </a>
+   </div>
+   <div>
+    2.
+    <a href="https://zh.wikipedia.org/wiki/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5" style="font-size: large;">
+     依賴注入 wiki
+    </a>
+   </div>
+   <div>
+    3.
+    <a href="https://zh.wikipedia.org/wiki/%E8%80%A6%E5%90%88%E6%80%A7_(%E8%A8%88%E7%AE%97%E6%A9%9F%E7%A7%91%E5%AD%B8)" style="font-size: large;">
+     耦合性 wiki
+    </a>
+   </div>
+  </div>
+ </body>
+</html>

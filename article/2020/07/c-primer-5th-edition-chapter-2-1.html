@@ -1,0 +1,151 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-6697927093438596066">
+   <div class="separator" style="clear: both; text-align: center;">
+    <a href="https://1.bp.blogspot.com/-Nh77fVPgCVM/X3bxSY5SOuI/AAAAAAAACbc/2HneHQmgbow4CkfmiIbS3i_23XHtRWSQQCPcBGAYYCw/s2048/Note.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;">
+     <img border="0" data-original-height="1365" data-original-width="2048" height="426" src="https://1.bp.blogspot.com/-Nh77fVPgCVM/X3bxSY5SOuI/AAAAAAAACbc/2HneHQmgbow4CkfmiIbS3i_23XHtRWSQQCPcBGAYYCw/w640-h426/Note.jpg" width="640"/>
+    </a>
+   </div>
+   <br/>
+   <div class="separator" style="clear: both; text-align: center;">
+    <br/>
+   </div>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     C++ 原生內建的資料型態 ( Primitive Types )
+    </span>
+   </h2>
+   <font face="helvetica" size="4">
+    C++ 定義了一些算術用的資料型態 ( Arithmetic Types ) 和一個特殊的資料型態 void。Arithmetic Types : Integer, Character, Boolean, Floating Point, Double Floating Point, Wide Character。
+    <br/>
+    <br/>
+   </font>
+   <font face="helvetica" size="4">
+    下面為一些資料型態轉換 :
+   </font>
+   <pre><code class="cpp">    bool b = 42;            // b is true
+    int i = b;              // i has value 1
+    i = 3.14;               // i has value 3
+    double pi = i;          // pi has value 3.0
+    unsigned char c = -1;   // assuming 8-bit chars, c has value 255
+    signed char c2 = 256;   // assuming 8-bit chars, the value of c2 is undefined</code></pre>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 36px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     Initialization
+    </span>
+   </h2>
+   <font face="helvetica" size="4">
+    各種初始 :
+   </font>
+   <pre><code class="cpp">    int units_sold1 = 0;
+    int units_sold2 = {0};
+    int units_sold3{0};
+    int units_sold4(0);</code></pre>
+   <font face="helvetica" size="4">
+    {} 跟 () 的不同 :
+   </font>
+   <pre><code class="cpp">    long double ld = 3.1415926536;
+    int a{ld}, b = {ld};    // error: narrowing conversion required
+    int c(ld), d = ld;      // ok: but value will be truncated</code></pre>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 36px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     Declaration 跟 Definition
+    </span>
+   </h2>
+   <font face="helvetica" size="4">
+    為了支援多個檔案的編譯，cpp 區分了 Declaration 跟 Definition。Declaration 代表著跟整個程式宣告一個帶有資料型態的名子，任何檔案都可以去作存取。Definition 則是創造一個物件實體去對應那個帶有資料型態的名子。
+    <br/>
+    如果想要只宣告名子(代表實際物件會被在其他檔案給實現)，則會在宣告時加上 extern，有了 extern 就代表你不能下 Definition。
+   </font>
+   <pre><code class="cpp">    extern int i;              // declares but does not define i
+    int j;                     // declares and defines j
+    extern double pi = 3.1416; // error: ‘pi’ has both ‘extern’ and initializer</code></pre>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 36px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     Compound Types - References
+    </span>
+   </h2>
+   <font face="helvetica" size="4">
+    Reference 等於創造額外的一個名子給一個物件。所以下面第 refVal2, refVal4 會 error，因為你不能給不存在的物件 ( 或
+    <a href="http://junye1993.blogspot.com/2020/05/cc-lvaluervalue.html" style="font-family: helvetica; font-size: large;">
+     rvalue
+    </a>
+    ) 取名。References must be initialized.
+   </font>
+   <pre><code class="cpp">    int ival = 1024;
+    int &amp;refVal = ival;     // refVal refers to (is another name for) ival
+    int &amp;refVal2;           // error: a reference must be initialized
+    int &amp;refVal3 = refVal;  // ok: refVal3 is bound to the object to which refVal is bound, i.e., to ival
+    int &amp;refVal4 = 10;      // error: initializer must be an object</code></pre>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 36px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     Compound Types - Pointers
+    </span>
+   </h2>
+   <font face="helvetica" size="4">
+    Pointer為一個 "指向" 物件。類似 References 但卻是一個物件，所以可以不用被 initialized，也可以用來複製、分配。下面的 ＆ 是
+    <b>
+     作為 operator，用來取物件的實際位置
+    </b>
+    ，與上面提到用來宣告資料型態的的 ＆ 有著不同的意義。
+   </font>
+   <pre><code class="cpp">    double dval;
+    double *pd = &amp;dval; // ok: initializer is the address of a double
+    double *pd2 = pd;   // ok: initializer is a pointer to double
+    int *pi = pd;       // error: types of pi and pd differ
+    pi = &amp;dval;         // error: assigning the address of a double to a pointer to int</code></pre>
+   <font face="helvetica" size="4">
+    下面的 * 作為 operator，放在 pointer 前面等於取其指向的該物件
+   </font>
+   <pre><code class="cpp">    *p = 0;             // * yields the object; we assign a new value to ival through p
+    std::cout &lt;&lt; *p;    // prints 0</code></pre>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 36px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     更多 References &amp; Pointers 範例
+    </span>
+   </h2>
+   <pre><code class="cpp">    double dval;
+    double *pd = &amp;dval;  // ok: initializer is the address of a double
+    double *pd2 = pd;    // ok: initializer is a pointer to double
+    int *pi = pd;        // error: types of pi and pd differ
+    pi = &amp;dval;          // error: assigning the address of a double to a pointer to int
+
+    int i = 42;
+    int &amp;r = i;          // &amp; follows a type and is part of a declaration; r is a reference
+    int *p;              // * follows a type and is part of a declaration; p is a pointer
+    p = &amp;i;              // &amp; is used in an expression as the address-of operator
+    *p = i;              // * is used in an expression as the dereference operator
+    int &amp;r2 = *p;        // &amp; is part of the declaration; * is the dereference operator</code></pre>
+   <div style="margin-top: 36px;">
+    <span style="font-size: large;">
+     相關文章 :
+    </span>
+   </div>
+   <div>
+    <a href="https://junye1993.blogspot.com/2020/05/c.html" style="font-size: large;">
+     Cpp - &amp;
+    </a>
+   </div>
+   <div style="margin-top: 12px;">
+    <span style="font-size: large;">
+     上一篇 :
+    </span>
+   </div>
+   <div>
+    <a href="http://junye1993.blogspot.com/2020/06/c-primer-5th-edition-chapter-1.html" style="font-size: large;">
+     讀書心得 - C++ Primer (5th Edition) - Chapter 1
+    </a>
+   </div>
+   <div style="margin-top:  6px;">
+    <span style="font-size: large;">
+     下一篇 :
+    </span>
+   </div>
+   <div>
+    <a href="http://junye1993.blogspot.com/2020/07/c-primer-5th-edition-chapter-2-2.html" style="font-size: large;">
+     讀書心得 - C++ Primer (5th Edition) - Chapter 2 (2)
+    </a>
+   </div>
+  </div>
+ </body>
+</html>

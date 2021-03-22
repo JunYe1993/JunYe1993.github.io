@@ -1,0 +1,149 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-1400558481699735301">
+   <h3>
+    <span style="font-size: large;">
+     Chapter 2 - 有意義的命名
+    </span>
+   </h3>
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; font-size: 20px; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     使之名符其實
+    </span>
+   </h3>
+   <span style="font-size: medium;">
+    選一個好的名稱很花時間，但省下的時間更多。
+   </span>
+   <br/>
+   <pre><code class="cpp">    // 沒命名
+    public List&lt;int[]&gt; getThem(){
+        List&lt;int[]&gt; list1 = new ArrayList&lt;int[]&gt;();
+        for (int[] x : theList)
+            if (x[0] == 4)
+                list1.add(x);
+        return list1;
+    }
+    // 有命名
+    public List&lt;int[]&gt; getFlaggedCells(){
+        List&lt;int[]&gt; flaggedCells = new ArrayList&lt;int[]&gt;();
+        for (int[] cell : gameBoard)
+            if (cell[STATUS_VALUE] == FLAGGED)
+                flaggedCells.add(cell);
+        return flaggedCells;
+    }</code></pre>
+   <span style="font-size: medium;">
+    有命名的參數也比較好找，
+   </span>
+   STATUS_VALUE 和 FLAGGED。
+   <br/>
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; font-size: 20px; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     類別的命名
+    </span>
+   </h3>
+   <div>
+    <span style="font-size: medium;">
+     使用名詞或名詞片語
+    </span>
+   </div>
+   <div>
+    <ul>
+     <li>
+      <span style="font-size: medium;">
+       Account
+      </span>
+     </li>
+     <li>
+      <span style="font-size: medium;">
+       AddressParser
+      </span>
+     </li>
+     <li>
+      <span style="font-size: medium;">
+       Customer
+      </span>
+     </li>
+     <li>
+      <span style="font-size: medium;">
+       WikiPage
+      </span>
+     </li>
+    </ul>
+   </div>
+   <span style="font-size: medium;">
+    避免以下之命名
+   </span>
+   <br/>
+   <ul>
+    <li>
+     <span style="font-size: medium;">
+      Manager
+     </span>
+    </li>
+    <li>
+     <span style="font-size: medium;">
+      Data
+     </span>
+    </li>
+    <li>
+     <span style="font-size: medium;">
+      Info
+     </span>
+    </li>
+   </ul>
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; font-size: 20px; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     方法的命名
+    </span>
+   </h3>
+   <div>
+    <span style="font-size: medium;">
+     使用動詞或動詞片語
+    </span>
+   </div>
+   <div>
+    <ul>
+     <li>
+      <span style="font-size: medium;">
+       deletePage()
+      </span>
+     </li>
+     <li>
+      <span style="font-size: medium;">
+       save()
+      </span>
+     </li>
+     <li>
+      <span style="font-size: medium;">
+       取出器 - getXX()
+      </span>
+     </li>
+     <li>
+      <span style="font-size: medium;">
+       修改器 - setXX()
+      </span>
+     </li>
+     <li>
+      <span style="font-size: medium;">
+       判定器 - isXX()
+      </span>
+     </li>
+    </ul>
+   </div>
+   <div>
+    <br/>
+    上一篇：
+    <br/>
+    <a href="https://junye1993.blogspot.com/2019/11/clean-code-chapter-1.html">
+     讀書心得 - Clean Code - Chapter 1
+    </a>
+    <br/>
+    下一篇：
+    <br/>
+    <a href="https://junye1993.blogspot.com/2019/12/clean-code-chapter-3-1.html">
+     讀書心得 - Clean Code - Chapter 3 (1)
+    </a>
+   </div>
+  </div>
+ </body>
+</html>

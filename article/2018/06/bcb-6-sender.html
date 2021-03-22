@@ -1,0 +1,50 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-202892840310845749">
+   說來慚愧，但我很後面才知道這東西
+   <br/>
+   BCB 設計按鈕不外乎 TButton TBitBtn TSpeedButton
+   <br/>
+   <br/>
+   但按鈕通常邏輯差不多，只是因為傳的值不一樣而用不同 Button
+   <br/>
+   然後程式碼變成這樣
+   <br/>
+   <br/>
+   <pre><code class="cpp">
+void __fastcall TMainForm::TButton1Click(TObject *Sender)
+{
+    MyButtonFunction("TButton1");
+}
+
+void __fastcall TMainForm::TButton2Click(TObject *Sender)
+{
+
+    MyButtonFunction("TButton2");
+}
+
+void __fastcall TMainForm::TButton3Click(TObject *Sender)
+{
+
+    MyButtonFunction("TButton3");
+}</code>
+</pre>
+   但你其實可以
+   <br/>
+   <pre><code class="cpp">
+void __fastcall TMainForm::ButtonClick(TObject *Sender)
+{
+    TControl *btn = dynamic_cast&lt;TControl *&gt;(Sender);
+    MyButtonFunction(btn-&gt;Name);
+}</code>
+</pre>
+   然後再去修改三個 Button 的 OnClick 指向 ButtonClick
+   <br/>
+   這裡為什麼用 TControl 因為一次就可以相容三種 Button
+   <br/>
+   用了半年BCB才知道...
+   <br/>
+   <br/>
+  </div>
+ </body>
+</html>

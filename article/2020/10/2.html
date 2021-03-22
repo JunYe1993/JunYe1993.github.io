@@ -1,0 +1,172 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-2841671483929522851">
+   <div class="separator" style="clear: both; text-align: center;">
+    <a href="https://junye1993.github.io/image/Development.jpg" style="margin-left: 1em; margin-right: 1em;">
+     <img border="0" data-original-height="1365" data-original-width="2048" height="426" src="https://junye1993.github.io/image/Development.jpg" width="640"/>
+    </a>
+   </div>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     模組化
+    </span>
+   </h2>
+   <font face="helvetica" size="4">
+    Ryan Dahl 創造的 node.js 專案之所以如此重要, 是因為其理念為
+    <b>
+     <u>
+      模組(module)
+     </u>
+    </b>
+    , 讓 javascript 的大規模專案得以實現, 也讓 javascript 可以做伺服器端程式設計。
+   </font>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 24px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     node.js 的模組
+    </span>
+   </h2>
+   <font face="helvetica" size="4">
+    這裡示範 node.js 原生的模組,
+   </font>
+   <ul style="text-align: left;">
+    <li>
+     <font face="helvetica" size="4">
+      moduleA.js
+     </font>
+     <pre style="width: 95%;"><code class="javascript">    // 想像這裡有隱藏程式碼
+    // # var module = new Module(...);
+    // # var exports = module.exports;
+    // index.js 在 call "require("./ModuleA");"
+    // 等於回傳 module.exports
+    var name = "JunYe";
+    exports.name = name;</code></pre>
+    </li>
+    <li>
+     <font face="helvetica" size="4">
+      moduleB.js
+     </font>
+     <pre style="width: 95%;"><code class="javascript">    // 想像這裡有隱藏程式碼
+    // # var module = new Module(...);
+    // # var exports = module.exports;
+    // index.js 在 call "require("./ModuleB");"
+    // 等於回傳 module.exports
+    var name = "Daniel";
+    exports.name = name;</code></pre>
+    </li>
+    <li>
+     <font face="helvetica" size="4">
+      index.js
+     </font>
+     <pre style="width: 95%;"><code class="javascript">    var a = require("./moduleA");
+    var b = require("./moduleB");
+    console.log(a.name + " and " + b.name + " both are the best.");</code></pre>
+    </li>
+    <li>
+     <font face="helvetica" size="4">
+      執行 node index.js
+     </font>
+     <pre style="width: 95%;"><code class="bash">    $&gt;:node index.js 
+    JunYe and Daniel both are the best.</code></pre>
+    </li>
+   </ul>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 24px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     ES6 的模組
+    </span>
+   </h2>
+   <font face="helvetica" size="4">
+    ES6 是較新的 javascript 規範, 沒錯就是規範, javascript 並非正規的程式語言, 而是一種語言規範, 而其 runtime 的執行則讓各個瀏覽器引擎決定(nodejs也是其中之一)。雖然 ES6 是較新的規範, 但大部分的瀏覽器都有支援了。以下為 nodejs 支援 ES6 的示範
+   </font>
+   <div style="margin-top: 12px">
+    <font face="helvetica" size="4">
+     <b>
+      <u>
+       <a href="https://junye1993.blogspot.com/2020/10/nodejs-es6-module.html" style="font-size: large;">
+        這裡有個前置作業, 要使用 npm init 去創造 package.json, 然後把 type 改成 module.
+       </a>
+      </u>
+     </b>
+    </font>
+   </div>
+   <ul style="text-align: left;">
+    <li>
+     <font face="helvetica" size="4">
+      studentA.js
+     </font>
+     <pre style="width: 95%;"><code class="javascript">    export var _name = "JunYe";
+    export var _class = "SSS";
+    export var _number = "3064";</code></pre>
+    </li>
+    <li>
+     <font face="helvetica" size="4">
+      function.js
+     </font>
+     <pre style="width: 95%;"><code class="javascript">    export function intro (name, number) {
+        console.log("My name is " + name + ", and my number is " + number);
+    };</code></pre>
+    </li>
+    <li>
+     <font face="helvetica" size="4">
+      index.js
+     </font>
+     <pre style="width: 95%;"><code class="javascript">    // 要在 package.json 加 type: module
+    // 才能達到 &lt;script src="./function.js" type="module"&gt;&lt;/script&gt; 的效果
+    // 這邊不知道為什麼要加 .js 才給過
+    import { intro } from "./function.js";
+    import { _name, _number } from "./studentA.js";
+    intro(_name, _number);</code></pre>
+    </li>
+    <li>
+     <font face="helvetica" size="4">
+      執行 node index.js
+     </font>
+     <pre style="width: 95%;"><code class="bash">    $&gt;:node index.js 
+    My name is JunYe, and my number is 3064</code></pre>
+    </li>
+   </ul>
+   <div style="margin-top: 36px;">
+    <span style="font-size: large;">
+     上一篇 :
+    </span>
+   </div>
+   <div>
+    <a href="https://junye1993.blogspot.com/2020/10/1.html" style="font-size: large;">
+     重新踏入網頁開發 (1) - Nodejs
+    </a>
+   </div>
+   <div style="margin-top: 12px;">
+    <span style="font-size: large;">
+     下一篇 :
+    </span>
+   </div>
+   <div>
+    <a href="https://junye1993.blogspot.com/2020/10/3.html" style="font-size: large;">
+     重新踏入網頁開發 (3) - Route
+    </a>
+   </div>
+   <div style="margin-top: 36px;">
+    <span style="font-size: large;">
+     參考資料 :
+    </span>
+   </div>
+   <div>
+    1.
+    <a href="https://ithelp.ithome.com.tw/articles/10191345" style="font-size: large;">
+     一文讓你徹底搞清楚javascript中的require、import與export
+    </a>
+   </div>
+   <div>
+    2.
+    <a href="https://ithelp.ithome.com.tw/articles/10185692" style="font-size: large;">
+     Day 11: ES6篇: Module System(模組系統)
+    </a>
+   </div>
+   <div>
+    3.
+    <a href="https://eddychang.me/node-es6-module" style="font-size: large;">
+     Node.js使用ES6 Module
+    </a>
+   </div>
+  </div>
+ </body>
+</html>

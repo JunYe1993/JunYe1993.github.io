@@ -1,0 +1,53 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-3631141464904962907">
+   <div class="separator" style="clear: both; text-align: center;">
+    <a href="https://junye1993.github.io/image/Development.jpg" style="margin-left: 1em; margin-right: 1em;">
+     <img border="0" data-original-height="1365" data-original-width="2048" height="426" src="https://junye1993.github.io/image/Development.jpg" width="640"/>
+    </a>
+   </div>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify; font-size: large; padding: 10px;">
+    Express - sendFile()
+   </h2>
+   <font face="helvetica" size="4">
+    用 sendFile 把寫好的 HTML 傳出去，然後準備開始前端的開發。
+   </font>
+   <pre><code class="javascript">    import express from 'express'
+    import path from 'path';
+
+    // 建立 express 這 module
+    var app = express()
+    const port = 8888
+    const __dirname = path.resolve();
+
+    // This responds a GET request for the homepage
+    app.get('/', (req, res) =&gt; {
+        console.log("Got a GET request for the homepage, from");
+        res.sendFile(__dirname + "/hello.html");
+    })
+
+    var server = app.listen(port, function () {
+    var host = server.address().address
+    var port = server.address().port
+        console.log("Example app listening at http://%s:%s", host, port)
+    })</code></pre>
+   <div style="margin-top: 36px;">
+    <span style="font-size: large;">
+     參考資料 :
+    </span>
+   </div>
+   <div>
+    1.
+    <a href="http://expressjs.com/en/guide/routing.html" style="font-size: large;">
+     Express 官網
+    </a>
+   </div>
+   <div>
+    1.
+    <a href="https://blog.gtwang.org/programming/learn-to-use-the-new-router-in-expressjs-4/" style="font-size: large;">
+     node.js TypeError: path must be absolute or specify root to res.sendFile [failed to parse JSON]
+    </a>
+   </div>
+  </div>
+ </body>
+</html>

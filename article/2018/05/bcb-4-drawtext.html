@@ -1,0 +1,54 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-6538102305773820681">
+   在 BCB 裡設計表格類的東西
+   <br/>
+   幾乎都是從 TCustomGrid 繼承而來
+   <br/>
+   在填入表格值都是用 DrawText 來填值
+   <br/>
+   而我們要改變一些東西，例如文字置中
+   <br/>
+   就要自己下 DrawText 的參數
+   <br/>
+   <br/>
+   首先第一步，把
+   <b>
+    DefaultDrawing 的值改為 Fault
+   </b>
+   <br/>
+   不改的話會 DrawText 兩次，造成
+   <b>
+    重疊
+   </b>
+   <br/>
+   <br/>
+   第二步改寫
+   <b>
+    OnDrawCell
+   </b>
+   <br/>
+   <pre><code class="cpp">
+void __fastcall TMainForm::LGridDrawCell(TObject *Sender, int ACol, int ARow, TRect &amp;Rect, TGridDrawState State)
+{
+    TStringGrid *vle = dynamic_cast&lt;TStringGrid *&gt;(Sender);
+    int flag = DT_WORDBREAK+DT_CENTER+DT_VCENTER+DT_SINGLELINE;
+    vle-&gt;Canvas-&gt;FillRect(Rect);
+    vle-&gt;Canvas-&gt;Font-&gt;Size = 11;
+    vle-&gt;Canvas-&gt;Font-&gt;Style = TFontStyles() &lt;&lt; fsBold;
+    vle-&gt;Canvas-&gt;Pen-&gt;Color = clBlack;
+    vle-&gt;Canvas-&gt;Rectangle(Rect);
+    String Str = vle-&gt;Cells[ACol][ARow];
+    DrawText(vle-&gt;Canvas-&gt;Handle, Str.w_str(),Str.Length(), &amp;Rect, flag);
+}
+</code>
+</pre>
+   <br/>
+   首先要通用的話，就必須用 Sender 來判斷呼叫的 TStringgrid
+   <br/>
+   再來調整 Flag 來改寫置左中右，上下置中似乎只對單行有作用
+   <br/>
+   接下來就常見的 Font 的操作，最後 DrawText 便大功告成
+  </div>
+ </body>
+</html>

@@ -1,0 +1,80 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-4740012678187519980">
+   轉報告下一步就是自動產生報告
+   <br/>
+   要自動產生報告，不外乎就是填表格。
+   <br/>
+   <br/>
+   你可以用 DrawGrid 或 StringGrid 來製作表格
+   <br/>
+   但我認為 DrawGrid 和 StringGrid 都是完成度很高的元件
+   <br/>
+   完成度很高代表若目的與設計方向不同，用起來就會綁手綁腳
+   <br/>
+   要覆寫很多功能或者沒有與你目的相同的東西
+   <br/>
+   <br/>
+   我想當初 Grid 就是來完成表格，不是給你填，
+   <br/>
+   所以在填值方面不會有太多方便的功能。
+   <br/>
+   填表格通常會想要用下拉式表單 ( ComboBox )
+   <br/>
+   網路上找想用 Grid 來做下拉式表單不外乎兩種
+   <br/>
+   <b>
+    1. 創一個 ComboBox 但"位置"在 Grid 的該 Cell 上
+   </b>
+   <br/>
+   <b>
+    2. 在該 Cell 真的創一個 ComboBox
+   </b>
+   <br/>
+   <br/>
+   但我兩種都不用
+   <br/>
+   我這裡要介紹的元件是 TValueListEditor 來 Implement 我要給填的表格
+   <br/>
+   TValueListEditor 只有兩個 Column 一個 Key 和 Value
+   <br/>
+   所以要三欄的你只好乖乖用他給 Grid 元件，或者用CustomGrid 自己做一個 Grid
+   <br/>
+   <br/>
+   但 TValueListEditor 她有
+   <b>
+    EditStyle
+   </b>
+   可改，讓你的表格更靈活
+   <br/>
+   <pre><code class="cpp">
+void __fastcall MyValueListEditorClass::setDropList(TValueListEditor* List, int index, TStringList* li){
+    List-&gt;ItemProps[index]-&gt;EditStyle = esPickList;
+    List-&gt;ItemProps[index]-&gt;PickList = li;
+    List-&gt;ItemProps[index]-&gt;ReadOnly = true;
+}
+</code></pre>
+   我將 EditStyle 變成 esPickList 就等於是下拉式表格
+   <br/>
+   表格內容就是 PickList (TStringList*)
+   <br/>
+   我覺得比用 Grid 方便許多，結果如下
+   <br/>
+   <div class="separator" style="clear: both; text-align: center;">
+    <a href="https://1.bp.blogspot.com/-j-3pEuL2wy4/WxPJ_Z7gZ6I/AAAAAAAAAjA/vidM4PGVeCc6mL52v99xiAm8zPvhYLo0wCLcBGAs/s1600/%25E6%259C%25AA%25E5%2591%25BD%25E5%2590%258D.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;">
+     <img border="0" data-original-height="211" data-original-width="300" src="https://1.bp.blogspot.com/-j-3pEuL2wy4/WxPJ_Z7gZ6I/AAAAAAAAAjA/vidM4PGVeCc6mL52v99xiAm8zPvhYLo0wCLcBGAs/s1600/%25E6%259C%25AA%25E5%2591%25BD%25E5%2590%258D.png"/>
+    </a>
+   </div>
+   有些人(我)會想刪掉 TValueListEditor 上面的 FixRow
+   <br/>
+   但是我找了很多方法都不行，最後只能開大絕
+   <br/>
+   <pre><code class="cpp">
+    MyValueListEditor-&gt;RowHeights[0] = 0;
+</code></pre>
+   <b>
+    輕鬆!!!
+   </b>
+  </div>
+ </body>
+</html>

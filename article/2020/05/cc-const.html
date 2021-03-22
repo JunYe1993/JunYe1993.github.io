@@ -1,0 +1,89 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-8680318130998356013">
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     const 基本用途
+    </span>
+   </h2>
+   <br/>
+   <span style="font-size: large;">
+    告知編譯器這個值為「常數」無法被修改。
+   </span>
+   <ul style="text-align: left;">
+    <li>
+     <font size="4">
+      一般作用
+     </font>
+     <pre><code class="cpp">    const int index = 5;
+    index = 8; // error: assignment of read-only variable 'index'</code></pre>
+    </li>
+    <li>
+     <font size="4">
+      作用於 *
+     </font>
+     <pre><code class="cpp">    // const pointer
+    char * const constptr = initptr;
+    *constptr = 1;              // 改變其 value OK
+    constptr = otherptr;        // 改變其  addr Error
+
+    // const value
+    const char * constval = "const value";
+    *constval = "nomal value";  // 改變其 value Error
+    constval = otherptr;        // 改變其  addr OK
+
+    // const pointer &amp; const value
+    const char * const consteverything = "ulti - const";</code></pre>
+    </li>
+   </ul>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     const 常見用途 : const&amp;
+    </span>
+   </h2>
+   <span style="font-size: large;">
+    <pre class="output" style="-webkit-font-smoothing: antialiased; background: rgb(242, 242, 242); border-color: rgb(238, 238, 238) rgb(238, 238, 238) rgb(238, 238, 238) rgb(112, 112, 112); border-image: initial; border-radius: 4px; border-style: solid; border-width: 1px 1px 1px 4px; box-sizing: border-box; color: #111111; font-family: menlo, monaco, monospace; font-size: 14px; line-height: 21px; margin-bottom: 1.5em; margin-top: 1em; max-width: 100%; overflow-wrap: break-word; overflow: auto; padding: 0.5em 0.5em 0.5em 1em;">在 C++ 可能常常看到 void function (type_Name const&amp;);
+"type_Name const&amp;" 是可以寫成 "const type_Name &amp;"</pre>
+   </span>
+   <pre><code class="cpp">    int i = 10;
+    const int &amp;r = i;   // reference to const
+    ++i;                // i 仍然可以修改
+    ++r;                // r 不行 (expression must be a modifiable lvalue)</code></pre>
+   <span style="font-size: large;">
+    通常追求效率的 C++ 工程師，會選擇 pass by reference 來防止程式做不必要的 Copy，這時 const 通常就會出現，來確保原始 value 不會被亂改。且 const 的出現可以使 call function 時，使用 rvalue。
+   </span>
+   <pre><code class="cpp">    std::vector<std::string> mySort(std::vector<std::string> const &amp;str)
+    {
+        std::vector<std::string> r(str);
+        std::sort(r.begin(), r.end());
+        return r;
+    }
+    mySort({"abc", "def", "xyz"});</std::string></std::string></std::string></code></pre>
+   <br/>
+   <span style="font-size: large;">
+    相關文章 :
+    <br/>
+   </span>
+   <a href="http://junye1993.blogspot.com/2020/05/cc-lvaluervalue.html">
+    C/C++ - 左值、右值 ( lvalue、rvalue )
+   </a>
+   <br/>
+   <a href="http://junye1993.blogspot.com/2020/07/c-primer-5th-edition-chapter-2-2.html">
+    讀書心得 - C++ Primer (5th Edition) - Chapter 2 (2)
+   </a>
+   <br/>
+   <br/>
+   參考資料 :
+   <div>
+    <a href="https://stackoverflow.com/questions/19415674/what-does-const-mean-in-c">
+     https://stackoverflow.com/questions/19415674/what-does-const-mean-in-c
+    </a>
+   </div>
+   <div>
+    <a href="https://welkinchen.pixnet.net/blog/post/48176114-const-%E5%9C%A8c-c%2B%2B%E7%9A%84%E7%94%A8%E6%B3%95">
+     https://welkinchen.pixnet.net/blog/post/const
+    </a>
+   </div>
+  </div>
+ </body>
+</html>

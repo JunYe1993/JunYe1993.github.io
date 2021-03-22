@@ -1,0 +1,83 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-5343688896422533227">
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     管線命令 ( Pipe )
+    </span>
+   </h2>
+   <font face="helvetica" size="4">
+    管線命令是用 "|" 去連接，只要前一資料能變成 standard input。管線命令僅會處理 standard output，而不會處理 standard error output。下面用時下最夯的 MBTI 作的假資料。
+   </font>
+   <pre class="output" style="-webkit-font-smoothing: antialiased; background: rgb(242, 242, 242); border-color: rgb(238, 238, 238) rgb(238, 238, 238) rgb(238, 238, 238) rgb(112, 112, 112); border-image: initial; border-radius: 4px; border-style: solid; border-width: 1px 1px 1px 4px; box-sizing: border-box; color: #111111; font-family: menlo, monaco, monospace; font-size: 14px; line-height: 21px; margin-bottom: 1.5em; margin-top: 1em; max-width: 100%; overflow-wrap: break-word; overflow: auto; padding: 0.5em 0.5em 0.5em 1em;">index    name    MBTI
+1        JunYe   ISTJ
+2        JunYe   ISTP
+3        JunYe   ESTP
+4        JunYe   ESTJ
+5        Mario   ISFJ
+6        Mario   ISFP
+7        Mario   ESFP
+8        Mario   ESFJ
+9        Joel    INFJ
+10       Joel    INFP
+11       Joel    ENFP
+12       Joel    ENFJ
+13       Joel    INTJ
+14       Joel    INTP
+15       Joel    ENTP
+16       John    ENTJ
+17       John    ESFP
+18       Peter   ESFJ
+19       Peter   INFJ
+20       Peter   INFP
+21       Peter   ENFP
+22       Eva     ESTJ</pre>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 36px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     基本管線命令 grep
+    </span>
+   </h2>
+   <font face="helvetica" size="4">
+    grep會在每一行找尋配對的字串，然後列出來。
+   </font>
+   <pre class="output" style="-webkit-font-smoothing: antialiased; background: rgb(242, 242, 242); border-color: rgb(238, 238, 238) rgb(238, 238, 238) rgb(238, 238, 238) rgb(112, 112, 112); border-image: initial; border-radius: 4px; border-style: solid; border-width: 1px 1px 1px 4px; box-sizing: border-box; color: #111111; font-family: menlo, monaco, monospace; font-size: 14px; line-height: 21px; margin-bottom: 1.5em; margin-top: 1em; max-width: 100%; overflow-wrap: break-word; overflow: auto; padding: 0.5em 0.5em 0.5em 1em;">$ bash pipeData.sh | grep "JunYe"
+1        JunYe   ISTJ
+2        JunYe   ISTP
+3        JunYe   ESTP
+4        JunYe   ESTJ</pre>
+   <font face="helvetica" size="4">
+    加 -v 找每一行沒配對的字串，然後列出來。
+   </font>
+   <pre class="output" style="-webkit-font-smoothing: antialiased; background: rgb(242, 242, 242); border-color: rgb(238, 238, 238) rgb(238, 238, 238) rgb(238, 238, 238) rgb(112, 112, 112); border-image: initial; border-radius: 4px; border-style: solid; border-width: 1px 1px 1px 4px; box-sizing: border-box; color: #111111; font-family: menlo, monaco, monospace; font-size: 14px; line-height: 21px; margin-bottom: 1.5em; margin-top: 1em; max-width: 100%; overflow-wrap: break-word; overflow: auto; padding: 0.5em 0.5em 0.5em 1em;">$ bash pipeData.sh | grep -v "JunYe"
+index    name    MBTI
+5        Mario   ISFJ
+6        Mario   ISFP
+7        Mario   ESFP
+8        Mario   ESFJ
+9        Joel    INFJ
+10       Joel    INFP
+11       Joel    ENFP
+12       Joel    ENFJ
+13       Joel    INTJ
+14       Joel    INTP
+15       Joel    ENTP
+16       John    ENTJ
+17       John    ESFP
+18       Peter   ESFJ
+19       Peter   INFJ
+20       Peter   INFP
+21       Peter   ENFP
+22       Eva     ESTJ</pre>
+   <div style="margin-top: 36px;">
+    <span style="font-size: large;">
+     上一篇 :
+    </span>
+   </div>
+   <div>
+    <a href="http://junye1993.blogspot.com/2020/07/linux-shell-scripts-2.html" style="font-size: large;">
+     Linux - Shell Scripts (2)
+    </a>
+   </div>
+  </div>
+ </body>
+</html>

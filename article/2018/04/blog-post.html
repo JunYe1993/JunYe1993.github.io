@@ -1,0 +1,71 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-642336569287087203">
+   ini檔顧名思義就是拿來初始化的
+   <br/>
+   <pre><code class="cpp">#include "inifiles.hpp"
+TIniFile *IniFile;
+IniFile = new TIniFile(ChangeFileExt(Application-&gt;ExeName, ".ini"));
+IniFile-&gt;WriteString(category, parameter, value);
+delete IniFile;
+</code></pre>
+   這裡介紹其中一個我最常用的 WriteString
+   <br/>
+   可以看到它要傳入三個參數
+   <br/>
+   這裡用圖片介紹
+   <br/>
+   <div class="separator" style="clear: both; text-align: center;">
+    <a href="https://3.bp.blogspot.com/-ytFYKrUPF70/Wsn_mHhoGeI/AAAAAAAAAio/-nMo4FHjuPQ__bOQQYJn2Kzv9KNxs0TAQCLcBGAs/s1600/%25E6%259C%25AA%25E5%2591%25BD%25E5%2590%258D.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;">
+     <img border="0" data-original-height="346" data-original-width="578" height="191" src="https://3.bp.blogspot.com/-ytFYKrUPF70/Wsn_mHhoGeI/AAAAAAAAAio/-nMo4FHjuPQ__bOQQYJn2Kzv9KNxs0TAQCLcBGAs/s320/%25E6%259C%25AA%25E5%2591%25BD%25E5%2590%258D.png" width="320"/>
+    </a>
+   </div>
+   <br/>
+   <pre><code class="cpp">AnsiString __fastcall INI::ReadStr(AnsiString category, AnsiString parameter)
+{
+    AnsiString value;
+    TIniFile *IniFile;
+    IniFile = new TIniFile(ChangeFileExt(Application-&gt;ExeName, ".ini"));
+    value = IniFile-&gt;ReadString(category, parameter, value);
+    delete IniFile;
+    return value;
+}</code></pre>
+   第三個value指的是若沒值時的 Default
+   <br/>
+   <br/>
+   這裡想寫一些
+   <b>
+    使用心得
+   </b>
+   <br/>
+   ini 檔及其操作十分簡單但功能就是這樣，他不會有 SORTING 之類的功能
+   <br/>
+   最多查詢有無值而已，你不能問它"你有什麼值?"
+   <br/>
+   ini 檔紀錄的都是
+   <b>
+    "已知"
+   </b>
+   的資料，所以正常不會用它來找
+   <b>
+    "未知"
+   </b>
+   資料
+   <br/>
+   你不會不知道 ini 資料全貌
+   <br/>
+   要想用 ini 做簡單紀錄未知資料之類的，你只能做些設計讓 ini 可以記錄未知
+   <br/>
+   例如
+   <b>
+    利用某一 category 來記錄 ini 的資料全貌
+   </b>
+   <br/>
+   達到
+   <b>
+    "你"
+   </b>
+   不用知道資料全貌，但其效用不會比你用其他像 XML 之類的方便
+  </div>
+ </body>
+</html>

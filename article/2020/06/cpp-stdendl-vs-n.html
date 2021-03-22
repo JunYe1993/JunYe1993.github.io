@@ -1,0 +1,48 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-1482248874819098005">
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     "std::endl" vs "\n"
+    </span>
+   </h3>
+   <br/>
+   <div>
+    <font face="helvetica" size="4">
+     基本上兩者在
+     <b>
+      <font color="#d52c1f">
+       換行的效果
+      </font>
+     </b>
+     沒有不同，唯一的不同是 std::endl 會 flush output buffer。若你不想頻繁地
+    </font>
+    <span style="font-family: helvetica; font-size: large;">
+    </span>
+    <span style="font-family: helvetica; font-size: large;">
+     flush output 用 "\n"，若你想看所有 output (
+     <b>
+      <font color="#d52c1f">
+       程式不穩定
+      </font>
+     </b>
+     ) 則用
+    </span>
+    <span style="font-family: helvetica; font-size: large;">
+     std::endl 。
+    </span>
+    <br/>
+    <br/>
+    <br/>
+   </div>
+   <div>
+    參考資料 :
+   </div>
+   <div>
+    <a href="https://stackoverflow.com/questions/213907/c-stdendl-vs-n">
+     https://stackoverflow.com/questions/213907/c-stdendl-vs-n
+    </a>
+   </div>
+  </div>
+ </body>
+</html>

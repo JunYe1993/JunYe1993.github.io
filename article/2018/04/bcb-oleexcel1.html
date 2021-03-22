@@ -1,0 +1,144 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-3246583712078222991">
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     BCB 操作 EXCEL、WORD ( OLE的應用 )
+    </span>
+   </h3>
+   <br/>
+   之前有講工作關係需要彙整報告，報告不外乎 WORD、EXCEL、PDF檔
+   <br/>
+   <br/>
+   程式要操作 WORD、EXCEL 可以靠微軟的
+   <br/>
+   <b>
+    COM（Component Object Model）或 .NET Framework
+   </b>
+   .
+   <br/>
+   照理說應該要用 .NET Framework ( 比較潮?? ) 但是公司前輩使用的是 COM
+   <br/>
+   新人啥都不懂乖乖跟著學就對了，其實也不知道兩者實際差異
+   <br/>
+   因為從來沒試過另外一種XD
+   <br/>
+   <br/>
+   在 COM 的基礎下，OLE ( Object Linking and Embedding )就是我們要用的技術
+   <br/>
+   <b>
+    簡單來說就是把應用程式 ( EXCEL、WORD ) 物件化後給軟體使用
+   </b>
+   <br/>
+   <b>
+    所以在這基礎下達到操作 EXCEL、WORD 和兩者間的溝通操作
+   </b>
+   <br/>
+   <br/>
+   這裡使用的 IDE 是 BCB10 拿 EXCEL 作範例
+   <br/>
+   <br/>
+   <pre><code class="cpp">#include "Comobj.hpp" //操作EXCEL
+struct _Excel
+{
+        Variant App;
+        Variant WorkBooks;
+        Variant WorkBook;
+        Variant WorkSheets;
+        Variant WorkSheet;
+};</code></pre>
+   首先宣告
+   <b>
+    Variant
+   </b>
+   去承接OLE的EXCEL物件
+   <br/>
+   <pre><code class="cpp">Excel::Excel(){
+        Exc.App = CreateOleObject("Excel.Application");
+        Exc.App.OlePropertySet("Visible", true);
+        Exc.WorkBooks = Exc.App.OlePropertyGet("Workbooks");
+}
+void __fastcall Excel::Open(AnsiString path){
+        Exc.WorkBook = Exc.WorkBooks.OleFunction("Open", OleStr(path));
+        Exc.WorkSheets = Exc.WorkBook.OlePropertyGet("Worksheets");
+        Exc.WorkSheet = Exc.WorkSheets.OlePropertyGet("Item", 1);
+}
+void __fastcall Excel::Close(){
+        Exc.WorkBook.OleFunction("Close", true);
+        Exc.App.Exec(Procedure("Quit"));
+}
+</code></pre>
+   這裡我分三個FUNCTION 來模擬平時操作EXCEL的狀態( 對我來說直觀好理解 )
+   <br/>
+   constructor 產生EXCEL物件，並開啟工作簿集合( 工作簿想像是EXCEL的外框 )
+   <br/>
+   open            開啟路徑的EXCEL，並在工作表集合要編號為"1"的工作表
+   <br/>
+   close            關閉工作簿，這裡第一行 CODE 代表意義是不儲存就關閉
+   <br/>
+   <br/>
+   這裡有個重要東西先講
+   <br/>
+   <b>
+    OLE 物件吃的是 Wide String，這裡用的是萬能的 OleStr() 轉成 Wide String
+   </b>
+   <br/>
+   我從 BCB10 的 UnicodeString 轉過去吃盡苦頭
+   <br/>
+   這時去問了那個唯一可以問的前輩才知道有這個函式，那時真覺得他是活菩薩。
+   <br/>
+   關於 Wide String 和 UnicodeString 的轉換以後再寫一篇
+   <br/>
+   <br/>
+   ( PS 以下是我的體感，有錯我道歉
+   <br/>
+   關於 OLE 網路上的資源並沒很多
+   <br/>
+   第一個 BCB10 沒人用 (沒有當初BCB6那麼猛)，要用都用 Visual C++ 去寫
+   <br/>
+   第二個 OLE 也是一個快被替換的東西
+   <br/>
+   所以用 BCB10 去寫這東西，上網查都是 BCB6 的CODE
+   <br/>
+   所以要注意的是 BCB6 跟 BCB10 字串的差異 )
+   <br/>
+   <br/>
+   <br/>
+   <b>
+    下一篇：
+   </b>
+   <br/>
+   <a href="https://junye1993.blogspot.com/2018/05/bcb-oleexcel2.html">
+    BCB OLE操作EXCEL (2)
+   </a>
+   <br/>
+   <br/>
+   <b>
+    參考來源：
+   </b>
+   <br/>
+   <b>
+    1.
+   </b>
+   <a href="http://skybow.pixnet.net/blog/post/98858843-%5Bbcb%5D%E7%94%A8c%2B%2B-builder%E6%8E%A7%E5%88%B6excel%E6%AA%94%E6%A1%88%E8%AE%80%E5%8F%96" style="text-decoration-line: underline;">
+    http://skybow.pixnet.net/blog/post/98858843-%5Bbcb%5D%E7%94%A8c%2B%2B-builder%E6%8E%A7%E5%88%B6excel%E6%AA%94%E6%A1%88%E8%AE%80%E5%8F%96
+   </a>
+   <br/>
+   <b>
+    2.
+   </b>
+   <a href="https://zh.wikipedia.org/wiki/%E7%BB%84%E4%BB%B6%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B" style="text-decoration-line: underline;">
+    https://zh.wikipedia.org/wiki/%E7%BB%84%E4%BB%B6%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B
+   </a>
+   <br/>
+   <b>
+    3.
+   </b>
+   <a href="https://zh.wikipedia.org/wiki/%E5%AF%B9%E8%B1%A1%E9%93%BE%E6%8E%A5%E4%B8%8E%E5%B5%8C%E5%85%A5" style="text-decoration-line: underline;">
+    https://zh.wikipedia.org/wiki/%E5%AF%B9%E8%B1%A1%E9%93%BE%E6%8E%A5%E4%B8%8E%E5%B5%8C%E5%85%A5
+   </a>
+   <br/>
+   <br/>
+  </div>
+ </body>
+</html>

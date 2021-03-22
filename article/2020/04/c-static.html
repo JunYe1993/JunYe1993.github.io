@@ -1,0 +1,74 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-3941482730422421679">
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     <span style="letter-spacing: 1.44px;">
+      static - Introduction
+     </span>
+    </span>
+   </h3>
+   靜態變數（Static Variable）在電腦編程領域指在
+   <b>
+    <u>
+     程式執行前系統就為之靜態分配
+    </u>
+   </b>
+   （也即在執行時中不再改變分配情況）儲存空間的一類變數。與之相對應的是在執行時只暫時存在的自動變數（即局部變數）與以動態分配方式取得儲存空間的一些物件，其中自動變數的儲存空間在呼叫棧上分配與釋放。
+   <br/>
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     <span style="letter-spacing: 1.44px;">
+      static + 變數
+     </span>
+    </span>
+   </h3>
+   <span style='background-color: white; color: blue; font-family: "tahoma" , "arial" ,; font-size: 18px;'>
+   </span>
+   <br/>
+   <span style='background-color: white; color: blue; font-family: "tahoma" , "arial" ,; font-size: 18px;'>
+    (1) 宣告在 function 內 ( 記憶體模式 )
+   </span>
+   <br/>
+   這是比較經典的 Case，因為 Static 參數不會隨著 function 結束而消逝，所以可以用來計算 function 被呼叫的次數。
+   <br/>
+   <pre><code class="C">    #include "hello.h"
+
+    int count(){
+        static int count = 0;
+        ++count;
+        return count;
+    }</code></pre>
+   <span style='background-color: white; color: blue; font-family: "tahoma" , "arial" ,; font-size: 18px;'>
+    (2) 宣告在 function 外
+   </span>
+   <span style="background-color: white; color: blue; font-size: 18px;">
+   </span>
+   <span style="background-color: white; color: blue; font-size: 18px;">
+    ( 連結模式 )
+   </span>
+   <span style="background-color: white; color: blue; font-size: 18px;">
+   </span>
+   <br/>
+   假設 a.h 跟 b.h 都設了 void foo() 這個函式，這樣你在 main.c 同時 include 時就會編譯錯誤。你有可能會說那我把 void foo() 個別放在 a.c 跟 b.c 就行，但編譯依然會錯誤。因為在連結 .o 檔時編譯器依然會發現。這時 static 就可避免此情況，有點類似 private 的概念，
+   <b>
+    <u>
+     只有自己看得到
+    </u>
+   </b>
+   就不會產生 ambiguous 的問題。
+   <br/>
+   <br/>
+   <br/>
+   參考資料 :
+   <br/>
+   <a href="https://zh.wikipedia.org/wiki/%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F">
+    https://zh.wikipedia.org/wiki/
+   </a>
+   <br/>
+   <a href="https://medium.com/@alan81920/c-c-%E4%B8%AD%E7%9A%84-static-extern-%E7%9A%84%E8%AE%8A%E6%95%B8-9b42d000688f">
+    https://medium.com/@alan81920/
+   </a>
+  </div>
+ </body>
+</html>

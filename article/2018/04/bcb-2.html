@@ -1,0 +1,58 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-5663915613361211202">
+   <h4>
+    BCB TDateTime 時間操作及應用
+   </h4>
+   在 BCB 裡有關時間的操作幾乎都是與
+   <b>
+    TDateTime
+   </b>
+   這個 Class 相關
+   <br/>
+   若找不到相關資料可以用 BCB 的 HELP
+   <br/>
+   ( 游標移到要查詢的函式或Class 並按 F1 )
+   <br/>
+   <br/>
+   介紹幾個個人有在用的函式
+   <br/>
+   <pre><code class="cpp">TDateTimePicker-&gt;DateTime = Now();
+TDateTimePicker-&gt;DateTime.DateTimeString();</code></pre>
+   TDateTimePicker 是常用的 BCB(VCL)元件
+   <br/>
+   可以讓使用方便選擇日期+防呆
+   <br/>
+   <div class="separator" style="clear: both; text-align: center;">
+    <a href="https://3.bp.blogspot.com/-vzR3AObtPSI/WsnxFtGfoAI/AAAAAAAAAiM/XeCDA-FJEBwy0fnGDQZgJ47fiKRu_evRgCLcBGAs/s1600/%25E6%259C%25AA%25E5%2591%25BD%25E5%2590%258D.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;">
+     <img border="0" data-original-height="180" data-original-width="221" src="https://3.bp.blogspot.com/-vzR3AObtPSI/WsnxFtGfoAI/AAAAAAAAAiM/XeCDA-FJEBwy0fnGDQZgJ47fiKRu_evRgCLcBGAs/s1600/%25E6%259C%25AA%25E5%2591%25BD%25E5%2590%258D.png"/>
+    </a>
+   </div>
+   <br/>
+   <pre><code class="cpp">String date = "2018/4/8";
+StrToDate(date);</code></pre>
+   將字串轉為 TDateTime 格式
+   <br/>
+   <pre><code class="cpp">double(TDateTimePicker1-&gt;DateTime)-double(TDateTimePicker2-&gt;DateTime)
+</code></pre>
+   直接代入double() 就可使 TDateTime 量化
+   <br/>
+   這裡 double() 後的數值基本單位是天
+   <br/>
+   1.5 = 一天半
+   <br/>
+   <br/>
+   參考資料
+   <br/>
+   1.
+   <a href="http://yanphph.blogspot.tw/2009/01/bcb-vcl.html">
+    http://yanphph.blogspot.tw/2009/01/bcb-vcl.html
+   </a>
+   <br/>
+   2.
+   <a href="http://cshartuc.blogspot.tw/2016/10/bcb.html">
+    http://cshartuc.blogspot.tw/2016/10/bcb.html
+   </a>
+  </div>
+ </body>
+</html>

@@ -1,0 +1,183 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-8019372191133726166">
+   <div class="separator" style="clear: both; text-align: center;">
+    <a href="https://junye1993.github.io/image/Note.jpg" style="margin-left: 1em; margin-right: 1em;">
+     <img border="0" data-original-height="1365" data-original-width="2048" height="426" src="https://junye1993.github.io/image/Note.jpg" width="640"/>
+    </a>
+   </div>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     簡單的 C++ 程式
+    </span>
+   </h2>
+   <font face="helvetica" size="4">
+    要寫一個 C++ 程式跟 C 一樣，寫好 cpp 檔，交給編譯器 ( g++ ) 編成可執行程式。程式至少包含一個名為 main 的 function，用以當作程式的入口 function。
+   </font>
+   <pre><code class="cpp">    int main() {
+        return 0; // return 0 的原因為 0 通常代表著程式執行成功。
+    }</code></pre>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 36px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     Input/Output
+    </span>
+   </h2>
+   <font face="helvetica" size="4">
+    C++ 本身並沒有定義 I/O，需要額外的標準函式庫，iostream。
+   </font>
+   <pre><code class="cpp">    #include &lt;iostream&gt;
+    int main()
+    {
+        // operator &lt;&lt; &gt;&gt; 會回傳左邊的 operand
+        // 以 std::cin &gt;&gt; v1 &gt;&gt; v2; 為例
+        // 執行結果 =
+        //     std::cin &gt;&gt; v1;
+        //     std::cin &gt;&gt; v2;
+        int v1, v2;
+        std::cout &lt;&lt; "Enter two numbers:" &lt;&lt; std::endl;
+        std::cin &gt;&gt; v1 &gt;&gt; v2;
+        std::cout &lt;&lt; "The sum of " &lt;&lt; v1 &lt;&lt; " and " &lt;&lt; v2 &lt;&lt; " is " &lt;&lt; v1 + v2 &lt;&lt; std::endl;
+        return 0;
+    }</code></pre>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 36px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <font size="3">
+     Note
+    </font>
+   </h2>
+   <ul style="text-align: left;">
+    <li>
+     std::endl :
+     <a href="http://junye1993.blogspot.com/2020/06/cpp-stdendl-vs-n.html">
+      std::endl vs "\n"
+     </a>
+    </li>
+   </ul>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 36px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     常用詞彙
+    </span>
+   </h2>
+   <ul style="text-align: left;">
+    <li>
+     <font face="helvetica" size="4">
+      prompt 提示 驅使
+      <br/>
+      <br/>
+      <span style='background-color: #edf4e8; color: #111111; font-family: "times new roman"; font-size: 17px; font-style: italic;'>
+       We can extend our main program to
+       <font color="#d52c1f">
+        prompt
+       </font>
+       the user to give us two numbers and then print their sum
+      </span>
+      <br/>
+      <br/>
+     </font>
+    </li>
+    <li>
+     <font face="helvetica" size="4">
+      expression （數學中的）式，表達式
+      <br/>
+      <br/>
+      <span style='background-color: #edf4e8; color: #111111; font-family: "times new roman"; font-size: 17px; font-style: italic;'>
+       The smallest unit of computation. An expression consists of one or more operands and usually one or more operators. Expressions are evaluated to
+		produce a result. For example, assuming i and j are ints, then i + j is an expression and yields the sum of the two int values.
+      </span>
+      <br/>
+      <br/>
+     </font>
+    </li>
+    <li>
+     <font face="helvetica" size="4">
+      angle brackets : &lt;&gt;
+      <br/>
+      <br/>
+     </font>
+    </li>
+    <li>
+     <font face="helvetica" size="4">
+      quotation marks : ""
+      <br/>
+      <br/>
+     </font>
+    </li>
+    <li>
+     <font face="helvetica" size="4">
+      curly braces : {}
+      <br/>
+      <br/>
+     </font>
+    </li>
+    <li>
+     <font face="helvetica" size="4">
+      operator : 運算子
+      <br/>
+      <br/>
+     </font>
+    </li>
+    <li>
+     <font face="helvetica" size="4">
+      operand : 運算元
+      <br/>
+      <br/>
+     </font>
+    </li>
+    <li>
+     <font face="helvetica" size="4">
+      assignment
+      <br/>
+      <br/>
+      <span style='background-color: #edf4e8; color: #111111; font-family: "times new roman"; font-size: 17px; font-style: italic;'>
+       Obliterates an object’s current value and replaces that value by a new one.
+      </span>
+      <br/>
+      <br/>
+     </font>
+    </li>
+    <li>
+     <font face="helvetica" size="4">
+      comments : 註解
+      <br/>
+      <br/>
+     </font>
+    </li>
+    <li>
+     <font face="helvetica" size="4">
+      statement :
+     </font>
+     <a href="https://zh.wikipedia.org/wiki/%E8%AA%9E%E5%8F%A5_(%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)" style="font-family: helvetica; font-size: large;">
+      wiki
+     </a>
+     <br/>
+     <br/>
+     <span style='background-color: #edf4e8; color: #111111; font-family: "times new roman"; font-size: 17px; font-style: italic;'>
+      The new part of this program is the while statement.A while has the form
+      <br/>
+      <br/>
+      while (condition)
+      <br/>
+      statement
+      <br/>
+      <br/>
+      A while executes by(alternately) testing the condition and executing the associated
+      <br/>
+      statement until the condition is false.A condition is an expression that yields a result
+      <br/>
+      that is either true or false..So long as condition is true, statement is executed.
+      <br/>
+     </span>
+    </li>
+   </ul>
+   <div style="margin-top: 36px;">
+    <span style="font-size: large;">
+     下一篇 :
+    </span>
+   </div>
+   <div>
+    <a href="http://junye1993.blogspot.com/2020/07/c-primer-5th-edition-chapter-2-1.html">
+     讀書心得 - C++ Primer (5th Edition) - Chapter 2 (1)
+    </a>
+   </div>
+  </div>
+ </body>
+</html>

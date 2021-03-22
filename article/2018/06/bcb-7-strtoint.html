@@ -1,0 +1,32 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-6296591361662238609">
+   報告在製作時，一定會遇到要字串轉數字
+   <br/>
+   在 BCB 裡有方便的函式
+   <br/>
+   <br/>
+   常見的有
+   <br/>
+   <pre><code class="cpp">
+    String str = "123"
+    int x = StrToInt(str);
+    float y = StrToFloat(str);
+</code></pre>
+   <br/>
+   但有時候不一定可以轉成數字
+   <br/>
+   這時就可用
+   <br/>
+   <pre><code class="cpp">
+    String str = "@123"
+    int x;
+    float y;
+    bool z;
+    z = TryStrToInt(str, x);
+    z = TryStrToInt(str, y);
+</code></pre>
+   <br/>
+  </div>
+ </body>
+</html>

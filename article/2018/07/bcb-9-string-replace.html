@@ -1,0 +1,59 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-8205858261026684355">
+   既然使用 BCB 作為開發工具
+   <br/>
+   不免俗就會常常使用他們的 String
+   <br/>
+   這裡介紹 BCB 取代字串的方法
+   <br/>
+   <div style='background-color: white; font-family: Consolas, "Courier New", "Segoe UI", "Microsoft YaHei", Tahoma; font-size: 13.3333px;'>
+    <span style="font-size: 13.3333px;">
+     <b>
+      StringReplace(const UnicodeString Source, const UnicodeString OldPattern, const UnicodeString NewPattern, TReplaceFlags Flags);
+     </b>
+    </span>
+   </div>
+   <div>
+    <br/>
+   </div>
+   <br/>
+   <pre><code class="cpp">    String Str;
+    TReplaceFlags rf = TReplaceFlags()&lt;&lt;rfReplaceAll;
+    Str = StringReplace(Str, L"@", L"\n", rf);
+</code>
+</pre>
+   <br/>
+   這裡的
+   <span style='background-color: white; font-family: "consolas" , "courier new" , "segoe ui" , "microsoft yahei" , "tahoma"; font-size: 13.3333px;'>
+    TReplaceFlags 有兩種
+   </span>
+   <br/>
+   <span style='background-color: white; font-family: "consolas" , "courier new" , "segoe ui" , "microsoft yahei" , "tahoma"; font-size: 13.3333px;'>
+    rfReplaceAll -&gt; 有這個參數會取代全部，無則只取代第一個
+   </span>
+   <br/>
+   <span style='background-color: white; font-family: "consolas" , "courier new" , "segoe ui" , "microsoft yahei" , "tahoma"; font-size: 13.3333px;'>
+    rfIgnoreCase -&gt;
+   </span>
+   <span style='background-color: white; font-family: "consolas" , "courier new" , "segoe ui" , "microsoft yahei" , "tahoma"; font-size: 13.3333px;'>
+    有這個參數會無視大小寫，無則會分辨大小寫
+   </span>
+   <br/>
+   <span style='background-color: white; font-family: "consolas" , "courier new" , "segoe ui" , "microsoft yahei" , "tahoma"; font-size: 13.3333px;'>
+    <br/>
+   </span>
+   <span style='background-color: white; font-family: "consolas" , "courier new" , "segoe ui" , "microsoft yahei" , "tahoma"; font-size: 13.3333px;'>
+    參考資料
+   </span>
+   <br/>
+   <span style="background-color: white; font-size: 13.3333px;">
+    <span style='font-family: "consolas" , "courier new" , "segoe ui" , "microsoft yahei" , "tahoma";'>
+     <a href="http://www.cppfans.com/cbknowledge/reference/strings/stringreplace.asp">
+      http://www.cppfans.com/cbknowledge/reference/strings/stringreplace.asp
+     </a>
+    </span>
+   </span>
+  </div>
+ </body>
+</html>

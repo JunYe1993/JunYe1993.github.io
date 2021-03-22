@@ -1,0 +1,48 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-4499328249405509988">
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     Convert CRLF to LF
+    </span>
+   </h3>
+   <pre><code class="python">
+     def convertCRLFtoLF(self, filename):
+
+          WINDOWS_LINE_ENDING = b'\r\n'
+          UNIX_LINE_ENDING = b'\n'
+
+          with open(filename, "rb") as f:
+               content = f.read()
+          
+          with open(filename, "wb") as f:
+               content = content.replace(WINDOWS_LINE_ENDING, UNIX_LINE_ENDING)
+               f.write(content)
+
+</code></pre>
+   <h5>
+    <span style="font-size: medium;">
+     <u>
+      用 rb wb 而不是 r w
+     </u>
+    </span>
+   </h5>
+   如果用 r w 開啟 Text Mode，不管你是 windows 還是 unix ，換行都會被自動轉成 \n。所以用 str.replace() 取代不了，因為找不到 \r\n。
+   <br/>
+   <h5>
+    <span style="font-size: medium;">
+     <u>
+      用 binary string
+     </u>
+    </span>
+   </h5>
+   如果沒有特別宣告，python3 會用 utf-8 去讀取操作，所以前加個 b 。
+   <br/>
+   <br/>
+   參考資料 :
+   <a href="https://stackoverflow.com/questions/36422107/how-to-convert-crlf-to-lf-on-a-windows-machine-in-python">
+    stackoverflow/how-to-convert-crlf-to-lf-on-a-windows-machine-in-python
+   </a>
+  </div>
+ </body>
+</html>

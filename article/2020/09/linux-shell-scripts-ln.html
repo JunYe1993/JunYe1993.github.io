@@ -1,0 +1,71 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-2877108283821072519">
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     ln 指令
+    </span>
+   </h2>
+   <font face="helvetica" size="4">
+    ln 指令是用來建立連結檔, 這裡用安裝 nodejs 示範。安裝法為在官網下載編譯好的 nodejs, 然後用 ln 建立連結檔。
+   </font>
+   <pre><code class="properties">    # 從 nodejs.org 下載並解壓縮至 /home/user/software
+    $ ln -s /home/daniel/software/node-v12.18.3-linux-x64/bin/node /usr/local/bin/
+    $ ln -s /home/daniel/software/node-v12.18.3-linux-x64/bin/npm  /usr/local/bin/
+    # 之後利用 node -v 跟 npm -v 來確定安裝是否完成...
+    
+    daniel@daniel-pc:~/daniel/node-v12.18.3-linux-x64$ ls -al /usr/local/bin/
+    總計 8
+    drwxr-xr-x  2 root root 4096  9月  3 15:46 .
+    drwxr-xr-x 10 root root 4096  2月  4  2020 ..
+    lrwxrwxrwx  1 root root   52  9月  3 15:02 node -&gt; /home/daniel/daniel/node-v12.18.3-linux-x64/bin/node
+    lrwxrwxrwx  1 root root   51  9月  3 15:46 npm -&gt; /home/daniel/daniel/node-v12.18.3-linux-x64/bin/npm
+</code></pre>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 24px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     軟連結(soft/symbolic link) 跟 硬連結(hard link)
+    </span>
+   </h2>
+   <font face="helvetica" size="4">
+    上面範例我用的是軟連結, 指令有加 -s, 硬連結則是不加。下面是兩種連結的比較。
+   </font>
+   <pre class="output" style="-webkit-font-smoothing: antialiased; background: rgb(242, 242, 242); border-color: rgb(238, 238, 238) rgb(238, 238, 238) rgb(238, 238, 238) rgb(112, 112, 112); border-image: initial; border-radius: 4px; border-style: solid; border-width: 1px 1px 1px 4px; box-sizing: border-box; font-family: menlo, monaco, monospace; font-size: 20px; line-height: 21px; margin-bottom: 0.5em; margin-top: 0.5em; max-width: 100%; overflow-wrap: break-word; overflow: auto; padding: 0.5em 0.5em 0.5em 1em;"><span style="color: #111111;">    </span><b><span style="color: red;">硬</span></b><span style="color: #111111;">連結 : 與連結的檔案</span><b><span style="color: red;">相同</span></b><span style="color: #111111;">的 inode, 相對路徑</span><span style="color: red;"><b>不受</b></span><span style="color: #111111;">連結之檔案影響
+    </span><b><span style="color: red;">軟</span></b><span style="color: #111111;">連結 : 與連結的檔案</span><b><span style="color: red;">不同</span></b><span style="color: #111111;">的 inode, 相對路徑</span><b><span style="color: red;">受</span></b><span style="color: #111111;">連結之檔案影響</span></pre>
+   <font face="helvetica" size="4">
+    如果用相對路徑去軟連結, 結果就是 2 個連結檔壞掉, 因為 inode 不同, 軟連結找不到 ./bin/node 跟 ./bin/npm。
+   </font>
+   <pre><code class="properties">    $ sudo ln -s ./bin/node /usr/local/bin/
+    $ sudo ln -s ./bin/npm  /usr/local/bin/
+    $ ls -al /usr/local/bin/
+    總計 8
+    drwxr-xr-x  2 root root 4096  9月  3 18:16 .
+    drwxr-xr-x 10 root root 4096  2月  4  2020 ..
+    lrwxrwxrwx  1 root root   10  9月  3 18:16 node -&gt; ./bin/node
+    lrwxrwxrwx  1 root root    9  9月  3 18:16 npm -&gt; ./bin/npm</code></pre>
+   <font face="helvetica" size="4">
+    如果用相對路徑去硬連結, 因為 inode 相同, 硬連結找得到 ./bin/node。
+   </font>
+   <pre><code class="properties">    $ sudo ln ./bin/node /usr/local/bin/
+    $ sudo ln ./bin/npm  /usr/local/bin/
+    $ ls -al /usr/local/bin/
+    總計 47520
+    drwxr-xr-x  2 root   root       4096  9月  3 18:24 .
+    drwxr-xr-x 10 root   root       4096  2月  4  2020 ..
+    -rwxr-xr-x  2 daniel daniel 48646656  7月 22 23:00 node
+    lrwxrwxrwx  2 daniel daniel       38  9月  3 13:34 npm -&gt; ../lib/node_modules/npm/bin/npm-cli.js</code></pre>
+   <font face="helvetica" size="4">
+    但上面的 npm 是壞的, 因為原本的 npm 也是連結檔, 而且連的是相對位置。雖然透過 inode 找到該連結檔, 但因為是在 /usr/local/bin 下找相對位置所以找不到。所以就如同文章最一開始的安裝示範, 軟連結在相對路徑的處理上會受所連結檔案影響, 反而能成功找到 ../lib/node_modules/npm/bin/npm-cli.js。
+   </font>
+   <div style="margin-top: 36px;">
+    <span style="font-size: large;">
+     參考資料 :
+    </span>
+   </div>
+   <div>
+    <a href="https://blog.gtwang.org/linux/linux-ln-command-tutorial-examples/" style="font-size: large;">
+     https://blog.gtwang.org/linux/linux-ln-command-tutorial-examples/
+    </a>
+   </div>
+  </div>
+ </body>
+</html>

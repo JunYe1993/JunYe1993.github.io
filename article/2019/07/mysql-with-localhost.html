@@ -1,0 +1,242 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-7947728512654707744">
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     前言
+    </span>
+   </h3>
+   <h4>
+    <span style="font-size: medium;">
+    </span>
+    移植(複製)系統後，新系統很慢
+   </h4>
+   <span style="font-size: medium;">
+   </span>
+   事情是這樣的，公司成立分部，鑑於前輩們 (都走了) 建的系統很好用
+   <br/>
+   <br/>
+   <span style="font-size: medium;">
+   </span>
+   公司讓我去建一個到分部，我心裡 OS : 複製貼上我最會 !!
+   <br/>
+   <br/>
+   <span style="font-size: medium;">
+   </span>
+   一切都很順利，安裝  PHP 然後 Hello World ~~
+   <br/>
+   <br/>
+   <span style="font-size: medium;">
+   </span>
+   安裝 Mysql 匯出匯入，會 Google 的都會，直到我開啟系統...好慢...
+   <br/>
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     檢查步驟 1 : 打開"開發者人員選項"
+    </span>
+   </h3>
+   <div>
+    <span style="font-size: medium;">
+     <br/>
+    </span>
+   </div>
+   <div>
+    <span style="font-size: medium;">
+    </span>
+    不急不慌先怪硬體...，開玩笑的...請按 F12
+   </div>
+   <div>
+    <br/>
+   </div>
+   <div>
+    <span style="font-size: medium;">
+    </span>
+    開了 F12 就發現 Hello World 很快，但系統很慢...
+   </div>
+   <div>
+    <br/>
+   </div>
+   <div>
+    <span style="font-size: medium;">
+    </span>
+    再仔細觀察發現
+    <b>
+     連結資料庫特很慢
+    </b>
+    ( 圖檔很快 )
+   </div>
+   <div>
+    <br/>
+   </div>
+   <div class="separator" style="clear: both; text-align: center;">
+    <a href="https://1.bp.blogspot.com/-MLSEn9-h28c/XSROOp7d6wI/AAAAAAAAA8A/7fAGewVjU18xMYE7puGWHh-LfUFQdtGyQCLcBGAs/s1600/Untitled.png" imageanchor="1" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;">
+     <img border="0" data-original-height="178" data-original-width="512" height="111" src="https://1.bp.blogspot.com/-MLSEn9-h28c/XSROOp7d6wI/AAAAAAAAA8A/7fAGewVjU18xMYE7puGWHh-LfUFQdtGyQCLcBGAs/s320/Untitled.png" width="320"/>
+    </a>
+   </div>
+   <br/>
+   <div class="separator" style="clear: both; text-align: center;">
+   </div>
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     檢查步驟 2 : 檢查 Mysql
+    </span>
+   </h3>
+   <div>
+    <span style="font-size: medium;">
+     <br/>
+    </span>
+   </div>
+   <div>
+    <span style="font-size: medium;">
+    </span>
+    我第一個想法，我要去優化前輩們的 SQL，結果大概是 2.2 秒 變 2 秒...
+   </div>
+   <div>
+    <br/>
+    <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+     <span style="font-size: medium;">
+      檢查步驟 3 : Google it !!
+     </span>
+    </h3>
+   </div>
+   <div>
+    <span style="font-size: medium;">
+     <br/>
+    </span>
+   </div>
+   <div>
+    <span style="font-size: medium;">
+    </span>
+    Google 結果發現問題出在 localhost 身上
+   </div>
+   <div>
+    <br/>
+   </div>
+   <div>
+    <span style="font-size: medium;">
+    </span>
+    當你連結資料庫時，hostname = "localhost"，此時 Server 會找 localhost 所對應的 IP 位置
+   </div>
+   <div>
+    <br/>
+   </div>
+   <div>
+    <span style="font-size: medium;">
+    </span>
+    只要你沒特別將 localhost 導向 127.0.0.1，那就會找 ::1，IPv6 裡的主機本身
+   </div>
+   <div>
+    <br/>
+   </div>
+   <div>
+    <span style="font-size: medium;">
+    </span>
+    鑒於 Mysql 並沒設定開啟 IPv6 所以你就只能等，等 Server 用 ::1發現不行才會換 127.0.0.1
+   </div>
+   <div>
+    <br/>
+   </div>
+   <div>
+    <span style="font-size: medium;">
+    </span>
+    造成
+    <b>
+     連結資料庫特很慢
+    </b>
+    的結果。
+   </div>
+   <div>
+    <br/>
+   </div>
+   <div>
+    <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+     <span style="font-size: medium;">
+      解決辦法
+     </span>
+    </h3>
+   </div>
+   <h4>
+    <span style="font-size: medium;">
+    </span>
+    解決辦法有 3 種
+   </h4>
+   <h4>
+    <span style="font-size: medium;">
+    </span>
+    1. 把系統裡的 hostname 通通從 localhost 改成 127.0.0.1
+   </h4>
+   <div>
+    <span style="font-size: medium;">
+    </span>
+    <span style="font-size: medium;">
+    </span>
+    如果你前輩有先見之明，它會是全域參數，改一下就好
+   </div>
+   <div>
+    <br/>
+   </div>
+   <div>
+    <span style="font-size: medium;">
+    </span>
+    <span style="font-size: medium;">
+    </span>
+    若不是...見一個改一個...
+   </div>
+   <h4>
+    <span style="font-size: medium;">
+    </span>
+    2. 設定主機的 localhost 讓其導向 127.0.0.1
+   </h4>
+   <div>
+    <span style="font-size: medium;">
+    </span>
+    <span style="font-size: medium;">
+    </span>
+    這我不會，附上參考資料
+   </div>
+   <span style="font-size: medium;">
+   </span>
+   <span style="font-size: medium;">
+   </span>
+   <a href="http://iamshowp.blogspot.com/2010/05/127001localhostipv6.html">
+    http://iamshowp.blogspot.com/2010/05/127001localhostipv6.html
+   </a>
+   <br/>
+   <h4>
+    <span style="font-size: medium;">
+    </span>
+    3. Enable Mysql IPv6
+   </h4>
+   <span style="font-weight: normal;">
+    <span style="font-size: medium;">
+    </span>
+   </span>
+   <span style="font-size: medium;">
+   </span>
+   這最簡單，最推薦
+   <br/>
+   <span style="font-weight: normal;">
+    <br/>
+   </span>
+   <span style="font-weight: normal;">
+    <span style="font-size: medium;">
+    </span>
+   </span>
+   <span style="font-size: medium;">
+   </span>
+   修改 config
+   <br/>
+   <pre><code class="cfg">[mysqld]
+bind_address = 127.0.0.1,::1</code></pre>
+   重啟 MySQL (windows指令)
+   <br/>
+   <pre><code class="cfg">net stop mysql
+net start mysql</code></pre>
+   <br/>
+   參考資料 :
+   <a href="https://dev.mysql.com/doc/refman/5.5/en/ipv6-local-connections.html">
+    https://dev.mysql.com/doc/refman/5.5/en/ipv6-local-connections.html
+   </a>
+  </div>
+ </body>
+</html>

@@ -1,0 +1,140 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-6257655655464236374">
+   <div class="separator" style="clear: both; text-align: center;">
+    <a href="https://junye1993.github.io/image/Development.jpg" style="margin-left: 1em; margin-right: 1em;">
+     <img border="0" data-original-height="1365" data-original-width="2048" height="426" src="https://junye1993.github.io/image/Development.jpg" width="640"/>
+    </a>
+   </div>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; font-size: large; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 12px; padding: 10px; text-align: justify;">
+    React - Introduction
+   </h2>
+   <font face="helvetica" size="4">
+    A JavaScript library for building user interfaces. React 在 MVC 分類上屬於 View，也就是主要用來開發前端。比起直接使用 npx create-react-app，我這裡想紀錄一些較簡單且原始的 React Sample Code。
+   </font>
+   <ul>
+    <li>
+     <font face="helvetica" size="4">
+      <b>
+       <u>
+        原本既有的程式碼
+       </u>
+      </b>
+     </font>
+     <pre><code class="html" style="width: 95%;">    &lt;!-- Some HTML --&gt;
+    &lt;div id="mydiv"&gt;&lt;/div&gt;
+    &lt;!-- Some HTML --&gt;</code></pre>
+    </li>
+    <li>
+     <font face="helvetica" size="4">
+      <b>
+       <u>
+        導入 React library
+       </u>
+      </b>
+     </font>
+     <pre><code class="html" style="width: 95%;">    &lt;script src="https://unpkg.com/react@16/umd/react.production.min.js"&gt;&lt;/script&gt;
+    &lt;script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"&gt;&lt;/script&gt;</code></pre>
+    </li>
+    <li>
+     <font face="helvetica" size="4">
+      <b>
+       <u>
+        React Code
+       </u>
+      </b>
+     </font>
+     <pre><code class="html" style="width: 95%;">    &lt;script type="text/javascript"&gt;
+      class HelloWorld extends React.Component {
+        render() {
+          return React.createElement('h1', {}, 'Hello React');
+        }
+      }
+      const domContainer = document.querySelector('#mydiv');
+      ReactDOM.render(React.createElement(HelloWorld), domContainer);
+    &lt;/script&gt;</code></pre>
+    </li>
+    <li>
+     <font face="helvetica" size="4">
+      <b>
+       <u>
+        Result
+       </u>
+      </b>
+     </font>
+     <pre><code class="html" style="width: 95%;">    &lt;div id="mydiv"&gt;
+      &lt;h1&gt;Hello React&lt;/h1&gt;
+    &lt;/div&gt;</code></pre>
+    </li>
+   </ul>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; font-size: large; letter-spacing: 1.44px; line-height: 1.6em; margin: 24px 0px 12px; padding: 10px; text-align: justify;">
+    React - JSX ver
+   </h2>
+   <font face="helvetica" size="4">
+    現今 React 大多都會用 JSX 語法，較為便捷直觀。這裡附上上面純 React 跟 React ＆ JSX 的 Sample Code。
+   </font>
+   <pre><code class="html">  &lt;!DOCTYPE html&gt;
+  &lt;html&gt;
+    
+    &lt;!--這兩個 script 讓我們可以在 JavaScripts 寫 React Code --&gt;
+    &lt;script src="https://unpkg.com/react@16/umd/react.production.min.js"&gt;&lt;/script&gt;
+    &lt;script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"&gt;&lt;/script&gt;
+    
+    &lt;!--這個 script 讓我們可以使用 JSX 和 ES6，即使瀏覽器較舊 --&gt;
+    &lt;script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"&gt;&lt;/script&gt;
+    
+    &lt;body&gt;
+
+      &lt;div id="mydiv"&gt;&lt;/div&gt;
+      &lt;div id="mydiv_JSX_ver"&gt;&lt;/div&gt;
+
+      &lt;!-- 純 React ( 不用 JSX ) --&gt;
+      &lt;script type="text/javascript"&gt;
+        class HelloWorld extends React.Component {
+          render() {
+            return React.createElement('h1', {}, 'Hello React');
+          }
+        }
+        const domContainer = document.querySelector('#mydiv');
+        ReactDOM.render(React.createElement(HelloWorld), domContainer);
+      &lt;/script&gt;
+
+      &lt;!-- JSX 版本 --&gt;
+      &lt;script type="text/babel"&gt;
+        class Hello extends React.Component {
+          render() {
+            return &lt;h1&gt;Hello React with JSX!&lt;/h1&gt;
+          }
+        }
+        ReactDOM.render(&lt;Hello /&gt;, document.querySelector('#mydiv_JSX_ver'))
+      &lt;/script&gt;
+
+    &lt;/body&gt;
+
+  &lt;/html&gt;</code></pre>
+   <div style="margin-top: 36px;">
+    <span style="font-size: large;">
+     參考資料 :
+    </span>
+   </div>
+   <div>
+    1.
+    <a href="https://reactjs.org/docs/add-react-to-a-website.html" style="font-size: large;">
+     React 官網
+    </a>
+   </div>
+   <div>
+    1.
+    <a href="https://www.w3schools.com/react/react_getstarted.asp" style="font-size: large;">
+     w3schools.com
+    </a>
+   </div>
+   <div>
+    1.
+    <a href="https://myapollo.com.tw/zh-tw/react-js-tutorial-part-1/" style="font-size: large;">
+     React 教學 - 從零開始的 React 生活 Part 1
+    </a>
+   </div>
+  </div>
+ </body>
+</html>

@@ -1,0 +1,134 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-391117602317695453">
+   <div class="separator" style="clear: both; text-align: center;">
+    <a href="https://junye1993.github.io/image/Development.jpg" style="margin-left: 1em; margin-right: 1em;">
+     <img border="0" data-original-height="1365" data-original-width="2048" height="426" src="https://junye1993.github.io/image/Development.jpg" width="640"/>
+    </a>
+   </div>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     前言
+    </span>
+   </h2>
+   <font face="helvetica" size="4">
+    網頁開發是一個對我而言還蠻陌生的東西, 因為我都是自學所以總是得過且過。自學通常就會拿手邊資源也就是公司內部系統的 Code。公司的 Code 較為古早, 不外乎 3 個基本的元素, http server(apache), PHP, 前端(html, css, javascript)。 此時的我靠著
+    <a href="https://www.w3schools.com/">
+     w3schools
+    </a>
+    就能完成所有事情。既然重新踏入開發網頁, 就去學最新的東西 (目標是 react), 即使路途遙遠, 但相對的有很多東西可以紀錄。
+   </font>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 24px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     Node.js
+    </span>
+   </h2>
+   <font face="helvetica" size="4">
+    離開了較為古老的開發方法後, 進入到所謂較為現代網站開發, 查了查似乎都繞不開 node.js。所以我想在這個下點功夫, 學學這個可以在後端執行的 javascript。
+    <br/>
+    <br/>
+    <b>
+     <u>
+      學程式學語言的第一步通常是 Hello World,所以那就來吧。(當然要先裝
+      <a href="https://nodejs.org/en/">
+       Node.js
+      </a>
+      )
+     </u>
+    </b>
+   </font>
+   <ul style="text-align: left;">
+    <li>
+     <font face="helvetica" size="4">
+      創一個檔案 HelloWorld.js
+     </font>
+     <pre style="width: 95%;"><code class="javascript">    console.log("Hello World");</code></pre>
+    </li>
+    <li>
+     <font face="helvetica" size="4">
+      在 CMD 執行 HelloWorld.js
+     </font>
+     <pre style="width: 95%;"><code class="bash">    $&gt;node HelloWorld.js
+    Hello World</code></pre>
+    </li>
+   </ul>
+   <font face="helvetica" size="4">
+    <b>
+     <u>
+      再一個貨真價實的後端 Hello World
+     </u>
+    </b>
+   </font>
+   <ul style="text-align: left;">
+    <li>
+     <font face="helvetica" size="4">
+      創一個檔案 Server.js
+     </font>
+     <pre style="width: 95%;"><code class="javascript">    var http = require("http");
+
+    http.createServer(function (request, response) {
+        response.writeHead(200, { "Content-Type": "text/plain" });
+        response.write("Hello World");
+        response.end();
+    }).listen(8888);</code></pre>
+    </li>
+    <li>
+     <font face="helvetica" size="4">
+      在 CMD 執行 Server.js (如果你是 windows 請按允許存取)
+     </font>
+     <pre style="width: 95%;"><code class="bash">    $&gt;node Server.js
+
+</code></pre>
+    </li>
+    <li>
+     <font face="helvetica" size="4">
+      開啟瀏覽器, 讀取 http://localhost:8888/ (chrome 書籤太多...科)
+     </font>
+     <div class="separator" style="clear: both; text-align: left;">
+      <a href="https://1.bp.blogspot.com/-qlWE3JcSdes/X4GRvDC0cyI/AAAAAAAACb4/7Wo_W8pTZqozvuQb_mlOQWGLgQf7EBYhwCLcBGAsYHQ/s463/%25E6%2593%25B7%25E5%258F%2596.PNG" style="margin-left: 1em; margin-right: 1em;">
+       <img border="0" data-original-height="174" data-original-width="463" src="https://1.bp.blogspot.com/-qlWE3JcSdes/X4GRvDC0cyI/AAAAAAAACb4/7Wo_W8pTZqozvuQb_mlOQWGLgQf7EBYhwCLcBGAsYHQ/s320/%25E6%2593%25B7%25E5%258F%2596.PNG" width="320"/>
+      </a>
+     </div>
+    </li>
+   </ul>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 24px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     結語
+    </span>
+   </h2>
+   <font face="helvetica" size="4">
+    老實說上面的程式碼對我來說還蠻震驚的, 因為它取代了 apache (http server), 一個我從來懶得去研究的東西。看來路途比想像的遙遠
+   </font>
+   <span style="font-family: helvetica; font-size: large;">
+    。
+   </span>
+   <div style="margin-top: 36px;">
+    <span style="font-size: large;">
+     下一篇 :
+    </span>
+   </div>
+   <div>
+    <a href="https://junye1993.blogspot.com/2020/10/2.html" style="font-size: large;">
+     重新踏入網頁開發 (2)
+    </a>
+   </div>
+   <div style="margin-top: 36px;">
+    <span style="font-size: large;">
+     參考資料 :
+    </span>
+   </div>
+   <div>
+    1.
+    <a href="https://codertw.com/%E5%89%8D%E7%AB%AF%E9%96%8B%E7%99%BC/229894/" style="font-size: large;">
+     https://codertw.com/%E5%89%8D%E7%AB%AF%E9%96%8B%E7%99%BC/229894/
+    </a>
+   </div>
+   <div>
+    2.
+    <a href="https://www.nodebeginner.org/index-zh-tw.html#hello-world" style="font-size: large;">
+     https://www.nodebeginner.org/index-zh-tw.html#hello-world
+    </a>
+   </div>
+  </div>
+ </body>
+</html>

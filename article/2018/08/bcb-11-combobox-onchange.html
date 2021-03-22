@@ -1,0 +1,46 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-7985977693175512079">
+   有時候會希望 ComboBox Change 的時候
+   <br/>
+   <br/>
+   Grid 能自動更新，但 ComboBox OnChange() 似乎事件較弱
+   <br/>
+   <br/>
+   所以
+   <b>
+    OnChange() 執行後，Grid 並沒有立即更新
+   </b>
+   <br/>
+   <br/>
+   你必須點 Grid 一下才會更新，當然一定有正規解法
+   <br/>
+   <br/>
+   但我很急無法深入研究，所以用這個邪門歪道
+   <br/>
+   <br/>
+   <br/>
+   1. 首先創一個 Button1 並設定 OnClick 事件 (為了美觀你可以設Button1隱藏)
+   <br/>
+   <pre><code class="cpp">
+void __fastcall TMainForm::Button1Click(TObject *Sender)
+{
+    Grid-&gt;Refresh();
+}
+</code></pre>
+   <br/>
+   2. 在你想要的 ComboBox OnChange() 改為 Button1Click()
+   <br/>
+   <div class="separator" style="clear: both; text-align: center;">
+    <a href="https://2.bp.blogspot.com/-iUPm6_94JRA/W36SzUS6H3I/AAAAAAAAAj8/v6m8MakiNQ4aUOibZmMa7ijpU7wadiwjACLcBGAs/s1600/%25E6%259C%25AA%25E5%2591%25BD%25E5%2590%258D.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;">
+     <img border="0" data-original-height="118" data-original-width="288" height="131" src="https://2.bp.blogspot.com/-iUPm6_94JRA/W36SzUS6H3I/AAAAAAAAAj8/v6m8MakiNQ4aUOibZmMa7ijpU7wadiwjACLcBGAs/s320/%25E6%259C%25AA%25E5%2591%25BD%25E5%2590%258D.png" width="320"/>
+    </a>
+   </div>
+   <br/>
+   <br/>
+   參考資料 : 著急的我
+   <br/>
+   <br/>
+  </div>
+ </body>
+</html>

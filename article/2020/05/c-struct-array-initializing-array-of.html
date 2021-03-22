@@ -1,0 +1,52 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-2630185769895562621">
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     初始化 struct array
+    </span>
+   </h2>
+   <pre><code class="cpp">    struct student
+    {
+        char* name;
+        int grade;
+        int id;
+    };</code></pre>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     1. 依照當初宣告的順序
+    </span>
+   </h2>
+   <pre><code class="cpp">    struct student myStudents[] = {
+        {"Henry", 3, 1},
+        {"Marry", 3, 2}
+    };</code></pre>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     1. 依照當初宣告的名子
+    </span>
+   </h2>
+   <pre><code class="cpp">    struct student myStudents[] = {
+        {.id = 1, .grade = 3, .name = "Henry"},
+        {.id = 2, .grade = 3, .name = "Marry"}
+    };</code></pre>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     Output
+    </span>
+   </h2>
+   <pre><code class="cpp">  printf("ID : %d-%d\tName : %s\n", myStudents[0].grade, myStudents[0].id, myStudents[0].name);
+  printf("ID : %d-%d\tName : %s\n", myStudents[1].grade, myStudents[1].id, myStudents[1].name);
+
+  // ID : 3-1        Name : Henry
+  // ID : 3-2        Name : Marry</code></pre>
+   <br/>
+   <br/>
+   參考資料 :
+   <br/>
+   <a href="https://stackoverflow.com/questions/18921559/initializing-array-of-structures">
+    https://stackoverflow.com/questions/18921559/initializing-array-of-structures
+   </a>
+  </div>
+ </body>
+</html>

@@ -1,0 +1,62 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-660959945969147040">
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     <span style="letter-spacing: 1.44px;">
+      使用的情境
+     </span>
+    </span>
+   </h3>
+   假設我們不知道外部是否會提供 foo() 這個 function，若沒有則用自己的 foo()。
+   <br/>
+   <pre><code class="linux">    extern int func(void);
+    int __attribute__((weak)) func(void)
+    {
+        return 0;
+    }</code></pre>
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     <span style="letter-spacing: 1.44px;">
+      備註 - 不會在動態函式庫 (.so) 中生效
+     </span>
+    </span>
+   </h3>
+   string.so
+   <br/>
+   <pre><code class="C">    void real_func()
+    {
+        printf("strong func\n");
+    }</code></pre>
+   weak.so
+   <br/>
+   <pre><code class="C">    void real_func() __attribute__((weak))
+    {
+        printf("weak func\n");
+    }</code></pre>
+   main.c
+   <br/>
+   <pre><code class="C">    extern void real_func();
+    void main()
+    {
+        real_func();
+    }</code></pre>
+   結果 :
+   <br/>
+   <pre><code class="C">    // 動態連結無效，只看順序
+    gcc main.c -lstrong -lweak // 輸出 : strong func
+    gcc main.c -lweak -lstrong // 輸出 : weak func
+
+    // 正常 .o 檔
+    gcc main.c weak.o strong.o // 輸出 : strong func
+    gcc main.c strong.o weak.o // 輸出 : strong func</code></pre>
+   <br/>
+   <br/>
+   參考資料 :
+   <br/>
+   <a href="https://www.itread01.com/content/1541531526.html">
+    https://www.itread01.com/content/1541531526.html
+   </a>
+  </div>
+ </body>
+</html>

@@ -1,0 +1,119 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-4426374682232068198">
+   <h3>
+    <span style="font-size: large;">
+     CSS 在 IE 瀏覽器下失效
+    </span>
+   </h3>
+   <span style="font-size: medium;">
+    在網站開發時，總會發現 IE 瀏覽器跟別人不太一樣
+   </span>
+   <br/>
+   <span style="font-size: medium;">
+    最常出事就是 CSS，CSS 在 IE 瀏覽器下失效
+   </span>
+   <br/>
+   <span style="font-size: medium;">
+    提供幾個從 stackoverflow 找的方法
+   </span>
+   <span style="font-size: medium;">
+    能影響下面
+   </span>
+   <br/>
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     Do not code CSS on the HTML file
+    </span>
+   </h3>
+   <span style="font-size: medium;">
+    這裡應該是指 CSS Code 有很多 HTML
+   </span>
+   <span style="font-size: medium;">
+    Code 不一樣，舉個最常出現的例子就是
+    <b>
+     註解
+    </b>
+    。
+   </span>
+   <br/>
+   <pre><code class="html"> &lt;style type ="text/css"&gt; 
+  &lt;!-- You need this in order to have CSS, it has --&gt; 
+  p {color: blue; font-family:arial;}
+ &lt;/style&gt;</code></pre>
+   <span style="font-size: medium;">
+    沒意外上面這段註解會失效，且很可能影響下面的程式碼
+   </span>
+   <br/>
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     Make a separate CSfile and link to it
+    </span>
+   </h3>
+   <pre><code class="html"> &lt;link rel="stylesheet" href="css/style.css"&gt;</code></pre>
+   <br/>
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     Always add &lt;!DOCTYPE&gt; tag to every HTML page
+    </span>
+   </h3>
+   <span style="font-size: medium;">
+   </span>
+   <span style="font-size: medium;">
+    其中最有效的就是第三點，在每個 HTML 頁面開頭都要加上所謂的 DOCTYPE 「文件類型」，DOCTYPE 的功能主要是標準化網頁，如果沒有這個 Tag，瀏覽器會依照自己的意思去解釋，而其中 IE 最怪，所以常常失效!
+   </span>
+   <br/>
+   <br/>
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     請把指定版本的&lt;meta&gt;放在第一位
+    </span>
+   </h3>
+   <span style="font-size: medium;">
+    原話 : Make &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;, is the first &lt;meta&gt; tag on your page, otherwise IE may not respect it
+   </span>
+   <span style="font-size: medium;">
+    上面這個指定 IE 用 E
+   </span>
+   <span style="font-size: medium;">
+    dge 去讀取這段 Code，不放第一個還真的會失效，你可以用 F12 去檢查當前瀏覽頁面用的 IE 版本，如果你沒有指定
+   </span>
+   <span style="font-size: medium;">
+    DOCTYPE，不意外會變成 IE5，很慘的...
+   </span>
+   <br/>
+   <span style="font-size: medium;">
+    <br/>
+   </span>
+   參考資料 :
+   <br/>
+   1.
+   <a href="https://stackoverflow.com/questions/595768/css-not-working-in-ie">
+    https://stackoverflow.com/questions/595768/css-not-working-in-ie
+   </a>
+   <br/>
+   2.
+   <a href="http://www.flycan.com/article/css/html-doctype-97.html">
+    http://www.flycan.com/article/css/html-doctype-97.html
+   </a>
+   <br/>
+   3.
+   <a href="http://www.webpage.idv.tw/maillist/maillist4/new/02/02.htm">
+    http://www.webpage.idv.tw/maillist/maillist4/new/02/02.htm
+   </a>
+   <br/>
+   4.
+   <a href="https://www.itread01.com/p/648379.html">
+    https://www.itread01.com/p/648379.html
+   </a>
+   <br/>
+   5.
+   <a href="https://stackoverflow.com/questions/25557299/internet-explorer-11-disable-display-intranet-sites-in-compatibility-view-via">
+    https://stackoverflow.com/questions/25557299/internet-explorer-11-disable-display-intranet-sites-in-compatibility-view-via
+   </a>
+   <br/>
+   <ol style='background-color: white; border: 0px; box-sizing: inherit; color: #242729; font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; font-size: 15px; font-stretch: inherit; font-variant-east-asian: inherit; font-variant-numeric: inherit; line-height: inherit; list-style-image: initial; list-style-position: initial; margin: 0px 0px 1em 30px; padding: 0px; vertical-align: baseline;'>
+   </ol>
+  </div>
+ </body>
+</html>

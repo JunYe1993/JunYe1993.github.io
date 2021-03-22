@@ -1,0 +1,73 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-8936867570513808724">
+   <div class="separator" style="text-align: center;">
+    <a href="https://1.bp.blogspot.com/-eRq1kWrrCyk/X_a95amK3WI/AAAAAAAACnw/DY4zgmI411ElUAod1vqR3gBi2BDpIw1agCLcBGAsYHQ/s2048/green-chameleon-s9CC2SKySJM-unsplash.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;">
+     <img border="0" data-original-height="1365" data-original-width="2048" height="426" src="https://1.bp.blogspot.com/-eRq1kWrrCyk/X_a95amK3WI/AAAAAAAACnw/DY4zgmI411ElUAod1vqR3gBi2BDpIw1agCLcBGAsYHQ/w640-h426/green-chameleon-s9CC2SKySJM-unsplash.jpg" width="640"/>
+    </a>
+   </div>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     cURL - Client URL
+    </span>
+   </h2>
+   <font face="helvetica" size="4">
+    cURL is a command-line tool for getting or sending data including files using URL syntax。網站在開發 Restful API 時，測試會用到的最基本工具。這邊紀錄一些常用的參數
+   </font>
+   <ul style="text-align: left;">
+    <li>
+     <font face="helvetica" size="4">
+      基本的 request
+     </font>
+     <pre style="width: 95%;"><code class="bash">    # Default 是 GET
+    curl http://localhost:8888/
+    # 指定 request (--request 可用 -X 代替)
+    curl --request GET http://localhost:8888/
+    curl --request POST http://localhost:8888/</code></pre>
+    </li>
+    <li>
+     <font face="helvetica" size="4">
+      將 response 存成檔案
+     </font>
+     <pre style="width: 95%;"><code class="bash">    # -o 加檔名, -O 直接將 URL 當檔名 (ex. list_user)
+    $ curl -o temp  http://localhost:8888/list_user
+    $ curl -O http://localhost:8888/list_user</code></pre>
+    </li>
+    <li>
+     <font face="helvetica" size="4">
+      若 response 301/302(redirect)，會跟著 redirect
+     </font>
+     <pre style="width: 95%;"><code class="bash">    # 會 redirect 到 http://www.google.com    
+    curl -L http://google.com</code></pre>
+    </li>
+    <li>
+     <font face="helvetica" size="4">
+      把整個 request 流程 trace 儲存到 file
+     </font>
+     <pre style="width: 95%;"><code class="bash">    curl --trace-ascii debugdump.txt -L http://google.com</code></pre>
+    </li>
+   </ul>
+   <div style="margin-top: 36px;">
+    <span style="font-size: large;">
+     參考資料 :
+    </span>
+   </div>
+   <div>
+    1.
+    <a href="https://en.wikipedia.org/wiki/CURL" style="font-size: large;">
+     維基百科
+    </a>
+   </div>
+   <div>
+    2.
+    <a href="https://blog.techbridge.cc/2019/02/01/linux-curl-command-tutorial/" style="font-size: large;">
+     Linux Curl Command 指令與基本操作入門教學
+    </a>
+   </div>
+   <div class="separator" style="clear: both; text-align: center;">
+    <br/>
+   </div>
+   <br/>
+  </div>
+ </body>
+</html>

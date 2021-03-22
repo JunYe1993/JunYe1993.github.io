@@ -1,0 +1,219 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-549001979635669854">
+   <div class="separator" style="clear: both; text-align: center;">
+    <a href="https://junye1993.github.io/image/Development.jpg" style="margin-left: 1em; margin-right: 1em;">
+     <img border="0" data-original-height="1365" data-original-width="2048" height="426" src="https://junye1993.github.io/image/Development.jpg" width="640"/>
+    </a>
+   </div>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     Blocking ＆ Non-Blocking
+    </span>
+   </h2>
+   <font face="helvetica" size="4">
+    Nodejs 為事件觸發的
+    <b>
+     <u>
+      單一執行緒
+     </u>
+    </b>
+    ，不像 Apache + PHP 會自動開一個 Thread 去接每一個 Request。
+   </font>
+   <div style="margin-top: 12px;">
+    <font face="helvetica" size="4" style="background-color: #fff7e9;">
+     <b>
+      <u>
+       Blocking Code 示範 (程式碼另有 index.js 請參照
+       <a href="https://junye1993.blogspot.com/2020/10/4.html" style="font-size: large;">
+        重新踏入網頁開發 (4) - Dependency injection
+       </a>
+       )
+      </u>
+     </b>
+    </font>
+   </div>
+   <ul style="text-align: left;">
+    <li>
+     <font face="helvetica" size="4">
+      route.js
+     </font>
+     <pre style="width: 95%;"><code class="javascript">    function start_requset_handle () {
+        console.log("Start request.");
+        
+        // Sleep for 10 seconds
+        function sleep(milliSeconds) {
+            var startTime = new Date().getTime();
+            while (new Date().getTime() &lt; startTime + milliSeconds);
+        }
+        sleep(10000);
+    }
+
+    function upload_requset_handle () {
+        console.log("Upload request.");
+    }
+
+    function requset_handler (url) {
+        var handle = {};
+        handle['/'] = start_requset_handle;
+        handle['/start'] = start_requset_handle;
+        handle['/upload'] = upload_requset_handle;
+
+        if (typeof handle[url] === 'function') {
+            handle[url]();
+        } else {
+            console.log("No request handler found for " + url);
+        }
+    }
+
+    export function route(url) {
+        requset_handler(url);
+    }</code></pre>
+    </li>
+    <li>
+     <font face="helvetica" size="4">
+      server.js
+     </font>
+     <pre style="width: 95%;"><code class="javascript">    import http from 'http'
+    import url from 'url'
+
+    export function serverStart(route) {
+        function onRequest(request, response) {
+            var path_name = url.parse(request.url).pathname;
+            console.log("Request for " + path_name + " received");
+            
+            // Routing function
+            route(path_name);
+
+            response.writeHead(200, {"Content-Type": "text/plain"});
+            response.write("Hello World.\n");
+            response.end();
+        }
+        http.createServer(onRequest).listen(8888);
+        console.log("Server has started...");
+    }</code></pre>
+    </li>
+   </ul>
+   <div style="margin-top: 12px;">
+    <font face="helvetica" size="4">
+     這裡先用 requset_handler() 這 function 去應對 2 種 url 的 request。client 端 request http://localhost:8888/start 會等 10 秒才回覆 Hello World.，request http://localhost:8888/upload 則立即回覆。因為 nodejs 為單一執行緒，如果有人先 request start, 後面即使是 request upload 也要跟著等 10 秒。
+    </font>
+   </div>
+   <div style="margin-top: 12px;">
+    <font face="helvetica" size="4" style="background-color: #fff7e9;">
+     <b>
+      <u>
+       Non-Blocking Code 示範 (程式碼另有 index.js 請參照
+       <a href="https://junye1993.blogspot.com/2020/10/4.html" style="font-size: large;">
+        重新踏入網頁開發 (4) - Dependency injection
+       </a>
+       )
+      </u>
+     </b>
+    </font>
+   </div>
+   <ul style="text-align: left;">
+    <li>
+     <font face="helvetica" size="4">
+      route.js
+     </font>
+     <pre style="width: 95%;"><code class="javascript">    import { exec } from 'child_process';
+
+    function start_requset_handle (response) {
+        console.log("Start request.");
+        var content = "empty\n";
+        exec("ls -alh", function (error, stdout, stderr) {
+            content = stdout;
+            response.writeHead(200, {"Content-Type": "text/plain"});
+            response.write(content);
+            response.end();
+        });
+        // 放在外面會讓 server 直接回 empty
+        // response.writeHead(200, {"Content-Type": "text/plain"});
+        // response.write(content);
+        // response.end();
+    }
+
+    function upload_requset_handle (response) {
+        console.log("Upload request.");
+        response.writeHead(200, {"Content-Type": "text/plain"});
+        response.write("Uploading...\n");
+        response.end();
+    }
+
+    function requset_handler (url, response) {
+        var handle = {};
+        handle['/'] = start_requset_handle;
+        handle['/start'] = start_requset_handle;
+        handle['/upload'] = upload_requset_handle;
+
+        if (typeof handle[url] === 'function') {
+            handle[url](response);
+        } else {
+            console.log("No request handler found for " + url);
+        }
+    }
+
+    export function route(url, response) {
+        requset_handler(url, response);
+    }</code></pre>
+    </li>
+    <li>
+     <font face="helvetica" size="4">
+      server.js
+     </font>
+     <pre style="width: 95%;"><code class="javascript">    import http from 'http'
+    import url from 'url'
+
+    export function serverStart(route) {
+        function onRequest(request, response) {
+            var path_name = url.parse(request.url).pathname;
+            console.log("Request for " + path_name + " received");
+            
+            // Routing function
+            route(path_name, response);
+        }
+        http.createServer(onRequest).listen(8888);
+        console.log("Server has started...");
+    }</code></pre>
+    </li>
+   </ul>
+   <div style="margin-top: 12px;">
+    <font face="helvetica" size="4">
+     import nodejs 內建的 child_process，解決了問題。傳 response 進去是為了讓 request 處理完再做回覆。
+    </font>
+   </div>
+   <div style="margin-top: 36px;">
+    <span style="font-size: large;">
+     上一篇 :
+    </span>
+   </div>
+   <div>
+    <a href="https://junye1993.blogspot.com/2020/10/4.html" style="font-size: large;">
+     重新踏入網頁開發 (4) - Dependency injection
+    </a>
+   </div>
+   <div style="margin-top: 12px;">
+    <span style="font-size: large;">
+     下一篇 :
+    </span>
+   </div>
+   <div>
+    <a href="https://junye1993.blogspot.com/2021/01/6-express.html" style="font-size: large;">
+     重新踏入網頁開發 (6) - Express - 1
+    </a>
+   </div>
+   <div style="margin-top: 36px;">
+    <span style="font-size: large;">
+     參考資料 :
+    </span>
+   </div>
+   <div>
+    1.
+    <a href="https://www.nodebeginner.org/index-zh-tw.html#hello-world" style="font-size: large;">
+     https://www.nodebeginner.org/index-zh-tw.html#hello-world
+    </a>
+   </div>
+  </div>
+ </body>
+</html>

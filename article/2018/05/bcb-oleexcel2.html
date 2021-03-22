@@ -1,0 +1,83 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-4178748576440982729">
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     BCB 操作 EXCEL、WORD ( OLE的應用 )
+    </span>
+   </h2>
+   <div>
+    <span style="font-size: medium;">
+     <br/>
+    </span>
+   </div>
+   有時候再操作 EXCEL 和 WORD 的時候，有可能會要應用到 MultiProcess 的概念
+   <br/>
+   但真正需要的地方很少，我自己是用偷懶的方式來避開，
+   <br/>
+   因為互相搶奪導致資料錯誤出現的機率微乎其微。
+   <br/>
+   下面介紹一些我常碰到的錯誤
+   <br/>
+   <pre><code class="cpp">bool __fastcall JunYe_Word::getDataTable(int index){
+    Variant Range;
+    bool flag = true;
+    try{
+        Range = Wd.DataDoc.OlePropertyGet("Tables").OleFunction("Item",index).OlePropertyGet("Range");
+    }catch(EOleSysError *e){
+        BugReport(L"Ranging Fail !! This Word doesn't have No."+IntToStr(index)+" Table.");
+        flag = false;
+    }
+    if(flag){
+        Range.OlePropertyGet("Rows").OleFunction("Item",1).OleFunction("Delete");
+        Range.OleFunction("Copy");
+    }
+    return flag;
+}</code></pre>
+   有時候要 Range 但 FAIL，有可能資料錯誤或跳錯誤訊息，且造成程式當掉的機會很大
+   <br/>
+   這時候就會用
+   <b>
+    Try and Catch
+   </b>
+   如上面的程式碼來避免
+   <br/>
+   <pre><code class="cpp">String __fastcall Excel::getCellValue(int row, int column){
+    String data;
+    Variant temp;
+    try{
+        temp = Exc.WorkSheet.OlePropertyGet("Cells", row, column).OlePropertyGet("Value");
+        if(VarType(temp) != varError){
+            data = temp;
+        }
+    }catch(EOleSysError *e){
+        BugReport(L"The Cell Can't transmit to OleStr");
+    }
+    return data;
+}</code></pre>
+   這個段程式是防止吃 EXCEL CELL的值時，會導致 Can't transmit to OleStr 的狀況，
+不是吃錯值，而是格子可能是#FFFFFF之類的東西，你直接用上述的data(String)去接會錯
+Try and Catch 也擋不了( 我自己試擋不了 )，這時我用多了一層判斷，
+用 VarType 去檢查 CELL 值是否能轉 OleStr。
+   <br/>
+   <br/>
+   <b>
+    上一篇：
+   </b>
+   <br/>
+   <a href="https://junye1993.blogspot.com/2018/04/bcb-oleexcel1.html">
+    BCB OLE操作EXCEL (1)
+   </a>
+   <div>
+    <b>
+     下一篇：
+    </b>
+   </div>
+   <div>
+    <a href="https://junye1993.blogspot.com/2018/07/bcb-oleexcel3.html">
+     BCB OLE操作EXCEL (3)
+    </a>
+   </div>
+  </div>
+ </body>
+</html>

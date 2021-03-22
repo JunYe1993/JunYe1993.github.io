@@ -1,0 +1,166 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-4172411602424280662">
+   <h3>
+    <span style="font-size: large;">
+     Chapter 3 - 函式 - 2
+    </span>
+   </h3>
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     使用具描述能力的名稱
+    </span>
+   </h3>
+   <span style="font-size: medium;">
+    <br/>
+   </span>
+   <span style="font-size: medium;">
+    不要害怕名字過長，若取了有性質的函式名稱就較能符合
+    <b>
+     「當每個你看到的函式，執行結果都與你想的差不多代表為 Clean Code」
+    </b>
+    。
+   </span>
+   <br/>
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     <span style="font-size: medium;">
+      函式的參數
+     </span>
+    </span>
+   </h3>
+   <div>
+    <span style="font-size: medium;">
+     <br/>
+    </span>
+    <span style="font-size: medium;">
+     函式的參數越少越好，因為參數的存在也會影響著你對函式的預期，所以最理想的情況為 0 參數。
+    </span>
+   </div>
+   <div>
+    <h5>
+     <span style="font-size: medium;">
+      <u>
+       一個參數
+      </u>
+     </span>
+    </h5>
+   </div>
+   <ol>
+    <li>
+     <pre><span style="font-size: medium;">與這個參數有關的問題  - boolean fileExits("Myfile")</span></pre>
+    </li>
+    <li>
+     <pre><span style="font-size: medium;">對這個參數做某種操作，然後回傳 - InputStream fileOpen("Myfile")</span></pre>
+    </li>
+    <li>
+     <pre><span style="font-size: medium;"><b>事件</b>，利用參數去修改系統狀態 - passwordAttemptFailedNtimes(int attempts)</span></pre>
+    </li>
+   </ol>
+   <span style="font-size: medium;">
+    第三種命名要特別小心，要明確的表示出此函式為
+    <b>
+     事件
+    </b>
+    。若參數為 flag 那你要知道此為很爛的作法，
+   </span>
+   <span style="font-size: medium;">
+    flag
+   </span>
+   <span style="font-size: medium;">
+    就代表 True 要做一件事，
+   </span>
+   <span style="font-size: medium;">
+    False 要做一件事，違反了只做一件事的原則。
+   </span>
+   <br/>
+   <h5>
+    <span style="font-size: medium;">
+     <u>
+      兩 ~ 三個參數
+     </u>
+    </span>
+   </h5>
+   <span style="font-size: medium;">
+    兩個參數影響
+   </span>
+   <span style="font-size: medium;">
+    函式
+   </span>
+   <span style="font-size: medium;">
+    的預期就更多，所以可以轉成一個參數就好好利用。
+   </span>
+   <br/>
+   <h5>
+    <span style="font-size: medium;">
+     <u>
+      物件型態的參數、參數串列
+     </u>
+    </span>
+   </h5>
+   <span style="font-size: medium;">
+    利用物件型態或陣列去減少參數個數是不錯的方法
+   </span>
+   <br/>
+   <pre><code class="java">    Circle makeCircle(double x, double y, double radius);
+    Circle makeCircle(point center, double radius);</code></pre>
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     指令和查詢的分離
+    </span>
+   </h3>
+   <span style="font-size: medium;">
+    <br/>
+   </span>
+   <span style="font-size: medium;">
+    如果函式除了做某件事情後，還回傳了某個問題的答案，就等於做兩件事
+   </span>
+   <br/>
+   <pre><code class="java">    public boolean set(String attribute, String value);
+    if(set("username", "unclebob"))...</code></pre>
+   <span style="font-size: medium;">
+    所以讀者看到此段 if 會容易產生誤解且疑惑，所以要將查詢與指令分開
+   </span>
+   <br/>
+   <pre><code class="java">    if(attributeExists("username")){
+        setAttribute("username", "unclebob");
+        ...
+    }</code></pre>
+   <h5>
+    <span style="font-size: medium;">
+     <u>
+      利用例外處理取代回傳錯誤碼
+     </u>
+    </span>
+   </h5>
+   <span style="font-size: medium;">
+    錯誤處理本身就是一件事
+   </span>
+   <br/>
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     Don't Repeat Yourself
+    </span>
+   </h3>
+   <br/>
+   <span style="font-size: medium;">
+    <span style="font-size: medium;">
+     n 個重複的程式碼，代表修改要花 n 倍時間。
+    </span>
+    <br/>
+    <br/>
+    上一篇：
+    <br/>
+    <a href="https://junye1993.blogspot.com/2019/12/clean-code-chapter-3-1.html">
+     讀書心得 - Clean Code - Chapter 3 (1)
+    </a>
+    <br/>
+    下一篇：
+    <br/>
+    <a href="https://junye1993.blogspot.com/2019/12/clean-code-chapter-4.html">
+     讀書心得 - Clean Code - Chapter 4
+    </a>
+   </span>
+  </div>
+ </body>
+</html>

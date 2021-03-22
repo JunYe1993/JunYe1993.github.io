@@ -1,0 +1,123 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-1277592783619024950">
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     regex.h (Linux 原生, Windows 再說)
+    </span>
+   </h2>
+   <font face="helvetica" size="4">
+    Regex.h 實作主要分 3 階段，regcom, regexec, regfree。
+   </font>
+   <pre><code class="c">    // 要被批配的 buffer 跟一些參數
+    int status, len, i;
+    char buf[1024], data[1024];
+    getdata(data);
+
+    // 正規表示式的會要先 compile (regcomp())並儲存在 regex_t 此資料結構
+    regex_t preg;
+
+    // 設定批配模式的 flag. 
+    // REG_EXTENDED ERE (Extended Regular Expression, 不用就是 BRE)
+    // REG_ICASE    忽略大小寫
+    // REG_NOSUB    不儲存批配後的結果
+    // REG_NEWLINE  識別換行符(^$ 這類符號會成每一行的開頭跟結尾), REG_NEWLINE 效力 &gt; eflags
+    int cflags = REG_EXTENDED | REG_NEWLINE;
+
+    // 正規表示式的批配樣板
+    const char * regex = "Name: ([A-Z a-z]+)\nYear of Birth: ([^\n]*)\n([^:]*: [^\n]*)";
+
+    // pmatch 為 struct 陣列去儲存批配後的結果
+    // pmatch.rm_so 批配到的子字串在 target string 的起始 index
+    // pmatch.rm_eo 批配到的子字串在 target string 的終止 index
+    // nmatch 為宣告 pmatch 的陣列大小
+    const size_t nmatch = 10;
+    regmatch_t pmatch[nmatch];
+    
+    // eflags 也會對批配做改動
+    // REG_NOTBOL   開頭批配符號(^)永遠批配不到
+    // REG_NOTEOL   結尾批配符號($)永遠批配不到
+    // REG_STARTEND 是直接使用 pmatch[0] 的 rm_so 跟 rm_eo
+    //   作為字串頭尾的 index 然後批配，是為了避免 target string 
+    //   中間有終止符(\0) 或 字串太長 strlen() 會 fail.
+    int eflags = 0;
+
+    // compile regex 
+    if( regcomp(&amp;preg, regex, cflags) != 0 ) {
+        puts("regex compile error!\n");
+        return;
+    }
+
+    // 進行批配 status = 0 代表成功
+    status = regexec(&amp;preg, data, nmatch, pmatch, eflags);
+    if (status == REG_NOMATCH) {
+        printf("No Match\n");
+    } else if (status == 0) {
+        // pmatch[0] 所指的子字串會是整串
+        // pmatch[1], pmatch[2]... 會是括弧裡 sub regex，通常拿來取真正想要的值
+        for (i = 0; i &lt; nmatch &amp;&amp; pmatch[i].rm_so &gt;= 0; ++i) {
+            len = pmatch[i].rm_eo - pmatch[i].rm_so;
+            strncpy(buf, data + pmatch[i].rm_so, len);
+            buf[len] = '\0';
+            printf("match %d :\n%s\n\n", i+1, buf);
+        }
+    }
+
+    regfree(&amp;preg);
+    return;</code></pre>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 24px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     測試資料 跟 結果
+    </span>
+   </h2>
+   <font face="helvetica" size="4">
+    測試資料
+   </font>
+   <pre class="output" style="-webkit-font-smoothing: antialiased; background: rgb(242, 242, 242); border-color: rgb(238, 238, 238) rgb(238, 238, 238) rgb(238, 238, 238) rgb(112, 112, 112); border-image: initial; border-radius: 4px; border-style: solid; border-width: 1px 1px 1px 4px; box-sizing: border-box; color: #111111; font-family: menlo, monaco, monospace; font-size: 14px; line-height: 21px; margin-bottom: 0.5em; margin-top: 0.5em; max-width: 100%; overflow-wrap: break-word; overflow: auto; padding: 0.5em 0.5em 0.5em 1em;">Name: JunYe
+Year of Birth: 1993
+Gender: Male</pre>
+   <font face="helvetica" size="4">
+    結果
+   </font>
+   <pre class="output" style="-webkit-font-smoothing: antialiased; background: rgb(242, 242, 242); border-color: rgb(238, 238, 238) rgb(238, 238, 238) rgb(238, 238, 238) rgb(112, 112, 112); border-image: initial; border-radius: 4px; border-style: solid; border-width: 1px 1px 1px 4px; box-sizing: border-box; color: #111111; font-family: menlo, monaco, monospace; font-size: 14px; line-height: 21px; margin-bottom: 0.5em; margin-top: 0.5em; max-width: 100%; overflow-wrap: break-word; overflow: auto; padding: 0.5em 0.5em 0.5em 1em;">match 1 :
+Name: JunYe
+Year of Birth: 1993
+Gender: Male
+
+match 2 :
+JunYe
+
+match 3 :
+1993
+
+match 4 :
+Gender: Male</pre>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 24px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     Basic (BRE) and extended (ERE) regular expression
+    </span>
+   </h2>
+   <font face="helvetica" size="4">
+    在一些特殊字元處理不一樣, 請參考
+    <a href="https://www.gnu.org/software/sed/manual/html_node/BRE-vs-ERE.html">
+     GNU的說明
+    </a>
+   </font>
+   <div style="margin-top: 36px;">
+    <span style="font-size: large;">
+     參考資料 :
+    </span>
+   </div>
+   <div>
+    <a href="http://junye1993.blogspot.com/2020/07/linux-shell-scripts-2.html" style="font-size: large;">
+     regex(3) — Linux manual page
+    </a>
+   </div>
+   <div>
+    <a href="http://rocksaying.tw/archives/3866523.html" style="font-size: large;">
+     石頭閒語
+    </a>
+   </div>
+  </div>
+ </body>
+</html>

@@ -1,0 +1,109 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-8587790912303622400">
+   <div>
+    <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+     <span style="font-size: medium;">
+      MySQL 利用執行順序提高效率
+     </span>
+    </h3>
+   </div>
+   <br/>
+   因為公司的內部網站平常有點慢，後來又架了個在美國的 Server
+   <br/>
+   原本的小問題就被放大，雖然優化網站的方式主要不是靠 SQL的改進
+   <br/>
+   <br/>
+   最普通的優化就是不要用 SELECT * ，理由顯而易見，資料越多搜尋越慢
+   <br/>
+   依照這點，所以要讓搜尋的資料越少，就要利用明確的條件去限制搜尋
+   <br/>
+   也就是利用 SQL 的執行順序
+   <br/>
+   <br/>
+   SQL 的執行順序如下 :
+   <br/>
+   <div>
+    <ol style='background-color: white; box-sizing: inherit; font-family: "Segoe UI", SegoeUI, "Segoe WP", "Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif; font-size: 16px; margin: 16px 0px 16px 38px; padding: 0px;'>
+     <li style="box-sizing: inherit; list-style: decimal outside none; outline: 0px;">
+      <span data-ttu-id="37ba3-142" style="box-sizing: inherit;" translation="FROM">
+       FROM
+      </span>
+     </li>
+     <li style="box-sizing: inherit; list-style: decimal outside none; outline: 0px;">
+      <span data-ttu-id="37ba3-143" style="box-sizing: inherit;" translation="ON">
+       ON
+      </span>
+     </li>
+     <li style="box-sizing: inherit; list-style: decimal outside none; outline: 0px;">
+      <span data-ttu-id="37ba3-144" style="box-sizing: inherit;" translation="JOIN">
+       JOIN
+      </span>
+     </li>
+     <li style="box-sizing: inherit; list-style: decimal outside none; outline: 0px;">
+      <span data-ttu-id="37ba3-145" style="box-sizing: inherit;" translation="WHERE">
+       WHERE
+      </span>
+     </li>
+     <li style="box-sizing: inherit; list-style: decimal outside none; outline: 0px;">
+      <span data-ttu-id="37ba3-146" style="box-sizing: inherit;" translation="GROUP BY">
+       GROUP BY
+      </span>
+     </li>
+     <li style="box-sizing: inherit; list-style: decimal outside none; outline: 0px;">
+      <span data-ttu-id="37ba3-147" style="box-sizing: inherit;" translation="WITH CUBE or WITH ROLLUP">
+       WITH CUBE 或 WITH ROLLUP
+      </span>
+     </li>
+     <li style="box-sizing: inherit; list-style: decimal outside none; outline: 0px;">
+      <span data-ttu-id="37ba3-148" style="box-sizing: inherit;" translation="HAVING">
+       HAVING
+      </span>
+     </li>
+     <li style="box-sizing: inherit; list-style: decimal outside none; outline: 0px;">
+      <span data-ttu-id="37ba3-149" style="box-sizing: inherit;" translation="SELECT">
+       SELECT
+      </span>
+     </li>
+     <li style="box-sizing: inherit; list-style: decimal outside none; outline: 0px;">
+      <span data-ttu-id="37ba3-150" style="box-sizing: inherit;" translation="DISTINCT">
+       DISTINCT
+      </span>
+     </li>
+     <li style="box-sizing: inherit; list-style: decimal outside none; outline: 0px;">
+      <span data-ttu-id="37ba3-151" style="box-sizing: inherit;" translation="ORDER BY">
+       ORDER BY
+      </span>
+     </li>
+     <li class="" style="box-sizing: inherit; list-style: decimal outside none; outline: 0px;">
+      <span data-ttu-id="37ba3-152" style="box-sizing: inherit;" translation="TOP">
+       Top / limit
+      </span>
+     </li>
+    </ol>
+   </div>
+   所以可以改進的就是 ON 跟 WHERE
+   <br/>
+   而且 ON 在 JOIN 前，所以我們要利用 ON 把 Table 的資料降到最小
+   <br/>
+   <br/>
+   所以好的 SQL 我認為應該是，
+   <b>
+    利用 ON 來把資料降到最小，甚至到不用 WHERE 的程度
+   </b>
+   <br/>
+   <b>
+    <br/>
+   </b>
+   參考資料 :
+   <br/>
+   <a href="https://docs.microsoft.com/zh-tw/sql/t-sql/queries/select-transact-sql?view=sql-server-2017">
+    https://docs.microsoft.com/
+   </a>
+   <br/>
+   <a href="http://pclevinblog.pixnet.net/blog/post/314563468-%5Bmysql%5D%E5%9F%B7%E8%A1%8C%E9%A0%86%E5%BA%8F%E8%88%87%E6%95%88%E7%8E%87%E6%A6%82%E8%AB%96">
+    http://pclevinblog.pixnet.net/blog/
+   </a>
+  </div>
+ </body>
+</html>

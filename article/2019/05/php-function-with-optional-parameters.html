@@ -1,0 +1,26 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-1774174205187438922">
+   <b>
+    PHP Function with Optional Parameters
+   </b>
+   <br/>
+   <br/>
+   有 2 種方法
+   <br/>
+   <br/>
+   1. 用 NULL arguments
+   <br/>
+   <pre><code class="php">function method($arg1 = null, $arg2 = null){
+  $arg1 = $arg1? $arg1: "default_value_for_arg1";
+  $arg2 = $arg2? $arg2: "default_value_for_arg2";
+}</code></pre>
+   2. 傳 Array
+   <br/>
+   <pre><code class="php">function method($arr){
+  $arg1 = $arr['$arg1'] ? $arr['$arg1'] : "default_value_for_arg1";
+  $arg2 = $arr['$arg2'] ? $arr['$arg2'] : "default_value_for_arg2";
+}</code></pre>
+  </div>
+ </body>
+</html>

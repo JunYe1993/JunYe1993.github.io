@@ -1,0 +1,57 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-7349424435613400954">
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     N 筆資料查詢
+    </span>
+   </h3>
+   <pre><code class="sql">    SELECT * FROM 成績單 LIMIT 3    // 取成績單前三筆資料
+    SELECT * FROM 成績單 ORDER BY 分數 DESC LIMIT 3 // 取分數前三名的資料
+    SELECT * FROM 成績單 ORDER BY 分數 DESC LIMIT 3, 7 // 取第四名到第十名的資料</code></pre>
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     分頁查詢
+    </span>
+   </h3>
+   <div>
+    <span style="font-size: medium;">
+     隨著查詢筆數越來越多，網站可能就會需要用分頁來表示查詢結果。
+    </span>
+   </div>
+   <div>
+    <span style="font-size: medium;">
+     這裡會出現一個問題 Offset ( LIMIT 的第1個參數 ) 越大，查詢速度越慢。
+    </span>
+   </div>
+   <pre><code class="sql">    SELECT * FROM 成績單 LIMIT  100000, 1         // 大 Offset</code></pre>
+   <div>
+    <span style="font-size: medium;">
+     Google 的結果是
+     <b>
+      InnoDB
+     </b>
+     會有的情況，InnoDB 會掃 100001 筆資料，然會再把 100000 筆資料給捨棄，導致查詢速度越來越慢。所以解決方法為
+     <b>
+      先只掃索引
+     </b>
+     。
+    </span>
+   </div>
+   <pre><code class="sql">    SELECT * FROM 成績單 WHERE id &gt;= (SELECT id FROM 成績單 LIMIT 100000, 1) LIMIT 1</code></pre>
+   <div>
+    <br/>
+    <br/>
+    參考資料 :
+    <br/>
+    <a href="https://codertw.com/%E8%B3%87%E6%96%99%E5%BA%AB/21569/">
+     https://codertw.com/%E8%B3%87%E6%96%99%E5%BA%AB/21569/
+    </a>
+    <br/>
+    <a href="https://blog.csdn.net/fdipzone/article/details/72793837">
+     https://blog.csdn.net/fdipzone/article/details/72793837
+    </a>
+   </div>
+  </div>
+ </body>
+</html>

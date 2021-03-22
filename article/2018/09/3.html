@@ -1,0 +1,86 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-7144972705705428209">
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     對同一個資料表做重複查詢
+    </span>
+   </h3>
+   <div>
+    <br/>
+   </div>
+   有時候可能會對同一個資料表做
+   <b>
+    重複查詢
+   </b>
+   很多次
+   <br/>
+   也就是需要
+   <b>
+    JOIN 兩次以上
+   </b>
+   <br/>
+   <div>
+    <br/>
+   </div>
+   <div>
+    例如( 以下範例不小心用到中文，沒試過到底可不可行 )
+   </div>
+   <div>
+    Table1
+   </div>
+   <div>
+    <a href="https://3.bp.blogspot.com/-hTMMg33f11A/W6N3IMrxT6I/AAAAAAAAAkw/sDXIfyn4Yl0AL-ujlu58FkE_x2gwebyjgCLcBGAs/s1600/%25E6%259C%25AA%25E5%2591%25BD%25E5%2590%258D.png" imageanchor="1" style="clear: left; margin-bottom: 1em; margin-right: 1em; text-align: center;">
+     <img border="0" data-original-height="117" data-original-width="222" src="https://3.bp.blogspot.com/-hTMMg33f11A/W6N3IMrxT6I/AAAAAAAAAkw/sDXIfyn4Yl0AL-ujlu58FkE_x2gwebyjgCLcBGAs/s1600/%25E6%259C%25AA%25E5%2591%25BD%25E5%2590%258D.png"/>
+    </a>
+   </div>
+   <div>
+    Table2
+   </div>
+   <div class="separator" style="clear: both; text-align: center;">
+    <a href="https://3.bp.blogspot.com/-pq3zaUcHbeM/W6N3ryT3qqI/AAAAAAAAAk8/TItIwB09IOgLZAVw6y6IVZZMZuhAz-uxwCEwYBhgL/s1600/%25E6%259C%25AA%25E5%2591%25BD%25E5%2590%258D.png" imageanchor="1" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;">
+     <img border="0" data-original-height="162" data-original-width="151" src="https://3.bp.blogspot.com/-pq3zaUcHbeM/W6N3ryT3qqI/AAAAAAAAAk8/TItIwB09IOgLZAVw6y6IVZZMZuhAz-uxwCEwYBhgL/s1600/%25E6%259C%25AA%25E5%2591%25BD%25E5%2590%258D.png"/>
+    </a>
+   </div>
+   <div>
+    <br/>
+   </div>
+   <div>
+    <br/>
+   </div>
+   <div>
+    <br/>
+   </div>
+   <div>
+    <br/>
+   </div>
+   <div>
+    <br/>
+   </div>
+   <div>
+    <br/>
+   </div>
+   <div>
+    <br/>
+   </div>
+   <div>
+    <br/>
+   </div>
+   <div>
+    <b>
+     這時可能就需要 JOIN Table2 重複 2 次來達到完整資料
+    </b>
+   </div>
+   <div>
+    <b>
+     利用 AS 來達到區分 Table2 達到 JOIN 2 次的效果
+    </b>
+   </div>
+   <pre><code class="sql">    SELECT send.名稱 as sendman, recv.名稱 as recvman
+    FROM Table1 as log
+    LEFT JOIN Table2 AS send ON log.寄件者 = send.id
+    LEFT JOIN Table2 AS recv ON log.收件者 = recv.id
+</code></pre>
+  </div>
+ </body>
+</html>

@@ -1,0 +1,52 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-822431584407078162">
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     BCB Debug
+    </span>
+   </h2>
+   <br/>
+   因為工作關係接觸了 BCB10
+   <br/>
+   這是我人生中第一次學 C++
+   <br/>
+   頁面打開其實不難理解但仍然迷茫了一星期
+   <br/>
+   ( 公司只有一個人會，不好意思一直煩他 )
+   <br/>
+   <br/>
+   雖然有強大的斷點功能
+   <br/>
+   但我還是不太會用，應該說不習慣
+   <br/>
+   加上我寫的都是小程式
+   <br/>
+   所以我選擇寫一個TXT檔 來記錄LOG
+   <br/>
+   程式碼如下
+   <br/>
+   <pre><code class="cpp">void BugReport(AnsiString msg)
+{
+    AnsiString Path = ExtractFilePath(Application-&gt;ExeName);
+    Path.cat_sprintf("DeBug.txt");
+    FILE *fp = fopen(Path.c_str(), "a+");
+    if(!fp)return;
+    fprintf(fp, "%s\n", msg);
+    fclose(fp);
+}
+</code></pre>
+   <br/>
+   至於為什麼用 AnsiString
+   <br/>
+   因為網路上大大們分享的程式碼都是 BCB6
+   <br/>
+   也就是他們的 String 等於 AnsiString
+   <br/>
+   而 BCB10 的 String 等於 UnicodeString
+   <br/>
+   兩者有啥不同，我想痛過就知道
+   <br/>
+  </div>
+ </body>
+</html>

@@ -1,0 +1,33 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-8214469648292406555">
+   <b>
+    PHP 日期加減
+   </b>
+   <br/>
+   1. mktime()
+   <br/>
+   <pre><code class="php">$date1 = date ("Y-m-d H:i:s" , mktime(date('H'), date('i'), date('s'), date('m'), date('d')-1, date('Y'))); 
+$date2 = date ("Y-m-d H:i:s" , mktime(date('H'), date('i'), date('s'), date('m'), date('d'), date('Y')));</code></pre>
+   2. strtotime()
+   <br/>
+   <pre><code class="php">$today = '2013-04-19';
+echo date("Y-m-d", strtotime($today."+3 year"));
+echo date("Y-m-d", strtotime($today."-1 month"));
+echo date("Y-m-d", strtotime($today."+10 week"));
+echo date("Y-m-d", strtotime($today."+10 day"));
+echo date("Y-m-d", strtotime($today."+2 hour"));
+echo date("Y-m-d", strtotime($today."+20 minute"));
+echo date("Y-m-d", strtotime($today."+5 seconds"));
+echo date("Y-m-d", strtotime($today."+1 day 5 seconds"));
+echo date("Y-m-d", strtotime($today."+1 week -2 day"));</code></pre>
+   <br/>
+   <br/>
+   參考資料 :
+   <br/>
+   <a href="http://blog.twbryce.com/strtotime-method/">
+    http://blog.twbryce.com/strtotime-method/
+   </a>
+  </div>
+ </body>
+</html>

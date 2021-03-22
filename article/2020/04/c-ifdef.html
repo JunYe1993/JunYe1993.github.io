@@ -1,0 +1,27 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-3331895541292007026">
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     #ifndef 用途
+    </span>
+   </h2>
+   <ul>
+    <li>
+     <span style="font-size: large;">
+      在 .h 檔確保只會被編譯一次
+     </span>
+    </li>
+   </ul>
+   <pre><code class="cpp" style="width: 90%;">    #ifndef HELLO_H // 有些人會定義成 _HELLO_H_
+    #define HELLO_H // 但目的就是不會被重複編譯
+
+    #include &lt;stdlib.h&gt;<stdlib .h="">
+
+    int helloIntro(char** str);
+    int main() __attribute__((weak));
+
+    #endif</stdlib></code></pre>
+  </div>
+ </body>
+</html>

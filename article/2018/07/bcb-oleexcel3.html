@@ -1,0 +1,45 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-8238748645747308479">
+   在用 OLE 操作 Excel 時
+   <br/>
+   有可能會遇到剪貼簿裡的資料過大
+   <br/>
+   導致關閉 Excel 時跳出視窗警告
+   <br/>
+   "
+   <b>
+    是否放棄剪貼簿裡的資料
+   </b>
+   "
+   <br/>
+   <br/>
+   要避開的話通常會用關閉
+   <b>
+    DisplayAlert
+   </b>
+   的方法來避免
+   <br/>
+   但我常常失敗，原因不明。
+   <br/>
+   <br/>
+   所以給失敗的朋友另一個辦法
+   <br/>
+   <b>
+    在 Excel 關閉前複製一格 避免剪貼簿裡資料過多跳出視窗
+   </b>
+   <br/>
+   <br/>
+   <pre><code class="cpp">
+void __fastcall Excel::Close_2(){
+    Exc.Range = Exc.WorkSheet.OlePropertyGet("Cells", 1, 1);
+    Exc.Range.OleFunction("Copy");
+    Exc.WorkBook.OleFunction("Close", false);
+    Exc.App.Exec(Procedure("Quit"));
+}
+</code>
+</pre>
+   <pre><b style='font-family: "Times New Roman"; white-space: normal;'>上一篇：</b><br style='font-family: "Times New Roman"; white-space: normal;'/><a href="https://junye1993.blogspot.com/2018/05/bcb-oleexcel2.html" style='font-family: "Times New Roman"; white-space: normal;'>BCB OLE操作EXCEL (2)</a></pre>
+  </div>
+ </body>
+</html>

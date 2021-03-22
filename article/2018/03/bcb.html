@@ -1,0 +1,93 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-6973842143571775683">
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     BCB 選擇路徑(資料夾)
+    </span>
+   </h2>
+   <br/>
+   工作關係要將各式各樣的資料彙整並輸出
+   <br/>
+   各式各樣的資料都放在同一目錄下
+   <br/>
+   所以在設計程式就必須設計可以給使用者選擇目錄
+   <br/>
+   但BCB10似乎沒有這種元件
+   <br/>
+   (其實有 DirectoryListBox 但我駕馭不了)
+   <br/>
+   <br/>
+   於是Google發現大家用的是
+   <b>
+    SelectDirectory()
+   </b>
+   ;
+   <br/>
+   網路上大大們說有 2 種版本
+   <br/>
+   <br/>
+   Boolean SelectDirectory(AnsiString Directory, TSelectDirOpts Options, Longint HelpCtx);
+   <br/>
+   Boolean SelectDirectory(const AnsiString Caption, const BSTR Root, AnsiString Directory, TSelectDirExtOpts Options = [sdNewUI], TWinControl * Parent = nil);
+   <br/>
+   <br/>
+   一個是 Windows 的對話框，一個是 BCB 自己的
+   <br/>
+   但我試不出來兩個似乎都長一樣
+   <br/>
+   不知道是 BCB10 的改動還是我用錯
+   <br/>
+   <br/>
+   以下是程式碼 ( 第2種版本 )
+   <br/>
+   <pre><code class="cpp">#include &lt;vcl .filectrl.hpp&gt;
+void __fastcall TMainForm::BitBtn1Click(TObject *Sender)
+{
+    String str;
+    TSelectDirExtOpts opt;
+    opt += TSelectDirExtOpts()&lt;&lt;sdShowEdit;
+    opt += TSelectDirExtOpts()&lt;&lt;sdValidateDir;
+    if (SelectDirectory(L"Please Select a Directory", L"", str, opt, this))
+        LabeledEdit1-&gt;Text = str;
+}
+</code></pre>
+   <br/>
+   SelectDirectory 共輸入了 5 個參數
+   <br/>
+   <br/>
+   第一個 Caption = 對話框顯示的字
+   <br/>
+   <br/>
+   第二個 Root = 根路徑
+   <br/>
+   <br/>
+   第三個 Directory = 選擇的字串
+   <br/>
+   <br/>
+   第四個 Options = 對話框樣式
+   <br/>
+   <br/>
+   第五個 不清楚，自己理解是 選擇 this 等於我按"這個" Button 這元件就會跳出來
+   <br/>
+   <br/>
+   其中 TSelectDirExtOpts 參數可以參考
+   <a href="http://docs.embarcadero.com/products/rad_studio/delphiAndcpp2009/HelpUpdate2/EN/html/delphivclwin32/FileCtrl_TSelectDirExtOpt.html">
+    官方文件
+   </a>
+   <br/>
+   <br/>
+   <br/>
+   參考資料
+   <br/>
+   <a href="http://hcl123.blogspot.tw/2012/09/using-open-directory-dialog-box-in-bcb.html">
+    http://hcl123.blogspot.tw/2012/09/using-open-directory-dialog-box-in-bcb.html
+   </a>
+   <br/>
+   <br/>
+   <a href="http://docs.embarcadero.com/products/rad_studio/delphiAndcpp2009/HelpUpdate2/EN/html/delphivclwin32/FileCtrl_SelectDirectory@string@TSelectDirOpts@Longint.html">
+    http://docs.embarcadero.com/products/rad_studio/delphiAndcpp2009/HelpUpdate2/EN/html/delphivclwin32/FileCtrl_SelectDirectory@string@TSelectDirOpts@Longint.html
+   </a>
+  </div>
+ </body>
+</html>

@@ -1,0 +1,262 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-8708845230776060872">
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <font size="4" style="letter-spacing: 1.44px;">
+     CLI 命令列介面
+    </font>
+   </h2>
+   <br/>
+   <span style="color: #111111; font-size: 17px;">
+    <font size="4" style="color: #111111; font-size: 17px;">
+     在設計 CLI 的程式時，最好的方法是遵從 IEEE Std 1003 (
+    </font>
+    <span style="color: #111111; font-size: large;">
+     POSIX
+    </span>
+    <font size="4">
+     <font color="#111111">
+      <span style="font-size: 17px;">
+       ) 對 program 的
+      </span>
+      command-line options 之
+      <span style="font-size: 17px;">
+       規範。所以用 getopt 去做 parse
+      </span>
+     </font>
+    </font>
+    <span style="color: #111111; font-size: large;">
+     command-line
+    </span>
+    <font size="4">
+     <font color="#111111">
+      <span style="font-size: 17px;">
+       是最簡單的，有一點要注意的是 GNU 提供的
+      </span>
+     </font>
+    </font>
+   </span>
+   <span style="color: #111111; font-size: 17px;">
+    getopt 支援 " -- "，這個 POSIX 沒有規範。
+   </span>
+   <br/>
+   <br/>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <font size="4" style="letter-spacing: 1.44px;">
+     常見的 Usage 設計
+    </font>
+   </h2>
+   <pre><code>    Usage : 
+        my_program tcp &lt;host&gt; &lt;port&gt; [--timeout=&lt;seconds&gt;]
+        my_program serial &lt;port&gt; [--baud=9600] [--timeout=&lt;seconds&gt;]
+        my_program (-h | --help)</code></pre>
+   <div style="text-align: left;">
+    <table>
+     <tbody>
+      <tr>
+       <td>
+        <span style="color: #111111; font-size: 17px;">
+         <em style="color: #3e4349; font-family: georgia, serif; font-size: 20px;">
+         </em>
+         <span style="color: #3e4349; font-family: georgia, serif; font-size: 20px;">
+          <b>
+           參數
+          </b>
+         </span>
+        </span>
+       </td>
+      </tr>
+      <tr>
+       <td>
+        <span style="color: #111111; font-size: 17px;">
+         <em style="color: #3e4349; font-family: georgia, serif; font-size: 20px;">
+          my_program
+         </em>
+        </span>
+       </td>
+       <td>
+        <span style="color: #111111; font-size: 17px;">
+         <em style="color: #3e4349; font-family: georgia, serif; font-size: 20px;">
+          : program name
+         </em>
+        </span>
+       </td>
+      </tr>
+      <tr>
+       <td>
+        <span style="color: #111111; font-size: 17px;">
+         <em style="color: #3e4349; font-family: georgia, serif; font-size: 20px;">
+          tcp
+         </em>
+        </span>
+       </td>
+       <td>
+        <span style="color: #111111; font-size: 17px;">
+         <em style="color: #3e4349; font-family: georgia, serif; font-size: 20px;">
+          : commands
+         </em>
+        </span>
+       </td>
+      </tr>
+      <tr>
+       <td>
+        <span style="color: #111111; font-size: 17px;">
+         <em style="color: #3e4349; font-family: georgia, serif; font-size: 20px;">
+          -h, --help
+         </em>
+        </span>
+       </td>
+       <td>
+        <span style="color: #111111; font-size: 17px;">
+         <em style="color: #3e4349; font-family: georgia, serif; font-size: 20px;">
+          : options
+         </em>
+        </span>
+       </td>
+      </tr>
+      <tr>
+       <td>
+        <span style="color: #111111; font-size: 17px;">
+         <em style="color: #3e4349; font-family: georgia, serif; font-size: 20px;">
+          &lt;host&gt;
+         </em>
+        </span>
+       </td>
+       <td>
+        <span style="color: #111111; font-size: 17px;">
+         <em style="color: #3e4349; font-family: georgia, serif; font-size: 20px;">
+          : arguments
+         </em>
+        </span>
+       </td>
+      </tr>
+     </tbody>
+    </table>
+   </div>
+   <br/>
+   <div style="text-align: left;">
+    <table>
+     <tbody>
+      <tr>
+       <td>
+        <span style="color: #111111; font-size: 17px;">
+         <em style="color: #3e4349; font-family: georgia, serif; font-size: 20px;">
+         </em>
+         <span style="color: #3e4349; font-family: georgia, serif; font-size: 20px;">
+          <b>
+           符號
+          </b>
+         </span>
+        </span>
+       </td>
+      </tr>
+      <tr>
+       <td>
+        <span style="color: #111111; font-size: 17px;">
+         <em style="color: #3e4349; font-family: georgia, serif; font-size: 20px;">
+          [ ]
+         </em>
+        </span>
+       </td>
+       <td>
+        <span style="color: #111111; font-size: 17px;">
+         <em style="color: #3e4349; font-family: georgia, serif; font-size: 20px;">
+          : optional
+         </em>
+        </span>
+       </td>
+      </tr>
+      <tr>
+       <td>
+        <span style="color: #111111; font-size: 17px;">
+         <em style="color: #3e4349; font-family: georgia, serif; font-size: 20px;">
+          ( )
+         </em>
+        </span>
+       </td>
+       <td>
+        <span style="color: #111111; font-size: 17px;">
+         <em style="color: #3e4349; font-family: georgia, serif; font-size: 20px;">
+          :  required
+         </em>
+        </span>
+       </td>
+      </tr>
+      <tr>
+       <td>
+        <span style="color: #111111; font-size: 17px;">
+         <em style="color: #3e4349; font-family: georgia, serif; font-size: 20px;">
+          |
+         </em>
+        </span>
+       </td>
+       <td>
+        <span style="color: #111111; font-size: 17px;">
+         <em style="color: #3e4349; font-family: georgia, serif; font-size: 20px;">
+          :  mutually exclusive
+         </em>
+        </span>
+       </td>
+      </tr>
+      <tr>
+       <td>
+        <span style="color: #111111; font-size: 17px;">
+         <em style="color: #3e4349; font-family: georgia, serif; font-size: 20px;">
+          ...
+         </em>
+        </span>
+       </td>
+       <td>
+        <span style="color: #111111; font-size: 17px;">
+         <em style="color: #3e4349; font-family: georgia, serif; font-size: 20px;">
+          :  repeating elements
+         </em>
+        </span>
+       </td>
+      </tr>
+     </tbody>
+    </table>
+   </div>
+   <br/>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <font size="4">
+     Options 設計
+    </font>
+   </h2>
+   <br/>
+   <span style="color: #111111; font-size: 17px;">
+    <font size="4" style="color: #111111; font-size: 17px;">
+     在設計長命名的 option ( " -- " )，最好需要有一個相對短命名的 option ( " - " )，example : -h, --help。
+    </font>
+   </span>
+   <div>
+    <font color="#111111">
+     <span style="font-size: 17px;">
+      <br/>
+     </span>
+    </font>
+   </div>
+   <div>
+    <font color="#111111">
+     <span style="font-size: 17px;">
+      每隻程式最好都要有 --help 跟 --version
+      <br/>
+     </span>
+    </font>
+    <br/>
+    <br/>
+    參考資料 :
+   </div>
+   <div>
+    <a href="http://www.gnu.org/prep/standards/standards.html#Command_002dLine-Interfaces">
+     http://www.gnu.org/prep/standards/standards.html#Command_002dLine-Interfaces
+    </a>
+   </div>
+   <div>
+    <a href="http://docopt.org/">
+     http://docopt.org/
+    </a>
+   </div>
+  </div>
+ </body>
+</html>

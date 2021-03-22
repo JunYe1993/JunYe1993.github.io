@@ -1,0 +1,71 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-2049836170599983082">
+   <div class="separator" style="clear: both; text-align: center;">
+    <a href="https://junye1993.github.io/image/ProgrammerLife.jpg" style="margin-left: 1em; margin-right: 1em;">
+     <img border="0" data-original-height="1365" data-original-width="2048" height="426" src="https://junye1993.github.io/image/ProgrammerLife.jpg" width="640"/>
+    </a>
+   </div>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; font-size: large; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 20px; padding: 10px; text-align: justify;">
+    stack v.s. heap
+   </h2>
+   <ul>
+    <li>
+     <font face="helvetica" size="4" style="background-color: #fff7e9;">
+      <b>
+       <u>
+        與 threads 的互動
+       </u>
+      </b>
+     </font>
+     <pre><font face="helvetica" size="4">在一個 multi-threaded 的程式中，每個 thread 都各自擁有一個 stack，但共享一個 heap。</font></pre>
+    </li>
+    <li>
+     <font face="helvetica" size="4" style="background-color: #fff7e9;">
+      <b>
+       <u>
+        object 可以儲存在 heap，而非 stack
+       </u>
+      </b>
+     </font>
+     <pre><font face="helvetica" size="4">在 c++ 可以使用 new，來將 object 實體儲存在 heap。</font></pre>
+     <pre><code class="cpp" style="width: 95%;">    void foo () {
+        // myClass, myPointer 儲存在 stack
+        // myPointer 所指向的 tempClass object 則儲存在 heap
+        // function 結束 myClass, myPointer 則會與 stack 一起 remove
+        // 而 myPointer 所指向的 tempClass 不會，所以下 delete
+        tempClass myClass;
+        tempClass *myPointer = new tempClass();
+        delete myPointer;
+    }</code></pre>
+    </li>
+   </ul>
+   <pre><font face="helvetica" size="4">Java 或 .NET 可以透過 garbage collection 來作到 delete myPointer; 的效果。</font></pre>
+   <li>
+    <font face="helvetica" size="4" style="background-color: #fff7e9;">
+     <b>
+      <u>
+       stack 跟 heap 的大小
+      </u>
+     </b>
+    </font>
+    <div style="margin: 8px 0px 8px">
+     <font face="helvetica" size="4">
+      stack 大小是固定的，有某些語言可以增加其大小。若 stack 不夠則會造成 stackoverflow (ex 無限遞迴)。heap 大小則是靠 OS 給的。
+     </font>
+    </div>
+   </li>
+   <div style="margin-top: 36px;">
+    <span style="font-size: large;">
+     參考資料 :
+    </span>
+   </div>
+   <div>
+    1.
+    <a href="http://www.programmerinterview.com/data-structures/difference-between-stack-and-heap/" style="font-size: large;">
+     difference-between-stack-and-heap
+    </a>
+   </div>
+  </div>
+ </body>
+</html>

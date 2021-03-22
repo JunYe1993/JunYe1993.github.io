@@ -1,0 +1,77 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-3775155438386443867">
+   <div class="separator" style="clear: both; text-align: center;">
+    <a href="https://1.bp.blogspot.com/-Nh77fVPgCVM/X3bxSY5SOuI/AAAAAAAACbc/2HneHQmgbow4CkfmiIbS3i_23XHtRWSQQCPcBGAYYCw/s2048/Note.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;">
+     <img border="0" data-original-height="1365" data-original-width="2048" height="426" src="https://1.bp.blogspot.com/-Nh77fVPgCVM/X3bxSY5SOuI/AAAAAAAACbc/2HneHQmgbow4CkfmiIbS3i_23XHtRWSQQCPcBGAYYCw/w640-h426/Note.jpg" width="640"/>
+    </a>
+   </div>
+   <br/>
+   <div class="separator" style="clear: both; text-align: center;">
+    <br/>
+   </div>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     Type Aliases
+    </span>
+   </h2>
+   <font face="helvetica" size="4">
+    創造資料型態的同義詞，通常是用 typedef 來去實現。
+   </font>
+   <pre><code>    typedef double wages;   // wages is a synonym for double
+    typedef wages base, *p; // base is a synonym for double, p for double*</code></pre>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 36px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     auto
+    </span>
+   </h2>
+   <font face="helvetica" size="4">
+    寫程式常會有想要一個 variable 去儲存 expression 的運算結果，但要事先知道 expression 的最終資料型態非常困難。所以有 auto 這個特別的資料型態，讓編譯器決定其資料型態，但相對的 variable 一定要 initialize。
+   </font>
+   <pre><code class="cpp">    auto item = val1 + val2; // item initialized to the result of val1 + val2</code></pre>
+   <font face="helvetica" size="4">
+    因為 auto 一次只能當一個資料型態，所以在宣告時如果是用 ", " 分開的複數宣告，資料型態要一致。
+   </font>
+   <pre><code class="cpp">    auto i = 0, *p = &amp;i;      // ok: i is int and p is a pointer to int
+    auto sz = 0, pi = 3.14;   // error: inconsistent types for sz and pi</code></pre>
+   <font face="helvetica" size="4">
+    auto 與 const 的互動，基本上 auto 會忽視 top level const ( 物件本身為 const )。
+   </font>
+   <pre><code class="cpp">    const int ci = i, &amp;cr = ci;
+    auto b = ci;       // b is an int (top-level const in ci is dropped)
+    auto c = cr;       // c is an int (cr is an alias for ci whose const is top-level)
+    auto d = &amp;i;       // d is an int*(&amp; of an int object is int*)
+    auto e = &amp;ci;      // e is const int*(&amp; of a const object is low-level const)</code></pre>
+   <font face="helvetica" size="4">
+    若想要個 top level auto const，你只能在 auto 前加 const 修飾詞。
+   </font>
+   <pre><code class="cpp">    const auto f = ci; // deduced type of ci is int; f has type const int</code></pre>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 36px 0px 12px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     decltype()
+    </span>
+   </h2>
+   <font face="helvetica" size="4">
+    不同於 auto，decltype() 可以不用去計算 expression，只讓編譯器去分析其資料型態。下面程式碼，編譯器不會呼叫 f()，而是去檢查 f() 的 return 資料型態去給予 sum。
+   </font>
+   <pre><code class="cpp">    decltype(f()) sum = x;     // sum has whatever type f returns</code></pre>
+   <font face="helvetica" size="4">
+    decltype() 也可以與 top level const 互動。
+   </font>
+   <pre><code class="cpp">    const int ci = 0, &amp;cj = ci;
+    decltype(ci) x = 0;     // x has type const int
+    decltype(cj) y = x;     // y has type const int&amp; and is bound to x
+    decltype(cj) z;         // error: z is a reference and must be initialized</code></pre>
+   <div style="margin-top: 36px;">
+    <span style="font-size: large;">
+     上一篇 :
+    </span>
+   </div>
+   <div>
+    <a href="http://junye1993.blogspot.com/2020/07/c-primer-5th-edition-chapter-2-2.html" style="font-size: large;">
+     讀書心得 - C++ Primer (5th Edition) - Chapter 2 (2)
+    </a>
+   </div>
+  </div>
+ </body>
+</html>

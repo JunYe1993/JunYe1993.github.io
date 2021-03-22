@@ -1,0 +1,77 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-2124280177780961538">
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     Linux 檔案系統
+    </span>
+   </h3>
+   Linux 採用 FHS ( Filesystem Hierarchy Standard )，基本上規定三項
+   <br/>
+   <ul>
+    <li>
+     /        : 與開機系統有關
+    </li>
+    <li>
+     /usr   : 與軟體安裝 / 執行有關
+    </li>
+    <li>
+     /var   : 與系統運作過程有關
+    </li>
+   </ul>
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     Linux 目錄指令
+    </span>
+   </h3>
+   <pre><code class="linux">    cd [相對路徑或絕對路徑]   // 到該目錄
+    cd ~username              // 到該使用者家目錄
+    cd ~                      // 到當前使用者家目錄
+    pwd                       // 顯示當前目錄</code></pre>
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     Linux 環境變數 $PATH
+    </span>
+   </h3>
+   <pre><code class="linux">    echo $PATH
+    /usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin</code></pre>
+   某些情況下，即使你已經將 ls 搬回 /bin 了，不過系統還是會告知你無法處理 /root/ls 喔！很可能是因為指令參數被快取的關係。 不要緊張，只要登出 (exit) 再登入 (su -) 就可以繼續快樂的使用 ls 了！
+   <br/>
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     Linux 特殊權限 SUID, SGID, SBIT
+    </span>
+   </h3>
+   <pre><code class="linux">    // SUID = 4 ，設在檔案上，讓有檔案執行權利的使用者執行檔案時，權利跟檔案擁有者一樣
+    // SGID = 2 ，設在檔案或目錄上，讓有檔案執行權利的使用者執行檔案時，權利跟檔案群組一樣
+    // SBIT = 1 ，設在目錄上，使在目錄下的使用者只能對自己的檔案或目錄作刪除/更名/移動等動作
+    
+    // example
+        chmod 4755 test
+        ls -l test
+        -rwsr-xr-x 1 root root 0 Mar 17 12:38 test</code></pre>
+   <br/>
+   <br/>
+   上一篇：
+   <div>
+    <a href="http://junye1993.blogspot.com/2020/03/linux-2.html">
+     Linux 初學 (2)
+    </a>
+    <br/>
+    <div>
+     <br/>
+    </div>
+    <div>
+     <br/>
+    </div>
+    <div>
+     參考資料 :
+     <br/>
+     <a href="http://linux.vbird.org/linux_basic/0220filemanager.php">
+      鳥哥的Linux私房菜
+     </a>
+    </div>
+   </div>
+  </div>
+ </body>
+</html>

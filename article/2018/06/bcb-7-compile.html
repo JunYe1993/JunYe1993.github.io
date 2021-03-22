@@ -1,0 +1,37 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-67632879215740924">
+   我在寫程式的時候
+   <br/>
+   偶爾會想寫個固定字串在 Header (路徑之類的)
+   <br/>
+   但這會在 Compile 上造成很大的負荷
+   <br/>
+   <b>
+    Cannot create pre-compiled header: initialized data in header
+   </b>
+   <br/>
+   因為我的 Header 都寫在一起
+   <br/>
+   <br/>
+   <pre><code class="cpp">
+    const String __SavePath = "Save\\";
+    const String __NameCardPath = "NameCard\\";
+    const String __PicturePath = "Pic\\";
+</code>
+</pre>
+   所以 Header 必須分開
+   <br/>
+   但最好是改讀檔的
+   <br/>
+   <br/>
+   但我因為這個發現了一個講解 Compile 的網頁
+   <br/>
+   在此留個紀錄
+   <br/>
+   <a href="http://bcbjournal.org/articles/vol4/0005/Pre-compiled_header_tips.htm">
+    http://bcbjournal.org/articles/vol4/0005/Pre-compiled_header_tips.htm
+   </a>
+  </div>
+ </body>
+</html>

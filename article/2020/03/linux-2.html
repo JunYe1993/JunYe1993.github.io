@@ -1,0 +1,75 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-306653308559620230">
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     Linux 指令查詢
+    </span>
+   </h3>
+   Linux 指令有很多，使用者不可能全部記下來，所以查詢指令就很重要了。
+   <br/>
+   <pre><code class="linux">    man             // 提供一般的查詢，支援度高
+    info            // 提供閱讀介面較好的查詢
+    /usr/share/doc  // 通常會把指令相關文件放在這</code></pre>
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     Linux 檔案權限
+    </span>
+   </h3>
+   <pre><code class="linux">    ls -al          // l = 列出所有資訊，a = 包含隱藏檔案
+
+    -rwxr--r--.  1 root root 0 Mar 13 17:05 test
+
+    // 第一個字串(字串)
+        // 第 1 個字元代表檔案類型
+        // 第 1 組 rwx 代表擁有者權限
+        // 第 2 組 rwx 代表群組權限
+        // 第 3 組 rwx 代表其他使用者權限
+    
+    // 第二個字串(數字)    // 第三個字串(字串)    // 第四個字串(字串)
+        // 檔案連結數          // 擁有者名稱          // 群組名稱
+    
+    // 第五個字串(數字)    // 第六個字串(時間)    // 第七個字串(字串)
+        // 檔案大小            // 最後修改時間        // 檔案名稱
+</code></pre>
+   可得很多當前目錄檔案的訊息，如何閱讀
+   <a href="http://linux.vbird.org/linux_basic/0210filepermission.php">
+    鳥哥的 Linux 私房菜
+   </a>
+   都有教學。
+   <br/>
+   以下指令為修改檔案權限之指令。
+   <span style="color: red;">
+    <b>
+     要有目錄執行權力才能 call cd 或讀取裡面的檔案。
+    </b>
+   </span>
+   <br/>
+   <pre><code class="linux">    chown           // 修改擁有者
+    chgrp           // 修改群組
+    chmod           // 修改權限</code></pre>
+   <br/>
+   上一篇：
+   <div>
+    <a href="http://junye1993.blogspot.com/2020/03/linux-1.html">
+     Linux 初學 (1)
+    </a>
+   </div>
+   <div>
+    下一篇：
+    <div>
+     <a href="http://junye1993.blogspot.com/2020/03/linux-3.html">
+      Linux 初學 (3)
+     </a>
+    </div>
+   </div>
+   <br/>
+   <br/>
+   參考資料 :
+   <br/>
+   <a href="http://linux.vbird.org/linux_basic/0157installcentos7.php">
+    鳥哥的Linux私房菜
+   </a>
+  </div>
+ </body>
+</html>

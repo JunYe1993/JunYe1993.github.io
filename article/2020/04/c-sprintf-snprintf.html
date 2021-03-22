@@ -1,0 +1,82 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-8746365031691540487">
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     sprintf (char *s, const char *format, ...)
+    </span>
+   </h2>
+   <span style="font-size: large;">
+    C 語言並沒有其他語言方便的 container 去作字串轉換，所以 sprintf 就顯得強大許多。原理就是 printf 但輸入到字串。但會有 overflow 的 issue 產生。
+   </span>
+   <br/>
+   <pre><code class="cpp">    int main()
+    {
+        char str[5];
+        sprintf(str, "ABC");
+        printf("%s\n", str); // output : ABC
+        return 0;
+    }</code></pre>
+   <pre><code class="cpp">    int main()
+    {
+        char str[5];
+        sprintf(str, "ABCDEF");
+        printf("%s\n", str); // output : ABCDEF
+        return 0;
+    }</code></pre>
+   <br/>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     <span style="letter-spacing: 1.44px;">
+      snprintf (char *s, size_t maxlen, const char *format, ...)
+     </span>
+    </span>
+   </h2>
+   <span style="font-size: large;">
+    snprintf 多了一個參數去限制寫入長度
+   </span>
+   <span style="background-color: #eeeeee; color: #111111; font-family: menlo, monaco, monospace; font-size: large;">
+    (包含'\0')
+   </span>
+   <span style="font-size: large;">
+    ，安全許多。另外我是用 gcc 編譯的，snprintf 會回傳寫入字串的長度
+   </span>
+   <span style="background-color: #eeeeee; color: #111111; font-family: menlo, monaco, monospace; font-size: large;">
+    (不包含'\0')
+   </span>
+   <span style="font-size: large;">
+    ，所以當回傳值大於等於 maxlen，則代表字串被切了。
+   </span>
+   <br/>
+   <pre><code class="cpp">    int main()
+    {
+        int ret;
+        char str[5];
+        ret = snprintf(str, 5, "ABC");
+        printf("%s\n", str); // output : ABC
+        printf("%d\n", ret); // output : 3
+        return 0;
+    }/code&gt;</code></pre>
+   <pre><code class="cpp">    int main()
+    {
+        int ret;
+        char str[5];
+        ret = snprintf(str, 5, "ABCDEF");
+        printf("%s\n", str); // output : ABCD
+        printf("%d\n", ret); // output : 6
+        return 0;
+    }</code></pre>
+   <br/>
+   <br/>
+   參考資料：
+   <br/>
+   <a href="https://blog.xuite.net/tzeng015/twblog/113272245-snprintf">
+    https://blog.xuite.net/tzeng015/twblog/113272245-snprintf
+   </a>
+   <br/>
+   <a href="https://linux.die.net/man/3/snprintf">
+    https://linux.die.net/man/3/snprintf
+   </a>
+  </div>
+ </body>
+</html>

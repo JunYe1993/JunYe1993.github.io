@@ -1,0 +1,167 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-5099801531125196210">
+   <h3>
+    <span style="font-size: large;">
+     Chapter 3 - 函式 - 1
+    </span>
+   </h3>
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; font-size: 20px; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     首要準則 - 簡短!!
+    </span>
+   </h3>
+   <div>
+    <span style="font-size: medium;">
+     <br/>
+    </span>
+   </div>
+   <div>
+    <span style="font-size: medium;">
+     即使現今編輯器能讓你在一行塞入 150 個英文字母，
+    </span>
+    <span style="font-size: medium;">
+     現今
+    </span>
+    <span style="font-size: medium;">
+     螢幕能讓你顯示 100 行，你也不該塞好塞滿。越短越好，3 ~ 4 行，每個函式都透漏著本身的意圖且帶領著你至下個函式。
+    </span>
+    <br/>
+    <h5>
+     <span style="font-size: medium;">
+      <b>
+       <u>
+        區塊 ( Blocks ) 和縮排 ( Indenting )
+       </u>
+      </b>
+     </span>
+    </h5>
+   </div>
+   <div>
+    <span style="font-size: medium;">
+     If、else
+    </span>
+    <span style="font-size: medium;">
+     、while 都應該只有 1 行，而那行通常會是個命名不錯的函式。
+    </span>
+   </div>
+   <div>
+    <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; font-size: 20px; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+     <span style="font-size: medium;">
+      只做一件事
+     </span>
+    </h3>
+   </div>
+   <div>
+    <br/>
+   </div>
+   <div>
+    <span style="font-size: medium;">
+     只做一件事很難下定義，以下提出兩種
+    </span>
+   </div>
+   <div>
+    <ol>
+     <li>
+      <span style="font-size: medium;">
+       <b>
+        透過觀察函式中進而提煉出一個新的函式來
+       </b>
+      </span>
+     </li>
+     <li>
+      <span style="font-size: medium;">
+       <b>
+        函式裡有明顯的段落 ( 宣告區、初始區、過濾區... )
+       </b>
+      </span>
+     </li>
+    </ol>
+   </div>
+   <div>
+    <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; font-size: 20px; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+     <span style="font-size: medium;">
+      只有一層抽象概念
+     </span>
+    </h3>
+   </div>
+   <div>
+    <span style="font-size: medium;">
+     <br/>
+    </span>
+   </div>
+   <div>
+    <span style="font-size: medium;">
+     為了確保只做一件事，就必須確保函式裡都是同一層次的概念。
+    </span>
+   </div>
+   <ul>
+    <li>
+     <pre><span style="font-size: medium;">getHtml()      - 高層次</span></pre>
+    </li>
+    <li>
+     <pre><span style="font-size: medium;">parsePath()    - 中層次</span></pre>
+    </li>
+    <li>
+     <pre><span style="font-size: medium;">.append("\n")  - 低層次</span></pre>
+    </li>
+   </ul>
+   <div>
+    <h5>
+     <span style="font-size: medium;">
+      <b>
+       <u>
+        降階準則
+       </u>
+      </b>
+     </span>
+    </h5>
+    <span style="font-size: medium;">
+     閱讀程式碼通常都是由上而下，所以層次也該從上到下
+    </span>
+    <br/>
+    <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; font-size: 20px; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+     <span style="font-size: medium;">
+      Switch 敘述
+     </span>
+    </h3>
+   </div>
+   <div>
+    <span style="font-size: medium;">
+     <br/>
+    </span>
+   </div>
+   <div>
+    <span style="font-size: medium;">
+     switch 要簡短很困難且很容易跟上述規則牴觸，作者這裡是利用 Polymorphism ( 多型 ) 將 switch 壓到低的層次且不會被重複利用。
+    </span>
+   </div>
+   <div>
+    <span style="font-size: medium;">
+     <br/>
+    </span>
+   </div>
+   <div>
+    <span style="font-size: medium;">
+     Polymorphism :
+    </span>
+    <a href="http://teddy-chen-tw.blogspot.com/2012/01/3polymorphism.html">
+     http://teddy-chen-tw.blogspot.com/2012/01/3polymorphism.html
+    </a>
+    <br/>
+    <br/>
+    上一篇：
+    <br/>
+    <a href="https://junye1993.blogspot.com/2019/11/clean-code-chapter-2.html">
+     讀書心得 - Clean Code - Chapter 2
+    </a>
+    <br/>
+    下一篇：
+    <br/>
+    <a href="https://junye1993.blogspot.com/2019/12/clean-code-chapter-3-2.html">
+     讀書心得 - Clean Code - Chapter 3 (2)
+    </a>
+   </div>
+  </div>
+ </body>
+</html>

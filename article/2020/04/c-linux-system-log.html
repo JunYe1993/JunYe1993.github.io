@@ -1,0 +1,165 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-519333701536285513">
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     Linux - System Log
+    </span>
+   </h3>
+   Linux 當事件發生會產生 log，通常會存在
+   <b>
+    /var/log
+   </b>
+   底下。優先度如下。
+   <br/>
+   <ul>
+    <li>
+     debug
+    </li>
+    <li>
+     info
+    </li>
+    <li>
+     notice
+    </li>
+    <li>
+     warning
+    </li>
+    <li>
+     err
+    </li>
+    <li>
+     crit
+    </li>
+    <li>
+     alert
+    </li>
+    <li>
+     emerg/panic
+    </li>
+   </ul>
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     C 實作 - void syslog(int priority, const char *format, ...)
+    </span>
+   </h3>
+   <pre><code class="cpp">    #include&lt;stdio.h&gt;<stdio .h="">
+    #include&lt;stdlib.h&gt;<stdlib .h="">
+    #include&lt;syslog.h&gt; <syslog .h="">
+    syslog(LOG_INFO, "hello %s", "woring");
+    syslog(LOG_ERR,  "hello %s", "test");</syslog></stdlib></stdio></code></pre>
+   底下為參數 int priority
+   <br/>
+   <table style='color: #222222; font-family: "times new roman" , serif; font-size: 16px;'>
+    <tbody>
+     <tr>
+      <td>
+       LOG_USER
+      </td>
+      <td>
+       :  A miscellaneous user process
+      </td>
+     </tr>
+     <tr>
+      <td>
+       LOG_MAIL
+      </td>
+      <td>
+       :  Mail
+      </td>
+     </tr>
+     <tr>
+      <td>
+       LOG_DAEMON
+      </td>
+      <td>
+       :  A miscellaneous system daemon
+      </td>
+     </tr>
+     <tr>
+      <td>
+       LOG_AUTH
+      </td>
+      <td>
+       :  Security (authorization)
+      </td>
+     </tr>
+     <tr>
+      <td>
+       LOG_SYSLOG
+      </td>
+      <td>
+       :  Syslog
+      </td>
+     </tr>
+     <tr>
+      <td>
+       LOG_LPR
+      </td>
+      <td>
+       :  Central printer
+      </td>
+     </tr>
+     <tr>
+      <td>
+       LOG_NEWS
+      </td>
+      <td>
+       :  Network news (e.g. Usenet)
+      </td>
+     </tr>
+     <tr>
+      <td>
+       LOG_UUCP
+      </td>
+      <td>
+       :  UUCP
+      </td>
+     </tr>
+     <tr>
+      <td>
+       LOG_CRON
+      </td>
+      <td>
+       :  Cron and At
+      </td>
+     </tr>
+     <tr>
+      <td>
+       LOG_AUTHPRIV
+      </td>
+      <td>
+       :  Private security (authorization)
+      </td>
+     </tr>
+     <tr>
+      <td>
+       LOG_FTP
+      </td>
+      <td>
+       :  Ftp server
+      </td>
+     </tr>
+     <tr>
+      <td>
+       LOG_LOCAL(0~7)
+      </td>
+      <td>
+       :  Locally defined
+      </td>
+     </tr>
+    </tbody>
+   </table>
+   <br/>
+   參考資料 :
+   <br/>
+   <a href="https://ithelp.ithome.com.tw/articles/10159084">
+    https://ithelp.ithome.com.tw/articles/10159084
+   </a>
+   <br/>
+   <a href="http://yu-minspace.blogspot.com/2007/09/linux-syslogd-openlogsyslogdsyslog.html">
+    http://yu-minspace.blogspot.com/2007/09/linux-syslogd-openlogsyslogdsyslog.html
+   </a>
+  </div>
+ </body>
+</html>

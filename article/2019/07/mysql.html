@@ -1,0 +1,71 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-6826697722553161283">
+   <div>
+    <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+     <span style="font-size: medium;">
+      備份 MySQL
+     </span>
+    </h3>
+   </div>
+   <div>
+    <br/>
+    備份單一資料庫
+   </div>
+   <pre><code class="cls">mysqldump -u root -p database_name &gt; backup.sql</code></pre>
+   <div>
+    備份多個資料庫
+   </div>
+   <pre><code class="cls">mysqldump -u root -p --databases db1 db2 &gt; backup.sql</code></pre>
+   <div>
+    備份全部資料庫
+   </div>
+   <pre><code class="cls">mysqldump -u root -p --all-databases &gt; backup.sql</code></pre>
+   <div>
+    備份單一資料表
+   </div>
+   <pre><code class="cls">mysqldump -u root -p database_name table_name &gt; backup.sql</code></pre>
+   <div>
+    備份多個資料表
+   </div>
+   <pre><code class="cls">mysqldump -u root -p database_name table1 table2 &gt; backup.sql</code></pre>
+   <div>
+    備份資料庫除了特定資料表
+   </div>
+   <pre><code class="cls">mysqldump -u root -p database --ignore-table=database.table1 &gt; database.sql</code></pre>
+   <div>
+    <br/>
+   </div>
+   <div>
+    <br/>
+   </div>
+   <h3 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: medium;">
+     導入 MySQL
+    </span>
+   </h3>
+   <div>
+    <span style="font-size: medium;">
+     <br/>
+    </span>
+   </div>
+   <div>
+    導入單一資料庫
+   </div>
+   <pre><code class="cls">mysql -u root -p database_name &lt; backup.sql</code></pre>
+   <div>
+    導入多個資料庫
+   </div>
+   <pre><code class="cls">mysql -u root -p &lt; backup.sql</code></pre>
+   <div>
+    <br/>
+    <br/>
+    參考資料 :
+    <br/>
+    <a href="https://code.yidas.com/mysqldump/">
+     https://code.yidas.com/mysqldump/
+    </a>
+   </div>
+  </div>
+ </body>
+</html>

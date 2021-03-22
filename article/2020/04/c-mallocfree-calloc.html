@@ -1,0 +1,111 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-5950111855794148783">
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     malloc 跟 free
+    </span>
+   </h2>
+   <br/>
+   <span style="font-size: large;">
+    一般來說要將函式結果回傳是不能用 pointer，因為一旦
+   </span>
+   <span style="font-size: large;">
+    函式結束
+   </span>
+   <span style="font-size: large;">
+   </span>
+   <span style="font-size: large;">
+    stack 的
+   </span>
+   <span style="font-size: large;">
+    空間就會被釋出，所以
+   </span>
+   <span style="font-size: large;">
+    pointer 會指向的資料是危險的。這時就會先動態地宣告一個位址給
+   </span>
+   <span style="font-size: large;">
+    pointer，但這類的記憶體會被存放在 heap 而非 stack，所以開發者必須自行釋放。
+   </span>
+   <br/>
+   <ul>
+    <li>
+     <span style="font-size: large;">
+      pointer.c
+     </span>
+    </li>
+   </ul>
+   <pre><code class="cpp" style="width: 90%;">    void
+    showMalloc(int pointerValue)
+    {
+        int *p = malloc(sizeof(int));
+
+        printf("Address : %p\n", p);
+        printf("Value   : %d\n", *p);
+
+        *p = pointerValue;
+
+        printf("Address : %p\n", p);
+        printf("Value   : %d\n", *p);
+        
+        free(p);
+    }</code></pre>
+   <li>
+    <span style="font-size: large;">
+     output
+    </span>
+   </li>
+   <pre><code class="linux" style="width: 90%;">    Address : 00682B90
+    Value   : 6826496
+    Address : 00682B90
+    Value   : 100</code></pre>
+   <h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 5px; padding: 5px 5px 5px 15px; text-align: justify;">
+    <span style="font-size: large;">
+     calloc
+    </span>
+   </h2>
+   <br/>
+   <span style="font-size: large;">
+    會幫你初始值的 malloc
+   </span>
+   <br/>
+   <ul>
+    <li>
+     <span style="font-size: large;">
+      pointer.c
+     </span>
+    </li>
+   </ul>
+   <pre><code class="cpp" style="width: 90%;">    void
+    showMalloc(int pointerValue)
+    {
+        int *p = calloc(1, sizeof(int));
+
+        printf("Address : %p\n", p);
+        printf("Value   : %d\n", *p);
+
+        *p = pointerValue;
+
+        printf("Address : %p\n", p);
+        printf("Value   : %d\n", *p);
+
+        free(p);
+    }</code></pre>
+   <li>
+    <span style="font-size: large;">
+     output
+    </span>
+   </li>
+   <pre><code class="linux" style="width: 90%;">    Address : 00722B90
+    Value   : 0
+    Address : 00722B90
+    Value   : 100</code></pre>
+   <br/>
+   參考資料 :
+   <br/>
+   <a href="https://openhome.cc/Gossip/CGossip/MallocFree.html">
+    https://openhome.cc/Gossip/CGossip/MallocFree.html
+   </a>
+  </div>
+ </body>
+</html>

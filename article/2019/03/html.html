@@ -1,0 +1,62 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-2037744809602767549">
+   在網頁裡有下拉表單 &lt;Select&gt;
+   <br/>
+   <div>
+    <br/>
+   </div>
+   <div>
+    有時會希望使用者真的有作過選擇，才進行下一步動作
+   </div>
+   <div>
+    <br/>
+   </div>
+   <div>
+    這時會設置一個
+    <b>
+     預設的 Option
+    </b>
+    ，使其 value = ""，來判斷使用者有無真的作選擇
+   </div>
+   <pre><code class="javascript">    &lt;option value='' selected disabled hidden&gt;請選擇&lt;/option&gt;</code></pre>
+   <div>
+    <table>
+     <tr>
+      <td>
+       selected:
+      </td>
+      <td>
+       預設此選項
+      </td>
+     </tr>
+     <tr>
+      <td>
+       disabled:
+      </td>
+      <td>
+       使此選項不能點擊
+      </td>
+     </tr>
+     <tr>
+      <td>
+       hidden:
+      </td>
+      <td>
+       讓此選項在下拉的時候消失
+      </td>
+     </tr>
+    </table>
+   </div>
+   <pre><code class="javascript">    &lt;option value='' selected disabled hidden style='display: none' &gt;請選擇&lt;/option&gt;</code></pre>
+   style='display: none' =&gt; 舊版本 Browser 可能不支援 hidden
+   <br/>
+   <br/>
+   參考資料 :
+   <br/>
+   <a href="https://codeday.me/bug/20170611/22563.html">
+    https://codeday.me/bug/20170611/22563.html
+   </a>
+  </div>
+ </body>
+</html>
