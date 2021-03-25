@@ -6,7 +6,7 @@ injectCSS('./css/highlight.css')
 // jQuery(function ($){}) == jQuery(document).ready(function($){});
 // Only run once the page Document Object Model (DOM) is ready for JavaScript code to execute.
 jQuery (function ($) {
-    $( "#article_container" ).load( "../../article/2021/01/6-express-2.html" , function () {
+    $( "#article_container" ).load( "../tool/markdown2html/output/output.html" , function () {
         $('pre > code').each(function() {
             hljs.highlightBlock(this);
         });
