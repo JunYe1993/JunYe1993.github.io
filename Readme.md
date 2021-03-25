@@ -23,7 +23,7 @@ pip3 install markdown
 ```bash
 python -m tool.sync.run_sync
 ```
-### Convert article/\*\*/\*.html to article/\*\*/\*.md ###
+### Convert article/\*\*/\*.html to article/\*\*/\*.md (still working)###
 ```bash
 python -m tool.html2markdown.run_html2markdown
 ```
