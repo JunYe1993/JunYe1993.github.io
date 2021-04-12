@@ -1,5 +1,6 @@
 !['ProgrammerLife.jpg'](https://junye1993.github.io/image/ProgrammerLife.jpg)
 ## stack v.s. heap
+
 - **與 threads 的互動**
 
     在一個 multi-threaded 的程式中，每個 thread 都各自擁有一個 stack，但共享一個 heap。
@@ -24,4 +25,4 @@
 
 參考資料 :
 
-[difference-between-stack-and-heap](http://www.programmerinterview.com/data-structures/difference-between-stack-and-heap/)
+1.[difference-between-stack-and-heap](http://www.programmerinterview.com/data-structures/difference-between-stack-and-heap/)

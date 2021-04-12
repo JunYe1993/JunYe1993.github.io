@@ -1,60 +1,90 @@
-<div class="separator" style="clear: both; text-align: center;">
- <a style="margin-left: 1em; margin-right: 1em;">
+<div class="separator" style="clear: both;text-align: center;">
+ <a style="margin-left: 1em;margin-right: 1em;">
   <img alt="'ProgrammerLife.jpg'" border="0" data-original-height="1365" data-original-width="2048" height="426" src="https://junye1993.github.io/image/ProgrammerLife.jpg"/>
  </a>
 </div>
-<h2 style="background-color: #e6edeb; border-left: 5px solid rgb(2, 180, 206); box-sizing: border-box; font-size: large; letter-spacing: 1.44px; line-height: 1.6em; margin: 16px 0px 12px; padding: 10px 10px 10px 18px; text-align: justify;">
- stack v.s. heap
+<h2 style="background-color: #e6edeb;border-left: 5px solid rgb(2, 180, 206);box-sizing: border-box;font-size: large;letter-spacing: 1.44px;line-height: 1.6em;margin: 16px 0px 24px;padding: 10px 10px 10px 18px;text-align: justify;">
+ BeautifulSoup
 </h2>
+<pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">紀錄下 Python 網頁爬蟲大部分會用到的 BeautifulSoup。BeautifulSoup 本質上就是 parser，知道這點後其 function 和 parameter 的使用就能得心應手。</font></pre>
 <ul>
  <li>
-  <p>
-   <strong>
-    與 threads 的互動
-   </strong>
-  </p>
-  <p>
-   在一個 multi-threaded 的程式中，每個 thread 都各自擁有一個 stack，但共享一個 heap。
-  </p>
+  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Install</u></b></font></pre>
+  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">這裡紀錄使用 pip 安裝</font></pre>
+  <pre><code class="language-bash" style="width: 95%;">    pip install beautifulsoup4
+    pip install lxml # 非必要</code></pre>
  </li>
  <li>
-  <p>
-   <strong>
-    object 可以儲存在 heap，而非 stack
-   </strong>
-  </p>
-  <p>
-   在 c++ 可以使用 new，來將 object 實體儲存在 heap。
-  </p>
+  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Import</u></b></font></pre>
+  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">第一行的 import 就可以包含 99％，第二行則是此篇會用的 import，多了 2 個說明用的 object。</font></pre>
+  <pre><code class="language-python" style="width: 95%;">    from bs4 import BeautifulSoup
+    from bs4 import BeautifulSoup, NavigableString, Comment</code></pre>
  </li>
-</ul>
-<pre><code class="language-c++">    void foo () {
-        // myClass, myPointer 儲存在 stack
-        // myPointer 所指向的 tempClass object 則儲存在 heap
-        // function 結束 myClass, myPointer 則會與 stack 一起 remove
-        // 而 myPointer 所指向的 tempClass 不會，所以下 delete
-        tempClass myClass;
-        tempClass *myPointer = new tempClass();
-        delete myPointer;
-    }
-</code></pre>
-<ul>
  <li>
-  <p>
-   <strong>
-    stack 跟 heap 的大小
-   </strong>
-  </p>
-  <p>
-   stack 大小是固定的，有某些語言可以增加其大小。若 stack 不夠則會造成 stackoverflow (ex 無限遞迴)。heap 大小則是靠 OS 給的。
-  </p>
+  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Load html</u></b></font></pre>
+  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">此篇會用第一行來 make soup</font></pre>
+  <pre><code class="language-python" style="width: 95%;">    soup = BeautifulSoup("&lt;html&gt;a web page&lt;/html&gt;", features="html.parser")
+    soup = BeautifulSoup("&lt;html&gt;a web page&lt;/html&gt;", features="lxml") # 如果你有安裝的話</code></pre>
  </li>
 </ul>
-<p style="margin-top: 36px;">
- 參考資料 :
-</p>
-<p>
- <a href="http://www.programmerinterview.com/data-structures/difference-between-stack-and-heap/">
-  difference-between-stack-and-heap
- </a>
-</p>
+<h2 style="background-color: #e6edeb;border-left: 5px solid rgb(2, 180, 206);box-sizing: border-box;font-size: large;letter-spacing: 1.44px;line-height: 1.6em;margin: 36px 0px 24px;padding: 10px 10px 10px 18px;text-align: justify;">
+ Tag object
+</h2>
+<pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">Tag object 對應到的就是 XML 跟 HTML 裡的 Tag。
+這裡可以從 soup object 下 2 個 Tag 開始，一個是 b 一個是 p。</font></pre>
+<pre><code class="language-python">    """ html
+    &lt;b class="boldest" id="bold man"&gt;
+        &lt;u&gt;Extremely bold&lt;/u&gt;
+    &lt;/b&gt;
+    &lt;p&gt;Just a paragraph&lt;/p&gt;
+    """
+    soup = BeautifulSoup(html, 'html.parser')
+    print(type(soup))   # &lt;class 'bs4.BeautifulSoup'&gt;
+    print(soup.b)       # &lt;b class="boldest" id="bold man"&gt;&lt;u&gt;Extremely bold&lt;/u&gt;&lt;/b&gt;
+    print(soup.p)       # &lt;p&gt;Just a paragraph&lt;/p&gt;
+
+    # Tag 有兩個基礎參數 name 跟 attrs
+    tag = soup.b
+    print(type(tag))    # &lt;class 'bs4.element.Tag'&gt;
+    print(tag.name)     # b
+    print(tag.attrs)    # {'class': ['boldest'], 'id': 'bold man'}
+
+    # name 跟 attrs 都可以直接修改
+    tag.name = "d"
+    tag.attrs = {'class': ['boldest', 'cutest'], 'id': 'pui pui'}
+    print(str(tag))     # &lt;d class="boldest cutest" id="pui pui"&gt;&lt;u&gt;Extremely bold&lt;/u&gt;&lt;/d&gt;</code></pre>
+<pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">Tag 的 child Tag 可以像 class 的 element 一樣直接呼叫 (上面的 soup.b 和 soup.p 也是一種呼叫 child Tag)</font></pre>
+<pre><code class="language-python">    print(str(tag.u))   # &lt;u&gt;Extremely bold&lt;/u&gt;
+    print(tag['class']) # ['boldest', 'cutest']
+    print(tag['id'])    # pui pui</code></pre>
+<pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">Tag 的 attr 也可以修改和刪除</font></pre>
+<pre><code class="language-python">tag['class'] = ['car']
+del tag['id']
+print(str(tag))     # &lt;d class="boldest cutest"&gt;&lt;u&gt;Extremely bold&lt;/u&gt;&lt;/d&gt;</code></pre>
+<blockquote>
+ <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font color="#cc0000" face="helvetica" size="4">P.S. HTML 裡的 class 是可以允許多參數的，所以上述的例子裡 class 是 string list，而非 string</font></pre>
+</blockquote>
+<h2 style="background-color: #e6edeb;border-left: 5px solid rgb(2, 180, 206);box-sizing: border-box;font-size: large;letter-spacing: 1.44px;line-height: 1.6em;margin: 36px 0px 24px;padding: 10px 10px 10px 18px;text-align: justify;">
+ NavigableString object
+</h2>
+<pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">NavigableString 就等於 Tag 裡的 string，可以使用 replace_with 做修改。</font></pre>
+<pre><code class="language-python">    tag.u.string.replace_with("No longer bold.")
+    print(type(tag.u.string)) # &lt;class 'bs4.element.NavigableString'&gt;
+    print(str(tag.u.string))  # No longer bold.</code></pre>
+<h2 style="background-color: #e6edeb;border-left: 5px solid rgb(2, 180, 206);box-sizing: border-box;font-size: large;letter-spacing: 1.44px;line-height: 1.6em;margin: 36px 0px 24px;padding: 10px 10px 10px 18px;text-align: justify;">
+ BeautifulSoup object
+</h2>
+<pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">其實一開始就有示範了，可以把他想像成<em>沒有 name 和 attributes 的 Tag</em>。但有時候你在 load 真正的 html 檔，他的 name 可能會是 "[document]"。</font></pre>
+<pre><code class="language-python">    print(str(soup))
+    # &lt;d class="car"&gt;&lt;u&gt;No longer bold.&lt;/u&gt;&lt;/d&gt;&lt;p&gt;123&lt;/p&gt;
+    print(soup.prettify())
+    # &lt;d class="car"&gt;
+    #  &lt;u&gt;
+    #   No longer bold.
+    #  &lt;/u&gt;
+    # &lt;/d&gt;
+    # &lt;p&gt;
+    #  123
+    # &lt;/p&gt;</code></pre>
+<pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;margin-top: 36px;"><font face="helvetica" size="4.5">參考資料 :</font></pre>
+<pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4.5">1.<a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/">Beautiful Soup 4.9.0 documentation</a></font></pre>

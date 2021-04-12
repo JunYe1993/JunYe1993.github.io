@@ -1,3 +1,4 @@
+import sys
 import tool.sync.bloggerSync as sync
 import tool.sync.bloggerCrawler as crawler
 
@@ -29,3 +30,6 @@ if __name__ == "__main__":
         
         count+=1
         print("Progress: "+str(count)+"/"+str(len(new_posts)))
+
+    if len(sys.argv) > 1:
+        sync.saveMarkDownFile("./article/"+post, sys.argv[1])

@@ -61,5 +61,13 @@ def saveSiteMap (localSiteMap, newAtrticle):
     with open (local_article_map, "w+", encoding="utf-8") as json_file:
         json.dump(localSiteMap, json_file, ensure_ascii=False, indent=4, sort_keys=True)
 
+def saveMarkDownFile (post, fileName):
+    # create dir if it needs.
+    path = createDir(fileName)
+
+    with open (fileName, "r", encoding="utf-8") as src:
+        with open (post[:-5] + ".md", "w+", encoding="utf-8") as md_file:
+            md_file.write(src.read())
+
 if __name__ == "__main__":
     createDir("tool/article/123/asdad/regeg")
