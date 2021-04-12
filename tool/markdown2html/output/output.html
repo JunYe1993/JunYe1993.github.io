@@ -4,87 +4,99 @@
  </a>
 </div>
 <h2 style="background-color: #e6edeb;border-left: 5px solid rgb(2, 180, 206);box-sizing: border-box;font-size: large;letter-spacing: 1.44px;line-height: 1.6em;margin: 16px 0px 24px;padding: 10px 10px 10px 18px;text-align: justify;">
- BeautifulSoup
+ Navigating the tree - Going down
 </h2>
-<pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">紀錄下 Python 網頁爬蟲大部分會用到的 BeautifulSoup。BeautifulSoup 本質上就是 parser，知道這點後其 function 和 parameter 的使用就能得心應手。</font></pre>
 <ul>
  <li>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Install</u></b></font></pre>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">這裡紀錄使用 pip 安裝</font></pre>
-  <pre><code class="language-bash" style="width: 95%;">    pip install beautifulsoup4
-    pip install lxml # 非必要</code></pre>
- </li>
- <li>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Import</u></b></font></pre>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">第一行的 import 就可以包含 99％，第二行則是此篇會用的 import，多了 2 個說明用的 object。</font></pre>
-  <pre><code class="language-python" style="width: 95%;">    from bs4 import BeautifulSoup
-    from bs4 import BeautifulSoup, NavigableString, Comment</code></pre>
- </li>
- <li>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Load html</u></b></font></pre>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">此篇會用第一行來 make soup</font></pre>
-  <pre><code class="language-python" style="width: 95%;">    soup = BeautifulSoup("&lt;html&gt;a web page&lt;/html&gt;", features="html.parser")
-    soup = BeautifulSoup("&lt;html&gt;a web page&lt;/html&gt;", features="lxml") # 如果你有安裝的話</code></pre>
- </li>
-</ul>
-<h2 style="background-color: #e6edeb;border-left: 5px solid rgb(2, 180, 206);box-sizing: border-box;font-size: large;letter-spacing: 1.44px;line-height: 1.6em;margin: 36px 0px 24px;padding: 10px 10px 10px 18px;text-align: justify;">
- Tag object
-</h2>
-<pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">Tag object 對應到的就是 XML 跟 HTML 裡的 Tag。
-這裡可以從 soup object 下 2 個 Tag 開始，一個是 b 一個是 p。</font></pre>
-<pre><code class="language-python">    """ html
+  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>child Tag</u></b></font></pre>
+  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">前一篇呼叫 Tag 底下的 subTag 是用像 class 的方式 (Tag.subTag)，沒完整說明的是這個 subTag 可呼叫到的範圍並不只侷限 children Tag，而是整個 Tag 底下第一個遇到的 Tag.name == subTag。</font></pre>
+  <pre><code class="language-python" style="width: 95%;">    """ html
     &lt;b class="boldest" id="bold man"&gt;
         &lt;u&gt;Extremely bold&lt;/u&gt;
     &lt;/b&gt;
     &lt;p&gt;Just a paragraph&lt;/p&gt;
     """
     soup = BeautifulSoup(html, 'html.parser')
-    print(type(soup))   # &lt;class 'bs4.BeautifulSoup'&gt;
-    print(soup.b)       # &lt;b class="boldest" id="bold man"&gt;&lt;u&gt;Extremely bold&lt;/u&gt;&lt;/b&gt;
-    print(soup.p)       # &lt;p&gt;Just a paragraph&lt;/p&gt;
-
-    # Tag 有兩個基礎參數 name 跟 attrs
-    tag = soup.b
-    print(type(tag))    # &lt;class 'bs4.element.Tag'&gt;
-    print(tag.name)     # b
-    print(tag.attrs)    # {'class': ['boldest'], 'id': 'bold man'}
-
-    # name 跟 attrs 都可以直接修改
-    tag.name = "d"
-    tag.attrs = {'class': ['boldest', 'cutest'], 'id': 'pui pui'}
-    print(str(tag))     # &lt;d class="boldest cutest" id="pui pui"&gt;&lt;u&gt;Extremely bold&lt;/u&gt;&lt;/d&gt;</code></pre>
-<pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">Tag 的 child Tag 可以像 class 的 element 一樣直接呼叫 (上面的 soup.b 和 soup.p 也是一種呼叫 child Tag)</font></pre>
-<pre><code class="language-python">    print(str(tag.u))   # &lt;u&gt;Extremely bold&lt;/u&gt;
-    print(tag['class']) # ['boldest', 'cutest']
-    print(tag['id'])    # pui pui</code></pre>
-<pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">Tag 的 attr 也可以修改和刪除</font></pre>
-<pre><code class="language-python">tag['class'] = ['car']
-del tag['id']
-print(str(tag))     # &lt;d class="boldest cutest"&gt;&lt;u&gt;Extremely bold&lt;/u&gt;&lt;/d&gt;</code></pre>
-<blockquote>
- <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font color="#cc0000" face="helvetica" size="4">P.S. HTML 裡的 class 是可以允許多參數的，所以上述的例子裡 class 是 string list，而非 string</font></pre>
-</blockquote>
+    print(soup.u)  # &lt;u&gt;Extremely bold&lt;/u&gt;</code></pre>
+ </li>
+ <li>
+  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>find_all()</u></b></font></pre>
+  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">依循前面的 subTag 找法，find_all 則會找出所有的 Tag (Tag.name == subTag)。</font></pre>
+  <pre><code class="language-python" style="width: 95%;">    soup.find_all('a')
+    # [&lt;a class="sister" href="http://example.com/elsie" id="link1"&gt;Elsie&lt;/a&gt;,
+    #  &lt;a class="sister" href="http://example.com/lacie" id="link2"&gt;Lacie&lt;/a&gt;,
+    #  &lt;a class="sister" href="http://example.com/tillie" id="link3"&gt;Tillie&lt;/a&gt;]</code></pre>
+ </li>
+ <li>
+  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>.contents</u></b></font></pre>
+  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">Tag.contents 回傳包含所有 child string 的 list。</font></pre>
+  <pre><code class="language-python" style="width: 95%;">    print(soup.contents)  # [&lt;d class="car"&gt;&lt;u&gt;Extremely bold.&lt;/u&gt;&lt;/d&gt;, &lt;p&gt;123&lt;/p&gt;]</code></pre>
+ </li>
+ <li>
+  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>.children</u></b></font></pre>
+  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">Tag.children 回傳包含所有 child Tag object 的 list。</font></pre>
+  <pre><code class="language-python" style="width: 95%;">    for child in soup.children:
+        print(child.name)
+    # b
+    # p</code></pre>
+ </li>
+ <li>
+  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>.descendants</u></b></font></pre>
+  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">回傳一個不只包含 Tag 底下一層的 subTag，而是整個 tree 上所有 object。底下的結果之所以會有 None，是因為 NavigableString 也是 child 的包含範圍 ( .contents 跟 .children 也一樣 )，而 NavigableString object 沒有 .name。</font></pre>
+  <pre><code class="language-python" style="width: 95%;">    for child in soup.descendants:
+        print(child.name)
+    # b
+    # u
+    # None
+    # p
+    # None</code></pre>
+ </li>
+ <li>
+  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>.string</u></b></font></pre>
+  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">回傳底下唯一一個的 NavigableString 。如果 Tag 只有一個 child 而且還是 NavigableString 則回傳。如果 Tag 只有一個 child 且 child 也只有一個 NavigableString child 也是回傳。如果有兩個以上的 NavigableString 則要呼叫 .strings，.string 會回傳 None。</font></pre>
+  <pre><code class="language-python" style="width: 95%;">    print(soup.u.string) # Extremely bold
+    print(soup.b.string) # Extremely bold
+    print(soup.string)   # None</code></pre>
+ </li>
+ <li>
+  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>.strings &amp; .stripped_strings</u></b></font></pre>
+  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">strings 會回傳所有 NavigableString。但這種情況下仍會紀錄到一些換行或字串前後的空格，所以可以用 stripped_strings 回傳乾淨的 NavigableString list。(如果整個字串都是空格或換行，則這個 NavigableString 會被無視)</font></pre>
+  <pre><code class="language-python" style="width: 95%;">    for sstr in soup.strings:
+        print(repr(sstr))
+    # 'Extremely bold'
+    # 'Just a paragraph' </code></pre>
+ </li>
+</ul>
 <h2 style="background-color: #e6edeb;border-left: 5px solid rgb(2, 180, 206);box-sizing: border-box;font-size: large;letter-spacing: 1.44px;line-height: 1.6em;margin: 36px 0px 24px;padding: 10px 10px 10px 18px;text-align: justify;">
- NavigableString object
+ Navigating the tree - Going Up
 </h2>
-<pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">NavigableString 就等於 Tag 裡的 string，可以使用 replace_with 做修改。</font></pre>
-<pre><code class="language-python">    tag.u.string.replace_with("No longer bold.")
-    print(type(tag.u.string)) # &lt;class 'bs4.element.NavigableString'&gt;
-    print(str(tag.u.string))  # No longer bold.</code></pre>
+<ul>
+ <li>
+  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>.parent &amp; .parents</u></b></font></pre>
+  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">基本上就是往上一層的 Tag (Soup 的 parent 為 None)。</font></pre>
+  <pre><code class="language-python" style="width: 95%;">    link = soup.a
+    link
+    # &lt;a class="sister" href="http://example.com/elsie" id="link1"&gt;Elsie&lt;/a&gt;
+    for parent in link.parents:
+        print(parent.name)
+    # p
+    # body
+    # html
+    # [document]</code></pre>
+ </li>
+</ul>
 <h2 style="background-color: #e6edeb;border-left: 5px solid rgb(2, 180, 206);box-sizing: border-box;font-size: large;letter-spacing: 1.44px;line-height: 1.6em;margin: 36px 0px 24px;padding: 10px 10px 10px 18px;text-align: justify;">
- BeautifulSoup object
+ Navigating the tree - Going sideways
 </h2>
-<pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">其實一開始就有示範了，可以把他想像成<em>沒有 name 和 attributes 的 Tag</em>。但有時候你在 load 真正的 html 檔，他的 name 可能會是 "[document]"。</font></pre>
-<pre><code class="language-python">    print(str(soup))
-    # &lt;d class="car"&gt;&lt;u&gt;No longer bold.&lt;/u&gt;&lt;/d&gt;&lt;p&gt;123&lt;/p&gt;
-    print(soup.prettify())
-    # &lt;d class="car"&gt;
-    #  &lt;u&gt;
-    #   No longer bold.
-    #  &lt;/u&gt;
-    # &lt;/d&gt;
-    # &lt;p&gt;
-    #  123
-    # &lt;/p&gt;</code></pre>
+<ul>
+ <li>
+  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>.next_sibling &amp;.previous_sibling</u></b></font></pre>
+  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">往前找跟往後找，但是要注意的是他沒那方便幫你找到下一個或上一個的 Tag object，絕大部分都是 NavigableString，例如換行 (\n) 之類的。</font></pre>
+  <pre><code class="language-python" style="width: 95%;">    tag1 = soup.b
+    tag2 = soup.p
+    print(tag1.next_sibling)     # &lt;p&gt;123&lt;/p&gt;
+    print(tag2.previous_sibling) # &lt;b class="boldest" id="bold man"&gt;&lt;u&gt;Extremely bold&lt;/u&gt;&lt;/b&gt;</code></pre>
+ </li>
+</ul>
 <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;margin-top: 36px;"><font face="helvetica" size="4.5">參考資料 :</font></pre>
 <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4.5">1.<a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/">Beautiful Soup 4.9.0 documentation</a></font></pre>
