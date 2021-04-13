@@ -10,7 +10,7 @@ def checkArg1Valid () -> bool:
     else:
         return os.path.isfile(sys.argv[1])
 
-if __name__ == "__main__":
+def run ():
     # check if $1 is valid file.
     if not checkArg1Valid():
         print("Please the valid file name.")
@@ -23,4 +23,7 @@ if __name__ == "__main__":
         html = markdown.markdown(targetData, extensions=['fenced_code'])
         with open ("./tool/markdown2html/output/output.html", "w+", encoding="utf-8") as f:
             f.write(h2myhtml.myBloggerPrettify(html))
+
+if __name__ == "__main__":
+    run()
     
