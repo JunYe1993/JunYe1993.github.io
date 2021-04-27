@@ -8,10 +8,11 @@ import readline
 CONFIG_FILE = "tool/manuscript/config.json"
 HTML_FILE = "tool/markdown2html/output/output.html"
 POST_DATA = "tool/manuscript/data.json"
-TO_HTML_CMD = ["", "-m", "tool.markdown2html.run_markdown2html"]
-TO_HTML_CMD[0] = "python3" if sys.platform == "linux" else "python"
-UPLOAD_CMD = ["/home/daniel/daniel/Google-api-python/bin/python3", "/home/daniel/daniel/Google-api-python/blogger/upload_post.py"]
-
+TO_HTML_CMD = ["python3", "-m", "tool.markdown2html.run_markdown2html"]
+ENV_PATH = "/home/daniel/daniel/Google-api-python"
+UPLOAD_CMD = [ENV_PATH+"/bin/python3", ENV_PATH+"/blogger/upload_post.py", ENV_PATH]
+SYNC_CMD = ["python3", "-m", "tool.sync.run_sync"]
+4
 def loadConfig ():
     try:
         with open(CONFIG_FILE, "r", encoding="utf-8") as config:
@@ -91,20 +92,50 @@ def uploadPost(postData):
         os.remove(POST_DATA)
         quit()
 
-def run ():
+def run_upload (manuscriptFile):
+    # get file & config
+    config = loadConfig()
+    html = transferToHTML(manuscriptFile)
     
+    # upload
+    uploadPost(getPostData(config, html))
+
+<<<<<<< HEAD
+if __name__ == "__main__":
+    run()
+=======
+# for my windows
+def getPlatformCommand ():
+    global ENV_PATH
+    if sys.platform == "win32":
+        ENV_PATH = "C:\\Users\\10903029\\Desktop\\my\\google.python.api"
+        UPLOAD_CMD[0] = ENV_PATH + "\\Scripts\\python.exe"
+        UPLOAD_CMD[1] = ENV_PATH + "\\blogger\\upload_post.py"
+        UPLOAD_CMD[2] = ENV_PATH
+        TO_HTML_CMD[0] = "python"
+        SYNC_CMD[0] = "python"
+
+def run_sync (file=None):
+    if file:
+        SYNC_CMD.append(file)
+    try:
+        subprocess.run(SYNC_CMD)
+    except:
+        print("Sync failed.")
+        quit()
+
+if __name__ == "__main__":
     # Quit process if there is no file path or file path is not valid.
     if len(sys.argv) < 2 or not os.path.isfile(sys.argv[1]):
         print("Error: Please enter the file path.")
         quit()
-
-    # get file & config
     manuscriptFile = sys.argv[1]
-    config = loadConfig()
-    html = transferToHTML(manuscriptFile)
-    
-    # 
-    uploadPost(getPostData(config, html))
 
-if __name__ == "__main__":
-    run()
+    # get platform setting
+    getPlatformCommand()
+
+    # update to last by sync once
+    run_sync()
+    run_upload(manuscriptFile)
+    run_sync(manuscriptFile)
+>>>>>>> 88ec2e1 (sync)

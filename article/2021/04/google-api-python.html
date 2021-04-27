@@ -1,0 +1,97 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-6942888476609552796">
+   <div class="separator" style="clear: both;text-align: center;">
+    <a style="margin-left: 1em;margin-right: 1em;">
+     <img alt="'Google.jpg'" border="0" data-original-height="1365" data-original-width="2048" height="426" src="https://junye1993.github.io/image/Google.jpg"/>
+    </a>
+   </div>
+   <h2 style="background-color: #e6edeb;border-left: 5px solid rgb(2, 180, 206);box-sizing: border-box;font-size: large;letter-spacing: 1.44px;line-height: 1.6em;margin: 16px 0px 24px;padding: 10px 10px 10px 18px;text-align: justify;">
+    Google API - python ver.
+   </h2>
+   <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">紀錄一些使用 python 呼叫 Google API 的心得</font></pre>
+   <h2 style="background-color: #e6edeb;border-left: 5px solid rgb(2, 180, 206);box-sizing: border-box;font-size: large;letter-spacing: 1.44px;line-height: 1.6em;margin: 36px 0px 24px;padding: 10px 10px 10px 18px;text-align: justify;">
+    基本前置作業
+   </h2>
+   <ul>
+    <li>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Google Account</u></b></font></pre>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">首先你要有 <a href="https://www.google.com/account/about/">google</a> 帳號。</font></pre>
+    </li>
+    <li>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Google Cloud Platform project</u></b></font></pre>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">想要使用 Google Cloud Platform (GCP) 的 service，你需要創建一個 <a href="https://console.cloud.google.com/">GCP project</a>。左上角 project name 右邊的倒三角按下去新增。</font></pre>
+    </li>
+    <li>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Enable API</u></b></font></pre>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">旁邊的 API&amp;Services =&gt; Library =&gt; 新增你想要的服務。不過我當初沒有用這步，應該是我用 Oauth 而非 API Keys 的關係 ( <a href="https://developers.google.com/workspace/guides/create-project">完整介紹</a> )。</font></pre>
+    </li>
+    <li>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Credentials</u></b></font></pre>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">產生金鑰，我是選 Desktop App，然後下載其 json 檔就樣就好。雖然 <a href="https://developers.google.com/workspace/guides/create-credentials">Google Guide</a> 其實有給很多講解及步驟，但我沒做也能運行。</font></pre>
+    </li>
+   </ul>
+   <h2 style="background-color: #e6edeb;border-left: 5px solid rgb(2, 180, 206);box-sizing: border-box;font-size: large;letter-spacing: 1.44px;line-height: 1.6em;margin: 36px 0px 24px;padding: 10px 10px 10px 18px;text-align: justify;">
+    安裝 google python api library
+   </h2>
+   <ul>
+    <li>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>安裝 google api python</u></b></font></pre>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">首先安裝 <a href="https://github.com/googleapis/google-api-python-client">google-api-python-client</a>，點進去有安裝方法，這裡用 Linux 做些紀錄。基本上是安裝一個 virtualenv，讓他新增一個獨立且乾淨的 python 執行環境，然後利用這虛擬環境去下載他門的 library。</font></pre>
+     <pre><code class="language-bash" style="width: 95%;">    # 安裝虛擬 python 環境和 google-api-python-client
+    pip install virtualenv
+    virtualenv &lt;your-env&gt;
+    source &lt;your-env&gt;/bin/activate
+    &lt;your-env&gt;/bin/pip install google-api-python-client</code></pre>
+    </li>
+    <li>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>安裝 google_auth_oauthlib</u></b></font></pre>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">再來安裝 <a href="https://github.com/googleapis/google-api-python-client/blob/master/docs/oauth.md">Oauth 2.0</a>。</font></pre>
+     <pre><code class="language-bash" style="width: 95%;">    &lt;your-env&gt;/bin/pip install google_auth_oauthlib</code></pre>
+    </li>
+   </ul>
+   <h2 style="background-color: #e6edeb;border-left: 5px solid rgb(2, 180, 206);box-sizing: border-box;font-size: large;letter-spacing: 1.44px;line-height: 1.6em;margin: 36px 0px 24px;padding: 10px 10px 10px 18px;text-align: justify;">
+    安裝 google python api library
+   </h2>
+   <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">我寫這篇的主因，因為 google python api library 已經不再更新，有些 sample code 已經過時不能使用所以在這裡紀錄一些可用的 sample code。</font></pre>
+   <ul>
+    <li>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Sample Code - flow</u></b></font></pre>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">這是 <a href="https://developers.google.com/identity/protocols/oauth2/scopes">Google Oauth API Scope</a> 我拿 blogger 做測試。完整的程式碼在 <a href="https://github.com/JunYe1993/Google_API_Python/blob/main/sample.py">sample.py</a>，輸出結果在 <a href="https://github.com/JunYe1993/Google_API_Python/blob/main/output.json">output.json</a>。這裡擷取片段，順序還要參考完整的程式碼。 </font></pre>
+     <pre><code class="language-python" style="width: 95%;">    # 首先是連線設置，Flow 這個 class 是用來讀取你的 Credentials 來認證你的程式。
+    # client_secrets.json = 你下載的 Oauth json file。
+    # SCOPES = 你宣告要使用哪些功能 ( ex. gmail, blogger... )
+    from google_auth_oauthlib.flow import InstalledAppFlow
+    SCOPES = ['https://www.googleapis.com/auth/blogger']
+    flow = InstalledAppFlow.from_client_secrets_file(
+        'client_secrets.json', SCOPES)
+
+    # 用 port 0 連線 GCP，這裡會用預設瀏覽器去做認證，結束後會跟你說可以關閉網頁
+    creds = flow.run_local_server(port=0)</code></pre>
+    </li>
+    <li>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Sample Code - token</u></b></font></pre>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">這裡回傳值 creds，是 GCP 給的暫時性 token，若你的 token 還在且未過期，你就可以用此 token 直接連線而不用再透過瀏覽器認證。</font></pre>
+     <pre><code class="language-python" style="width: 95%;">    # 如果你有儲存 token，可以直接用 token 重新連線
+    # token expired 的話且沒過太就的話可以用 creds.refresh(Request()) 做 refresh token
+    creds = Credentials.from_authorized_user_file('token.json', SCOPES)
+    if not creds.valid:
+        if creds.expired and creds.refresh_token:
+            creds.refresh(Request())</code></pre>
+    </li>
+    <li>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Sample Code - build</u></b></font></pre>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">這裡依照 <a href="https://developers.google.com/blogger/docs/3.0/getting_started">Blogger API Guide</a> 去做取資料。</font></pre>
+     <pre><code class="language-python" style="width: 95%;">    # 先依照 scope 取得服務，再依照 api 的格式去取得資料
+    # posts() 跟 list() 都是依照 Blogger API Guide 去填寫的，最後執行 execute()
+    # 回傳會是 dict，要自己轉 json
+    from googleapiclient.discovery import build
+    service = build('blogger', 'v3', credentials=creds)
+    posts = service.posts().list(blogId=BLOGID,maxResults=3).execute()</code></pre>
+    </li>
+   </ul>
+   <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;margin-top: 36px;"><font face="helvetica" size="4.5">參考資料 :</font></pre>
+   <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4.5">1.我跟Google官網</font></pre>
+  </div>
+ </body>
+</html>
