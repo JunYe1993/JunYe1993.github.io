@@ -1,0 +1,19 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-6414362765307112382">
+   <div class="separator" style="clear: both;text-align: center;">
+    <a style="margin-left: 1em;margin-right: 1em;">
+     <img alt="'ProgrammerLife.jpg'" border="0" data-original-height="1365" data-original-width="2048" height="426" src="https://junye1993.github.io/image/ProgrammerLife.jpg"/>
+    </a>
+   </div>
+   <h2 style="background-color: #e6edeb;border-left: 5px solid rgb(2, 180, 206);box-sizing: border-box;font-size: large;letter-spacing: 1.44px;line-height: 1.6em;margin: 16px 0px 24px;padding: 10px 10px 10px 18px;text-align: justify;">
+    讀檔時 UnicodeDecodeError: 'cp950' codec can't decode
+   </h2>
+   <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">老實說這非常常見，即使你的檔案是用 UTF-8 編寫，而且用 Python3 ( 絕大部分 default 是 utf-8 )，仍會報這個錯。所以要避免程式能在不同平台都能正常使用，讀檔時最好都加上 encoding="utf-8"</font></pre>
+   <pre><code class="language-python">    with open("somefile.py", encoding="utf-8") as f:
+        f.read()</code></pre>
+   <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;margin-top: 36px;"><font face="helvetica" size="4.5">參考資料 :</font></pre>
+   <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4.5">1.<a href="https://stackoverflow.com/questions/49021589/how-do-i-fix-this-cp950-illegal-multibyte-sequence-unicodedecodeerror-when-rea">stackoverflow</a></font></pre>
+  </div>
+ </body>
+</html>

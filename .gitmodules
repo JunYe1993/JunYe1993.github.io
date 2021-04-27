@@ -1,6 +1,0 @@
-[submodule "tool/html2markdown/html2text"]
-	path = tool/html2markdown/html2text
-	url = https://github.com/aaronsw/html2text.git
-[submodule "tool/html2markdown/html2markdown"]
-	path = tool/html2markdown/html2markdown
-	url = https://github.com/dlon/html2markdown.git
