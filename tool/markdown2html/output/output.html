@@ -1,45 +1,19 @@
 <div class="separator" style="clear: both;text-align: center;">
  <a style="margin-left: 1em;margin-right: 1em;">
-  <img alt="'Google.jpg'" border="0" data-original-height="1365" data-original-width="2048" height="426" src="https://junye1993.github.io/image/Google.jpg"/>
+  <img alt="'Git.jpg'" border="0" data-original-height="1365" data-original-width="2048" height="426" src="https://junye1993.github.io/image/Git.jpg" width="640"/>
  </a>
 </div>
 <h2 style="background-color: #e6edeb;border-left: 5px solid rgb(2, 180, 206);box-sizing: border-box;font-size: large;letter-spacing: 1.44px;line-height: 1.6em;margin: 16px 0px 24px;padding: 10px 10px 10px 18px;text-align: justify;">
- Google Blogger API Table
+ Git - delete submodule
 </h2>
-<pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">其實找到好用的 Google API document 就完成 80% 了，這裡紀錄 <a href="https://developers.google.com/resources/api-libraries/documentation/blogger/v3/python/latest/index.html">Python</a> 連結。再紀錄個 Google 給開發者用的 <a href="https://developers.google.com/oauthplayground/">Playground</a>，可以讓你先試試 API。</font></pre>
-<h2 style="background-color: #e6edeb;border-left: 5px solid rgb(2, 180, 206);box-sizing: border-box;font-size: large;letter-spacing: 1.44px;line-height: 1.6em;margin: 36px 0px 24px;padding: 10px 10px 10px 18px;text-align: justify;">
- Post article
-</h2>
-<pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">這裡紀錄程式碼模擬平常的流程，但其實可以只用 insert 就完成所有事。</font></pre>
-<ul>
- <li>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>New Post</u></b></font></pre>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">新增草稿。</font></pre>
-  <pre><code class="language-python" style="width: 95%;">    # Create a new draft post.
-    # The return value (newpost) is dict contain all info of this draft
-    newpost = service.posts().insert(blogId=BLOGID, isDraft=True).execute()</code></pre>
- </li>
- <li>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Update content</u></b></font></pre>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">Update 好 content 後，要轉成 JSON object。以下若程式碼直接傳 JsonPost(str)，會回傳錯誤 Invalid JSON payload received. Unknown name “”: Root element must be a message，即使他們 print 出來一模一樣。</font></pre>
-  <pre><code class="language-python" style="width: 95%;">    # Update some content of the new draft post.
-    newpost['title'] = "posted via python"
-    newpost['content'] = "&lt;div&gt;hello world test&lt;/div&gt;"
-    JsonPost = json.dumps(newpost, indent=4, ensure_ascii=False)
-    service.posts().update(blogId=BLOGID, postId=newpost['id'], 
-        body=json.loads(JsonPost)).execute()</code></pre>
- </li>
- <li>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Publich</u></b></font></pre>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">其實就只是把 Draft 的狀態改成 Publish。</font></pre>
-  <pre><code class="language-python" style="width: 95%;">    # Publish the new post.
-    service.posts().publish(blogId=BLOGID, postId=newpost['id']).execute()</code></pre>
- </li>
- <li>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Insert 解決一切</u></b></font></pre>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">可以直接用 insert 就好，上面的程式碼只是模擬。</font></pre>
-  <pre><code class="language-python" style="width: 95%;">    service.posts().insert(blogId=BLOGID, body=body).execute()</code></pre>
- </li>
-</ul>
-<pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;margin-top: 36px;"><font face="helvetica" size="4.5">參考資料 :</font></pre>
-<pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4.5">1.<a href="https://developers.google.com/resources/api-libraries/documentation/blogger/v3/python/latest/index.html">Google API Library</a></font></pre>
+<pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">因為上網 Google 這問題你會發現<a href="https://stackoverflow.com/questions/1260748/how-do-i-remove-a-submodule">這個Stackoverflow</a>和<a href="https://gist.github.com/myusuf3/7f645819ded92bda6677">這個Github</a>的答案。很久以前查的時候 stackoverflow 置頂的答案是以前最多 upvote 的答案，也就是 <a href="https://gist.github.com/myusuf3/7f645819ded92bda6677">githb</a> 的答案。但 git 在版本更新後那個 7 步刪除 submodule 的已經過時了。雖然還是可以用但現在三步就可完成。</font></pre>
+<pre><code class="language-bash">    # 用 git submodule deinit 清除 git config 的紀錄
+    git submodule deinit -f path/to/submodule
+
+    # 手動刪除 git 不再 track 的 submodule file
+    rm -rf .git/modules/path/to/submodule
+
+    # 用 git 清除 .gitmodules 的紀錄
+    git rm -f path/to/submodule</code></pre>
+<pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">參考資料 :
+1.<a href="https://stackoverflow.com/questions/1260748/how-do-i-remove-a-submodule">stackoverflow</a></font></pre>

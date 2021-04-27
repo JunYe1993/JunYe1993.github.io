@@ -8,6 +8,7 @@ def picPrettify (soup):
         img['data-original-height'] = 1365
         img['data-original-width'] = 2048
         img['height'] = 426
+        img['width'] = 640
 
         div = img.parent
         div.name = "div"

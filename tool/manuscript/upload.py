@@ -2,8 +2,6 @@ import os
 import sys
 import json
 import subprocess
-import readline
-
 
 CONFIG_FILE = "tool/manuscript/config.json"
 HTML_FILE = "tool/markdown2html/output/output.html"
@@ -12,7 +10,7 @@ TO_HTML_CMD = ["python3", "-m", "tool.markdown2html.run_markdown2html"]
 ENV_PATH = "/home/daniel/daniel/Google-api-python"
 UPLOAD_CMD = [ENV_PATH+"/bin/python3", ENV_PATH+"/blogger/upload_post.py", ENV_PATH]
 SYNC_CMD = ["python3", "-m", "tool.sync.run_sync"]
-4
+
 def loadConfig ():
     try:
         with open(CONFIG_FILE, "r", encoding="utf-8") as config:
@@ -100,10 +98,6 @@ def run_upload (manuscriptFile):
     # upload
     uploadPost(getPostData(config, html))
 
-<<<<<<< HEAD
-if __name__ == "__main__":
-    run()
-=======
 # for my windows
 def getPlatformCommand ():
     global ENV_PATH
@@ -138,4 +132,3 @@ if __name__ == "__main__":
     run_sync()
     run_upload(manuscriptFile)
     run_sync(manuscriptFile)
->>>>>>> 88ec2e1 (sync)
