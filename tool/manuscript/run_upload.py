@@ -3,13 +3,14 @@ import sys
 import json
 import subprocess
 
+import tool.markdown2html.run_markdown2html as m2html
+import tool.sync.run_sync as sync
+
 CONFIG_FILE = "tool/manuscript/config.json"
-HTML_FILE = "tool/markdown2html/output/output.html"
-POST_DATA = "tool/manuscript/data.json"
-TO_HTML_CMD = ["python3", "-m", "tool.markdown2html.run_markdown2html"]
-ENV_PATH = "/home/daniel/daniel/Google-api-python"
-UPLOAD_CMD = [ENV_PATH+"/bin/python3", ENV_PATH+"/blogger/upload_post.py", ENV_PATH]
-SYNC_CMD = ["python3", "-m", "tool.sync.run_sync"]
+HTML_FILE   = "tool/markdown2html/output/output.html"
+POST_DATA   = "tool/manuscript/data.json"
+ENV_PATH    = "/home/daniel/daniel/Google-api-python"
+UPLOAD_CMD  = [ENV_PATH+"/bin/python3", ENV_PATH+"/blogger/upload_post.py"]
 
 def loadConfig ():
     try:
@@ -32,12 +33,10 @@ def saveConfig (config):
 
 def transferToHTML (markdownFile):
     try:
-        TO_HTML_CMD.append(markdownFile)
-        subprocess.run(TO_HTML_CMD)
-        with open (HTML_FILE, "r", encoding="utf-8") as html:
-            return html.read() 
+        with open (markdownFile, "r", encoding="utf-8") as md:
+            return m2html.transMDtoHTML(md.read())
     except:
-        print("Transfer to HTML failed.")
+        print("Transfer failed.")
         quit()
 
 def getPostData (config, html):
@@ -71,32 +70,36 @@ def getPostData (config, html):
     retData['content'] = html
     return retData
 
-def savePostData (postData):
+def savePostData (postData, dataPath):
     try:
-        with open (POST_DATA, "w+", encoding="utf-8") as f:
+        with open (dataPath, "w+", encoding="utf-8") as f:
             json.dump(postData, f, indent=4, ensure_ascii=False)
     except:
         print("Save post data failed.")
         quit()
 
-def uploadPost(postData):
-    savePostData(postData)
-    UPLOAD_CMD.append(POST_DATA)
+def uploadPost(postData, dataPath):
+    # get platform setting
+    getPlatformCommand()
+    savePostData(postData, dataPath)
+    UPLOAD_CMD.append(dataPath)
     try:
-        subprocess.run(UPLOAD_CMD)
-        os.remove(POST_DATA)
+        process = subprocess.run(UPLOAD_CMD, stdout=subprocess.PIPE)
     except:
         print("Upload failed.")
-        os.remove(POST_DATA)
+        os.remove(dataPath)
         quit()
+
+    os.remove(dataPath)
+    return process.stdout.decode("ascii")
 
 def run_upload (manuscriptFile):
     # get file & config
     config = loadConfig()
     html = transferToHTML(manuscriptFile)
     
-    # upload
-    uploadPost(getPostData(config, html))
+    # upload & return post id
+    return uploadPost(getPostData(config, html), os.path.abspath(POST_DATA))
 
 # for my windows
 def getPlatformCommand ():
@@ -105,30 +108,23 @@ def getPlatformCommand ():
         ENV_PATH = "C:\\Users\\10903029\\Desktop\\my\\google.python.api"
         UPLOAD_CMD[0] = ENV_PATH + "\\Scripts\\python.exe"
         UPLOAD_CMD[1] = ENV_PATH + "\\blogger\\upload_post.py"
-        UPLOAD_CMD[2] = ENV_PATH
-        TO_HTML_CMD[0] = "python"
-        SYNC_CMD[0] = "python"
 
 def run_sync (file=None):
-    if file:
-        SYNC_CMD.append(file)
     try:
-        subprocess.run(SYNC_CMD)
+        sync.run(file)
     except:
         print("Sync failed.")
         quit()
+
+def run (manuscriptFile):
+    # update to last by sync once
+    #run_sync()
+    run_upload(manuscriptFile)
+    #run_sync(manuscriptFile)
 
 if __name__ == "__main__":
     # Quit process if there is no file path or file path is not valid.
     if len(sys.argv) < 2 or not os.path.isfile(sys.argv[1]):
         print("Error: Please enter the file path.")
         quit()
-    manuscriptFile = sys.argv[1]
-
-    # get platform setting
-    getPlatformCommand()
-
-    # update to last by sync once
-    run_sync()
-    run_upload(manuscriptFile)
-    run_sync(manuscriptFile)
+    run(sys.argv[1])

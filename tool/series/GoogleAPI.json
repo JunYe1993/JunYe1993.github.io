@@ -1,0 +1,25 @@
+{
+    "config": {
+        "blog": {
+            "id": 4634073707460521498
+        },
+        "id": "6263828621335172696",
+        "title": "Google API 筆記總覽",
+        "labels": [
+            "程式",
+            "Python",
+            "Google",
+            "API"
+        ],
+        "content": "<h2 style=\"background-color: #e6edeb;border-left: 5px solid rgb(2, 180, 206);box-sizing: border-box;font-size: large;letter-spacing: 1.44px;line-height: 1.6em;margin: 16px 0px 24px;padding: 10px 10px 10px 18px;text-align: justify;\">\n Python\n</h2>\n<ul>\n <li>\n  <pre style=\"white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;\"><font face=\"helvetica\" size=\"4\" style=\"background-color: #fff7e9;\"><b><u><a href=\"https://junye1993.blogspot.com/2021/04/google-api-python.html\">Google API - Python 學習筆記</a></u></b></font></pre>\n </li>\n <li>\n  <pre style=\"white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;\"><font face=\"helvetica\" size=\"4\" style=\"background-color: #fff7e9;\"><b><u><a href=\"https://junye1993.blogspot.com/2021/04/google-api-python-upload-post.html\">Google API - Python 學習筆記 - Upload post</a></u></b></font></pre>\n </li>\n</ul>"
+    },
+    "sub-titles": [
+        {
+            "title": "Python",
+            "posts": [
+                "2021/04/google-api-python.html",
+                "2021/04/google-api-python-upload-post.html"
+            ]
+        }
+    ]
+}

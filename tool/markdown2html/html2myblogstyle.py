@@ -3,11 +3,10 @@ from bs4 import BeautifulSoup, NavigableString
 
 def picPrettify (soup):
     for img in soup.find_all("img"):
-
         img['border'] = 0
         img['data-original-height'] = 1365
         img['data-original-width'] = 2048
-        img['height'] = 426
+        img['height'] = 424
         img['width'] = 640
 
         div = img.parent

@@ -23,11 +23,19 @@ pip3 install markdown
 ```bash
 python -m tool.sync.run_sync
 ```
-### Convert article/\*\*/\*.html to article/\*\*/\*.md (still working)###
-```bash
-python -m tool.html2markdown.run_html2markdown
-```
 ### Convert markdown to html
 ```bash
 python -m tool.markdown2html.run_markdown2html [file]
 ```
+## Work with API (need [install google python api env][googlePythonAPI]) ##
+---
+### Upload markdown file to blog 
+```bash
+python -m tool.manuscript.run_upload [file]
+```
+### Upload/Update series to blog 
+```bash
+python -m tool.series.updateSeries [file]
+```
+
+[googlePythonAPI]: https://github.com/JunYe1993/Google_API_Python

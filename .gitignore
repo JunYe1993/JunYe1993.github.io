@@ -1,4 +1,1 @@
-tool/sync/__pycache__/
-tool/manuscript/__pycache__/
-tool/html2markdown/__pycache__/
-tool/markdown2html/__pycache__/
+tool/*/__pycache__/
