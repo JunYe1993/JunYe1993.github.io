@@ -31,7 +31,7 @@ def run (file = None):
         count += 1
         print("Progress: "+str(count)+"/"+str(len(new_posts)))
 
-    if file:
+    if file != None:
         sync.saveMarkDownFile("./article/"+post, file)
 
 if __name__ == "__main__":

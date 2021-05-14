@@ -10,13 +10,14 @@ def checkArg1Valid () -> bool:
     else:
         return os.path.isfile(sys.argv[1])
 
-def transMDtoHTML (content):
+def transMDtoHTML (content, option = None):
     html = markdown.markdown(content, extensions=['fenced_code'])
     with open ("./tool/markdown2html/output/output.html", "w+", encoding="utf-8") as f:
-        f.write(h2myhtml.myBloggerPrettify(html))
-    return h2myhtml.myBloggerPrettify(html)
+        html = h2myhtml.myBloggerPrettify(html, option)
+        f.write(html)
+    return html
 
-def run ():
+def run (option = None):
     # check if $1 is valid file.
     if not checkArg1Valid():
         print("Please the valid file name.")
@@ -26,8 +27,9 @@ def run ():
     targetFile = sys.argv[1]
     with open (targetFile, "r", encoding="utf-8") as sourcefile:
         targetData = sourcefile.read()
-        transMDtoHTML(targetData)
+        transMDtoHTML(targetData, option)
 
 if __name__ == "__main__":
-    run()
+    option = None if len(sys.argv) < 3 else sys.argv[2] 
+    run(option)
     

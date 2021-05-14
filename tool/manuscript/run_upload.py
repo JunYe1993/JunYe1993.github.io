@@ -33,8 +33,9 @@ def saveConfig (config):
 
 def transferToHTML (markdownFile):
     try:
+        option = None if len(sys.argv) < 3 else sys.argv[2] 
         with open (markdownFile, "r", encoding="utf-8") as md:
-            return m2html.transMDtoHTML(md.read())
+            return m2html.transMDtoHTML(md.read(), option)
     except:
         print("Transfer failed.")
         quit()
@@ -118,9 +119,9 @@ def run_sync (file=None):
 
 def run (manuscriptFile):
     # update to last by sync once
-    #run_sync()
+    run_sync()
     run_upload(manuscriptFile)
-    #run_sync(manuscriptFile)
+    run_sync(manuscriptFile)
 
 if __name__ == "__main__":
     # Quit process if there is no file path or file path is not valid.

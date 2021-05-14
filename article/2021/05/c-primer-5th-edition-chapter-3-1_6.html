@@ -1,0 +1,75 @@
+<div class="separator" style="clear: both;text-align: center;">
+  <a style="margin-left: 1em;margin-right: 1em;">
+   <img alt="'Note.jpg'" border="0" data-original-height="1365" data-original-width="2048" height="424" src="https://junye1993.github.io/image/Note.jpg" width="640"/>
+  </a>
+ </div>
+ <h2 style="background-color: #e6edeb;border-left: 5px solid rgb(2, 180, 206);box-sizing: border-box;font-size: large;letter-spacing: 1.44px;line-height: 1.6em;margin: 16px 0px 24px;padding: 10px 10px 10px 18px;text-align: justify;">
+  Namespace - using declaration
+ </h2>
+ <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">為了讀取 stdin，程式碼會是 std::cin。 :: 的左邊是告訴 compiler 去哪個 scope 找右邊的 operand。這有時會造成程式碼過於冗長，所以有了 using declaration 讓你更簡單的呼叫 namespace 底下的成員。</font></pre>
+ <pre><code class="language-c++">    #include &lt;iostream&gt;
+     using std::cin;
+     int main()
+     {
+         int i;
+         cin &gt;&gt; i;       // ok: cin is a synonym for std::cin
+         cout &lt;&lt; i;      // error: no using declaration; we must use the full name
+         std::cout &lt;&lt; i; // ok: explicitly use cout from namepsace std
+         return 0;
+     }
+ </code></pre>
+ <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">using declaration 通常不會出現在 header 裡，因為 header 會被複製到各個程式中，會導致所有 include 該 header 的程式用相同的 using declaration 容易造成命名衝突。</font></pre>
+ <h2 style="background-color: #e6edeb;border-left: 5px solid rgb(2, 180, 206);box-sizing: border-box;font-size: large;letter-spacing: 1.44px;line-height: 1.6em;margin: 36px 0px 24px;padding: 10px 10px 10px 18px;text-align: justify;">
+  Library - string
+ </h2>
+ <ul>
+  <li>
+   <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Initialize</u></b></font></pre>
+   <pre><code class="language-c++" style="width: 95%;">    #include &lt;string&gt;
+     using std::string;
+     string s1;            // default initialization; s1 is the empty string
+     string s2 = s1;       // s2 is a copy of  s1
+     string s3 = "hiya";   // s3 is a copy of the string literal
+     string s4(10, 'c');   // s4 is cccccccccc
+ </code></pre>
+  </li>
+ </ul>
+ <ul>
+  <li>
+   <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>std::cin interaction</u></b></font></pre>
+   <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">cin 會因為 space 而被分開，以下程式碼若輸入 "Hello World!"，則 s1 = "Hello", s2 = "World!"</font></pre>
+   <pre><code class="language-c++" style="width: 95%;">    string s1, s2;
+     cin &gt;&gt; s1 &gt;&gt; s2; // read first input into s1, second into s2
+     cout &lt;&lt; s1 &lt;&lt; s2 &lt;&lt; endl; // write both strings
+ </code></pre>
+   <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">可以用 getline 來讀完整的 "Hello World!"</font></pre>
+   <pre><code class="language-c++" style="width: 95%;">    string line;
+     // read input a line at a time until end-of-file
+     while (getline(cin, line))
+         cout &lt;&lt; line &lt;&lt; endl;
+     return 0;
+ </code></pre>
+  </li>
+ </ul>
+ <ul>
+  <li>
+   <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Comparing &amp; Adding Two string</u></b></font></pre>
+   <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">string 可以使用 ==, != 做比較，也可以用 + 來做字串串接</font></pre>
+   <pre><code class="language-c++" style="width: 95%;">    string s1 = "hello, ", s2 = "world\n";
+     string s3 = s1 + s2;   // s3 is hello, world\n
+     s1 += s2;   // equivalent to s1 = s1 + s2
+ </code></pre>
+  </li>
+ </ul>
+ <ul>
+  <li>
+   <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Iterates through the chars in a string</u></b></font></pre>
+   <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">可以用 for(auto c : str)，也可以用 for(auto &amp;c : str)。&amp;c 是 reference 所以可以改變 str 裡的 char。 </font></pre>
+   <pre><code class="language-c++" style="width: 95%;">    string str("some string");
+     // print the characters in str one character to a line
+     for (auto c : str)      // for every char in str
+         cout &lt;&lt; c &lt;&lt; endl;  // print the current character followed by a newline
+ </code></pre>
+  </li>
+ </ul>
+ 
