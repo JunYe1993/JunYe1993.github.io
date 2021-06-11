@@ -81,9 +81,9 @@ Array 為資料結構且跟 Vector 很像，都是裝同一 Type object 的 cont
         {8, 9, 10, 11}  // initializers for the row indexed by 2
     };
     // equivalent initialization without the optional nested braces for each row
-    int ia[3][4] = {0,1,2,3,4,5,6,7,8,9,10,11};
+    int ia[3][4] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
     // explicitly initialize only element 0 in each row
-    int ia[3][4] = {{ 0 }, { 4 }, { 8 }};
+    int ia[3][4] = { { 0 }, { 4 }, { 8 } };
     // explicitly initialize row 0; the remaining elements are value initialized
     int ix[3][4] = {0, 3, 6, 9};
 ```
