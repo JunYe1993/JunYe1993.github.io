@@ -30,6 +30,6 @@ def run (option = None):
         transMDtoHTML(targetData, option)
 
 if __name__ == "__main__":
-    option = None if len(sys.argv) < 3 else sys.argv[2] 
+    option = None if len(sys.argv) < 3 else sys.argv[2]
     run(option)
     

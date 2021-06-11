@@ -1,0 +1,132 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-149186609937554198">
+   <div class="separator" style="clear: both;text-align: center;">
+    <a style="margin-left: 1em;margin-right: 1em;">
+     <img alt="'Note.jpg'" border="0" data-original-height="1365" data-original-width="2048" height="424" src="https://junye1993.github.io/image/Note.jpg" width="640"/>
+    </a>
+   </div>
+   <h2 style="background-color: #e6edeb;border-left: 5px solid rgb(2, 180, 206);box-sizing: border-box;font-size: large;letter-spacing: 1.44px;line-height: 1.6em;margin: 16px 0px 24px;padding: 10px 10px 10px 18px;text-align: justify;">
+    Statement
+   </h2>
+   <ul>
+    <li>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Simple Statements</u></b></font></pre>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">expression 加上 ; 作為結尾視為 statement。</font></pre>
+     <pre><code class="language-c++" style="width: 95%;">    a + 5  // expression
+    a + 5; // statement
+    ;      // null statement
+</code></pre>
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Compound Statements (Blocks)</u></b></font></pre>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">在 { } 中間一連串的 statements 或 declarations (也允許是空的)，且不用 ; 作為中止符。</font></pre>
+     <pre><code class="language-c++" style="width: 95%;">    while (val &lt;= 10) {
+        sum += val;  // assigns sum + val to sum
+        ++val;       // add 1 to val
+    }
+</code></pre>
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Statement Scope</u></b></font></pre>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">我們可以在 if else for 等等的 statements 裡宣告參數，但該參數也只有在 statements 裡能存取。</font></pre>
+     <pre><code class="language-c++" style="width: 95%;">    while (int i = get_num()) // i is created and initialized on each iteration
+        cout &lt;&lt; i &lt;&lt; endl;
+    i = 0;  // error: i is not accessible outside the loop
+</code></pre>
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Conditional Statements</u></b></font></pre>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">有 if statement, if else statement 和 switch statement。以下面的 switch code 為示範，"switch (ch)" 的 ch 為 expression，"case 'a':", "case 'e':" ... 為 case label，<span style="color: #e06666;"><b><em>當 expression match case label，execution 就會從此開始直到 switch 的中止符或 break</em></b></span>，所以是有可能橫跨 case labels。合法 case label 為 integral constant expressions，也就是 integral type 的 <a href="https://junye1993.blogspot.com/2020/07/c-primer-5th-edition-chapter-2-2.html">constant expression</a>。</font></pre>
+     <pre><code class="language-c++" style="width: 95%;">    int vowelCnt = 0
+    // any occurrence of a, e, i, o, or u increments vowelCnt
+    while (cin &gt;&gt; ch) {
+        switch (ch) {
+            case 'a':
+            case 'e':
+            case 'i':
+            case 'o':
+            case 'u':
+                ++vowelCnt;
+                break;
+        }
+    }
+</code></pre>
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Why can't variables be declared in a switch statement?</u></b></font></pre>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">首先這是 <a href="https://stackoverflow.com/questions/92396/why-cant-variables-be-declared-in-a-switch-statement">stackoverflow</a> 裡的一個問題，問題題目應該改成 Why can't variables be <span style="color: #e06666;"><b><em>initialized</em></b></span> in a switch statement?，因為如果只有 declared 是合法的，頂多有 warning。<span style="color: #e06666;"><b><em>基本上 case 就是 label 的一種，一種常見於有 goto 的程式碼。若你做 variable definition 在 switch statement，等於在這 switch statement scope 裡會有機會因為做了 goto label 的關係而忽略掉該 definition，進而導致程式碼出錯。</em></b></span>若要在 switch statement 做 variable definition，你就必須很明確地告訴 compiler 即使有 goto label 忽略該 variable definition 也沒差，因為我只會在那 case 裡使用，也就是<span style="color: #e06666;"><b><em>加 {} 更近一步明確地縮小 variable definition 的 scope</em></b></span> 而非整個 switch statement scope。(<a href="https://junye1993.blogspot.com/2020/07/c-primer-5th-edition-chapter-2-1.html">Declaration跟Definition間的差異</a>)</font></pre>
+     <pre><code class="language-c++" style="width: 95%;">    // Ok, 程式碼寫得漂亮，compiler 發現沒有任何 label 會忽略掉 init 的 definition
+    switch (num) {
+        case 1:
+            int init = 0;
+            cout &lt;&lt; declare &lt;&lt; endl;
+    }
+</code></pre>
+     <pre><code class="language-c++" style="width: 95%;">    // Error, case 2 這個 label 會忽略 init 的 definition
+    // main.cpp:17:10: error: jump to case label
+    // 17 |     case 2:
+    //    |          ^
+    switch (num) {
+        case 1:
+            int init = 0;
+            cout &lt;&lt; init &lt;&lt; endl;
+        case 2:
+            cout &lt;&lt; 9999 &lt;&lt; endl;
+    }
+</code></pre>
+     <pre><code class="language-c++" style="width: 95%;">    // 加 {}，縮小該 variable definition 的 scope
+    switch (num) {
+        case 1:
+            {
+                int init = 0;
+                cout &lt;&lt; init &lt;&lt; endl;
+            }
+        case 2:
+            cout &lt;&lt; 9999 &lt;&lt; endl;
+    }
+</code></pre>
+     <pre><code class="language-c++" style="width: 95%;">    // 只是 declaration 不會有事
+    // 甚至因為是同 scope 所以 case 2 可以呼叫到
+    // declare = 5; 若拿掉會出錯
+    // 因為 compiler 發現 declare 從沒被賦予值過
+    int num = 2;
+    switch (num) {
+        case 1:
+            int declare;
+            declare = 5;
+        case 2:
+            cout &lt;&lt; declare &lt;&lt; endl;
+    }
+    // Output: 21911
+</code></pre>
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Iterative Statements</u></b></font></pre>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">有 while statement, for statement 跟 do while Statement。C++ 的 for statement 除了傳統的還有 range for statement。其中 expression 必須要是 braced initializer list, array, vector 或 string 其中一種。</font></pre>
+     <pre><code class="language-c++" style="width: 95%;">    for (declaration : expression)
+        statement
+</code></pre>
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Jump Statements</u></b></font></pre>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">有 break statement, continue statement 和 goto Statement。</font></pre>
+    </li>
+   </ul>
+   <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">參考資料 :
+1.<a href="https://stackoverflow.com/questions/92396/why-cant-variables-be-declared-in-a-switch-statement">why-cant-variables-be-declared-in-a-switch-statement</a></font></pre>
+  </div>
+ </body>
+</html>

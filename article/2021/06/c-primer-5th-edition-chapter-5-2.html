@@ -1,0 +1,83 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-1903821906136793106">
+   <div class="separator" style="clear: both;text-align: center;">
+    <a style="margin-left: 1em;margin-right: 1em;">
+     <img alt="'Note.jpg'" border="0" data-original-height="1365" data-original-width="2048" height="424" src="https://junye1993.github.io/image/Note.jpg" width="640"/>
+    </a>
+   </div>
+   <h2 style="background-color: #e6edeb;border-left: 5px solid rgb(2, 180, 206);box-sizing: border-box;font-size: large;letter-spacing: 1.44px;line-height: 1.6em;margin: 16px 0px 24px;padding: 10px 10px 10px 18px;text-align: justify;">
+    Exceptions
+   </h2>
+   <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">Exceptions 是程式在 run-time 遇到的異常，比如與資料庫的連結斷開或遇到其他程式異想不到的 input。Exception handling 基本上就是當程式無法解決問題或者無法繼續執行時發出警告，或者更進一步根據情況處理 exception。</font></pre>
+   <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">Exception handling 由 detecting, handling parts of a program 所組成</font></pre>
+   <ul>
+    <li>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">throw expressions</font></pre>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">當 detecting part 表示遭遇無法處理的情況</font></pre>
+    </li>
+    <li>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">try blocks</font></pre>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">handling part 用來處理 exception。程式碼一開始會有一個 try block 隨後跟著一個或以上的 catch clauses。</font></pre>
+    </li>
+    <li>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">exception classes</font></pre>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">用來傳遞 information about what happened between a throw and an associated catch.</font></pre>
+    </li>
+   </ul>
+   <h2 style="background-color: #e6edeb;border-left: 5px solid rgb(2, 180, 206);box-sizing: border-box;font-size: large;letter-spacing: 1.44px;line-height: 1.6em;margin: 36px 0px 24px;padding: 10px 10px 10px 18px;text-align: justify;">
+    A throw Expression
+   </h2>
+   <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">通常會在 detecting part 發生 exception 時 throw Expression，這麼做原因是有時你不能保證你的程式一定是跟 User 互動的那一個，throw Expression 效果就比你回傳一個錯誤值好用得多。</font></pre>
+   <pre><code class="language-c++">    // Normal version
+    int throwTest(int num1, int num2) {
+        if (num1 == num2) {
+            cout &lt;&lt; "Same." &lt;&lt; endl;
+            return 0;
+        } else {
+            cerr &lt;&lt; "Not the same." &lt;&lt; endl;
+            return -1;
+        }
+    }
+
+    // throw Expression
+    void throwTest(int num1, int num2) {
+        if (num1 != num2)
+            throw runtime_error("Not the same.");
+        cout &lt;&lt; "Same." &lt;&lt; endl;
+    }
+</code></pre>
+   <h2 style="background-color: #e6edeb;border-left: 5px solid rgb(2, 180, 206);box-sizing: border-box;font-size: large;letter-spacing: 1.44px;line-height: 1.6em;margin: 36px 0px 24px;padding: 10px 10px 10px 18px;text-align: justify;">
+    The try Block
+   </h2>
+   <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">基於 C 風格的錯誤處理，在回傳值代表發生錯誤時予以處理。相比之下 throw 就相對靈活，但也會有終止程式的代價。try catch 的 block 就適合在此情況使用。讓程式有 exception handler。</font></pre>
+   <pre><code class="language-c++">    try {
+        program-statements
+    } catch (exception-declaration) {
+        handler-statements
+    } catch (exception-declaration) {
+        handler-statements
+    } // . . .
+</code></pre>
+   <h2 style="background-color: #e6edeb;border-left: 5px solid rgb(2, 180, 206);box-sizing: border-box;font-size: large;letter-spacing: 1.44px;line-height: 1.6em;margin: 36px 0px 24px;padding: 10px 10px 10px 18px;text-align: justify;">
+    Standard Exceptions
+   </h2>
+   <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">正如上面的 try block 示億程式碼所示，程式必須先宣告 exception 的種類才能近一步去做 handle，這裡紀錄 C++ standard library \<stdexcept> 裡的 exception table。 </stdexcept></font></pre>
+   <pre><code class="language-c++">    exception         // The most general kind of problem.
+
+    // Runtime errors
+    runtime_error     // Problem that can be detected at the run-time.
+    range_error       // Result generated outside the range of value that are meaningful.
+    overflow_error    // Computation that overflow.
+    underflow_error   // Computation that underflow.
+
+    // Logic errors
+    logic_error       // Error in the logic of the program.
+    domain_error      // Argument for which no result exists.
+    invalid_argument  // Inappropriate argument.
+    length_error      // Attempt to create an object larger than the maximum size for that type.
+    out_of_range      // Use a value outside the valid range.
+</code></pre>
+  </div>
+ </body>
+</html>

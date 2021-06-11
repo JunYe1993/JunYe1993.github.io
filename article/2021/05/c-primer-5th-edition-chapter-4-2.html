@@ -1,0 +1,59 @@
+<html>
+ <body>
+  <div class="post-body entry-content float-container" id="post-body-725967225867697760">
+   <div class="separator" style="clear: both;text-align: center;">
+    <a style="margin-left: 1em;margin-right: 1em;">
+     <img alt="'Note.jpg'" border="0" data-original-height="1365" data-original-width="2048" height="424" src="https://junye1993.github.io/image/Note.jpg" width="640"/>
+    </a>
+   </div>
+   <h2 style="background-color: #e6edeb;border-left: 5px solid rgb(2, 180, 206);box-sizing: border-box;font-size: large;letter-spacing: 1.44px;line-height: 1.6em;margin: 16px 0px 24px;padding: 10px 10px 10px 18px;text-align: justify;">
+    Type Conversions
+   </h2>
+   <ul>
+    <li>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Implicit Conversions</u></b></font></pre>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">型別轉換，大部分轉換都是看是否能轉換成 int，例如 char, bool, 和 short。</font></pre>
+     <pre><code class="language-c++" style="width: 95%;">    bool      flag;   char           cval;
+    short     sval;   unsigned short usval;
+    int       ival;   unsigned int   uival;
+    long      lval;   unsigned long  ulval;
+    float     fval;   double         dval;
+    3.14159L + 'a'; //  'a' promoted to int, then that int converted to long double
+    dval + ival;    //  ival converted to double
+    dval + fval;    //  fval converted to double
+    ival = dval;    //  dval converted (by truncation) to int
+    flag = dval;    //  if dval is 0, then flag is false, otherwise true
+    cval + fval;    //  cval promoted to int, then that int converted to float
+    sval + cval;    //  sval and cval promoted to int
+    cval + lval;    //  cval converted to long
+    ival + ulval;   //  ival converted to unsigned long
+    usval + ival;   //  promotion depends on the size of unsigned short and int
+    uival + lval;   //  conversion depends on the size of unsigned int and long
+</code></pre>
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Explicit Conversions</u></b></font></pre>
+     <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">用於我們想明確地強制將 object 轉換為其他類型。cast-name\<type>(expression)。(<a href="https://junye1993.blogspot.com/2020/07/c-primer-5th-edition-chapter-2-2.html">const相關文章1</a>, <a href="https://junye1993.blogspot.com/2020/05/cc-const.html">const相關文章2</a>)</type></font></pre>
+     <pre><code class="language-c++" style="width: 95%;">    // static_cast 最常用的 cast-name
+    // cast used to force floating-point division
+    double slope = static_cast&lt;double&gt;(j) / i;
+
+    // const_cast 用來改變 low-level const (point to const)
+    const char *pc;
+    char *p = const_cast&lt;char*&gt;(pc); // ok: but writing through p is undefinedc
+
+    // reinterpret_cast 對其 operand 進行 low-level bit 的重新解釋
+    // 要很理解其型別的 bit 組成才會使用
+    int *ip;
+    char *pc = reinterpret_cast&lt;char*&gt;(ip);
+</code></pre>
+    </li>
+   </ul>
+   <blockquote>
+    <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font color="#cc0000" face="helvetica" size="4">cast 基本上就是擾亂型別，建議能不使用就不使用。</font></pre>
+   </blockquote>
+  </div>
+ </body>
+</html>

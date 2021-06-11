@@ -14,7 +14,7 @@ def blogger_article_spider (url):
     post['content'] = soup.find('div', {'class': 'post-body entry-content float-container'})
     post['config']['url'] = url
     post['config']['title'] = soup.find('title').string
-    post['config']['author'] = soup.find('a', {'rel': 'author'}).span.string
+    post['config']['author'] = "JunYe" # no longer accessible from html
     post['config']['published'] = soup.find('span', {'class': 'byline post-timestamp'}).a.time['datetime']
     post['config']['tag'] = []
     for tag in soup.find_all('a', {'rel': 'tag'}):
@@ -28,7 +28,7 @@ def blogger_article_spider (url):
 def blogger_sitemap_spider (url):
     data = {'post': []}
     pattern = r'sitemap.xml\?page=[1-9]+'
-    
+    print(url)
     source_code = requests.get(url)
     plain_text = source_code.text
     soup = BeautifulSoup(plain_text, features="html.parser")
