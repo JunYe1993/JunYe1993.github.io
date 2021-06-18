@@ -1,50 +1,133 @@
+<div class="separator" style="clear: both;text-align: center;">
+ <a style="margin-left: 1em;margin-right: 1em;">
+  <img alt="'Tree.jpg'" border="0" data-original-height="1365" data-original-width="2048" height="424" src="https://junye1993.github.io/image/Tree.jpg" width="640"/>
+ </a>
+</div>
 <h2 style="background-color: #e6edeb;border-left: 5px solid rgb(2, 180, 206);box-sizing: border-box;font-size: large;letter-spacing: 1.44px;line-height: 1.6em;margin: 16px 0px 24px;padding: 10px 10px 10px 18px;text-align: justify;">
- 總覽
+ Segment-Tree 介紹
+</h2>
+<pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">主要用來找<span style="color: #e06666;"><b><em>區間最大值</em></b></span>或<span style="color: #e06666;"><b><em>區間總和</em></b></span>。由於我是為了<a href="https://leetcode.com/problems/range-sum-query-mutable/">這題</a>所以以區間總和做介紹。下面參考的是 leetcode/hg3994 大大的<a href="https://leetcode.com/problems/range-sum-query-mutable/discuss/1218358/C%2B%2B-or-Segment-Tree-or-Explained">答案</a>。</font></pre>
+<pre><code class="language-c++">    // nums:[-1, 4, 2, 0, 5]
+    //
+    // Segment Tree for the Above Array:
+    //
+    //         10                     [0,4]
+    //        /  \
+    //      5      5           [0,2]          [3,4]
+    //     / \    / \
+    //    3   2  0   5      [0,1]  [2,2]   [3,3]  [4,4]
+    //   / \   
+    // -1  4            [0,0]  [1,1]
+</code></pre>
+<h2 style="background-color: #e6edeb;border-left: 5px solid rgb(2, 180, 206);box-sizing: border-box;font-size: large;letter-spacing: 1.44px;line-height: 1.6em;margin: 36px 0px 24px;padding: 10px 10px 10px 18px;text-align: justify;">
+ Segment-Tree 實作
 </h2>
 <ul>
  <li>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u><a href="https://junye1993.blogspot.com/2020/06/c-primer-5th-edition-chapter-1.html">讀書心得 - C++ Primer (5th Edition) - Chapter 1</a></u></b></font></pre>
- </li>
- <li>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u><a href="https://junye1993.blogspot.com/2020/07/c-primer-5th-edition-chapter-2-1.html">讀書心得 - C++ Primer (5th Edition) - Chapter 2 (1) - Primitive Types</a></u></b></font></pre>
- </li>
- <li>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u><a href="https://junye1993.blogspot.com/2020/07/c-primer-5th-edition-chapter-2-2.html">讀書心得 - C++ Primer (5th Edition) - Chapter 2 (2) - Const</a></u></b></font></pre>
- </li>
- <li>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u><a href="https://junye1993.blogspot.com/2020/07/c-primer-5th-edition-chapter-2-3.html">讀書心得 - C++ Primer (5th Edition) - Chapter 2 (3) - Type Aliases</a></u></b></font></pre>
- </li>
- <li>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u><a href="https://junye1993.blogspot.com/2021/02/c-primer-5th-edition-chapter-2-4.html">讀書心得 - C++ Primer (5th Edition) - Chapter 2 (4) - 常用詞彙</a></u></b></font></pre>
- </li>
- <li>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u><a href="https://junye1993.blogspot.com/2021/05/c-primer-5th-edition-chapter-3-1_6.html">讀書心得 - C++ Primer (5th Edition) - Chapter 3 (1) - Namespace</a></u></b></font></pre>
- </li>
- <li>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u><a href="https://junye1993.blogspot.com/2021/05/c-primer-5th-edition-chapter-3-2_11.html">讀書心得 - C++ Primer (5th Edition) - Chapter 3 (2) - Vector</a></u></b></font></pre>
- </li>
- <li>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u><a href="https://junye1993.blogspot.com/2021/05/c-primer-5th-edition-chapter-3-3.html">讀書心得 - C++ Primer (5th Edition) - Chapter 3 (3) - Array</a></u></b></font></pre>
- </li>
- <li>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u><a href="https://junye1993.blogspot.com/2021/05/c-primer-5th-edition-chapter-3-4.html">讀書心得 - C++ Primer (5th Edition) - Chapter 3 (4) - 常用詞彙</a></u></b></font></pre>
- </li>
- <li>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u><a href="https://junye1993.blogspot.com/2021/05/c-primer-5th-edition-chapter-4-1.html">讀書心得 - C++ Primer (5th Edition) - Chapter 4 (1) - Expression &amp; Operator</a></u></b></font></pre>
- </li>
- <li>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u><a href="https://junye1993.blogspot.com/2021/05/c-primer-5th-edition-chapter-4-2.html">讀書心得 - C++ Primer (5th Edition) - Chapter 4 (2) - Type Conversions</a></u></b></font></pre>
- </li>
- <li>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u><a href="https://junye1993.blogspot.com/2021/05/c-primer-5th-edition-chapter-4-3.html">讀書心得 - C++ Primer (5th Edition) - Chapter 4 (3) - 常用詞彙</a></u></b></font></pre>
- </li>
- <li>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u><a href="https://junye1993.blogspot.com/2021/06/c-primer-5th-edition-chapter-5-1.html">讀書心得 - C++ Primer (5th Edition) - Chapter 5 (1) - Statement</a></u></b></font></pre>
- </li>
- <li>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u><a href="https://junye1993.blogspot.com/2021/06/c-primer-5th-edition-chapter-5-2.html">讀書心得 - C++ Primer (5th Edition) - Chapter 5 (2) - Exception</a></u></b></font></pre>
- </li>
- <li>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u><a href="https://junye1993.blogspot.com/2021/06/c-primer-5th-edition-chapter-5-3.html">讀書心得 - C++ Primer (5th Edition) - Chapter 5 (3) - 常用詞彙</a></u></b></font></pre>
+  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Build Tree</u></b></font></pre>
+  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">這邊我用 c++ 概略作介紹( a.k.a. 沒 run 過 )。基本上是 top-down 的 build 法，時間複雜度為 O(n)。</font></pre>
+  <pre><code class="language-c++" style="width: 95%;">    // Node 資料結構
+    struct segTreeNode {
+        int begin;
+        int end;
+        int sum;
+        segTreeNode* left;
+        segTreeNode* right;
+    }
+</code></pre>
+  <pre><code class="language-c++" style="width: 95%;">    // Build
+    segTreeNode buildSegTree(int begin, int end, vector&lt;int&gt;&amp; nums) {
+        // 若 begin = end，代表是 leaf。
+        if (begin == end) return segTreeNode(begin,end,nums[begin],NULL,NULL);
+
+        // 分割
+        int mid = (begin + end) / 2;
+        segTreeNode left = buildSegTree(begin, mid, nums);
+        segTreeNode right = buildSegTree(mid+1, end, nums);
+        return segTreeNode(begin, end, segTree, left.sum+right.sum, &amp;left, &amp;right);
+        // 最後 return 的 node 為 root
+    }
+</code></pre>
  </li>
 </ul>
+<ul>
+ <li>
+  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Update tree</u></b></font></pre>
+  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">時間複雜度為 O(log n)。</font></pre>
+  <pre><code class="language-c++" style="width: 95%;">    // Update
+    segTreeNode updateSegTree(segTreeNode&amp; node, int index, int val) {
+
+        // 若是該 index 的 leaf。則更新其 sum
+        if (node.begin == node.end &amp;&amp; node.end == index) {
+            node.sum = val;
+            return;
+        }
+
+        // 若是中間 node 則分割往下繼續找
+        int mid = (node.begin+node.end)/2;
+        if (index &gt; mid)
+            updateSegTree(node.right, index, val);
+        else
+            updateSegTree(node.left, index, val);
+
+        // 最後更新 node's sum
+        node.sum = node.left-&gt;sum + node.right-&gt;sum;
+    }
+</code></pre>
+ </li>
+</ul>
+<ul>
+ <li>
+  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Update tree</u></b></font></pre>
+  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">時間複雜度為 O(log n)。</font></pre>
+  <pre><code class="language-c++" style="width: 95%;">    // Update
+    segTreeNode updateSegTree(segTreeNode&amp; node, int index, int val) {
+
+        // 若是該 index 的 leaf。則更新其 sum
+        if (node.begin == node.end &amp;&amp; node.end == index) {
+            node.sum = val;
+            return;
+        }
+
+        // 若是中間 node 則分割往下繼續找
+        int mid = (node.begin+node.end)/2;
+        if (index &gt; mid)
+            updateSegTree(node.right, index, val);
+        else
+            updateSegTree(node.left, index, val);
+
+        // 最後更新 node's sum
+        node.sum = node.left-&gt;sum + node.right-&gt;sum;
+    }
+</code></pre>
+ </li>
+</ul>
+<ul>
+ <li>
+  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Sum</u></b></font></pre>
+  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">時間複雜度為 O(log n + k)。</font></pre>
+  <pre><code class="language-c++" style="width: 95%;">    // Sum
+    int sum(segTreeNode&amp; node, int left, int right) {
+
+        // 若完美覆蓋區間，直接回傳。
+        if (node.begin == left &amp;&amp; node.end == right)
+            return node.sum;
+
+        int mid = (node.begin+node.end)/2;
+        // 要求區間完全在左邊
+        if (right &lt;= mid)
+            return sum(node.left, left, right);
+        // 要求區間完全在右邊
+        else if (left &gt; mid)
+            return sum(node.right, left, right);
+        // 兩邊都有
+        else
+            return sum(node.left, left, mid) + 
+                   sum(node.right, mid+1, right);
+    }
+</code></pre>
+ </li>
+</ul>
+<pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;margin-top: 36px;"><font face="helvetica" size="4.5">參考資料 :</font></pre>
+<pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4.5">1.<a href="https://leetcode.com/problems/range-sum-query-mutable/">leetcode/hg3994 answer</a></font></pre>
+<pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4.5">2.<a href="https://www.youtube.com/watch?v=rYBtViWXYeI&amp;ab_channel=HuaHua">youtube中文講解</a></font></pre>
