@@ -13,12 +13,12 @@ def blogger_article_spider (url):
     soup = BeautifulSoup(plain_text, features="lxml")
     post['content'] = soup.find('div', {'class': 'post-body entry-content float-container'})
     post['config']['url'] = url
-    post['config']['title'] = soup.find('title').string
+    post['config']['title'] = soup.find('h2', {'class': 'post-title entry-title'}).a.string
     post['config']['author'] = "JunYe" # no longer accessible from html
-    post['config']['published'] = soup.find('span', {'class': 'byline post-timestamp'}).a.time['datetime']
+    post['config']['published'] = soup.find('span', {'class': 'nbtpost-date'}).string
     post['config']['tag'] = []
-    for tag in soup.find_all('a', {'rel': 'tag'}):
-        post['config']['tag'].append(tag.string)
+    for tag in soup.find_all('span', {'class': 'nbttags-links'}):
+        post['config']['tag'].append(tag.a.string)
 
     # return prettify data string
     soup = BeautifulSoup(str(post['content']), features="lxml")

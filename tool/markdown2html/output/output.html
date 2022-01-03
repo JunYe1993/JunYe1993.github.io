@@ -4,130 +4,86 @@
  </a>
 </div>
 <h2 style="background-color: #e6edeb;border-left: 5px solid rgb(2, 180, 206);box-sizing: border-box;font-size: large;letter-spacing: 1.44px;line-height: 1.6em;margin: 16px 0px 24px;padding: 10px 10px 10px 18px;text-align: justify;">
- Segment-Tree 介紹
+ Directed Acyclic Graph (DAG) 介紹
 </h2>
-<pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">主要用來找<span style="color: #e06666;"><b><em>區間最大值</em></b></span>或<span style="color: #e06666;"><b><em>區間總和</em></b></span>。由於我是為了<a href="https://leetcode.com/problems/range-sum-query-mutable/">這題</a>所以以區間總和做介紹。下面參考的是 leetcode/hg3994 大大的<a href="https://leetcode.com/problems/range-sum-query-mutable/discuss/1218358/C%2B%2B-or-Segment-Tree-or-Explained">答案</a>。</font></pre>
-<pre><code class="language-c++">    // nums:[-1, 4, 2, 0, 5]
-    //
-    // Segment Tree for the Above Array:
-    //
-    //         10                     [0,4]
-    //        /  \
-    //      5      5           [0,2]          [3,4]
-    //     / \    / \
-    //    3   2  0   5      [0,1]  [2,2]   [3,3]  [4,4]
-    //   / \   
-    // -1  4            [0,0]  [1,1]
-</code></pre>
+<pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">不同於 Tree 的無方向、無環，DAG 則是<span style="color: #e06666;"><b><em>有方向</em></b></span>、<span style="color: #e06666;"><b><em>無環</em></b></span>。DAG 特性是不斷地前進，有時分流、有時合流，日常常見的 DAG 為族譜、水流以及<a href="https://leetcode.com/problems/course-schedule/">課程擋修規則</a>。</font></pre>
 <h2 style="background-color: #e6edeb;border-left: 5px solid rgb(2, 180, 206);box-sizing: border-box;font-size: large;letter-spacing: 1.44px;line-height: 1.6em;margin: 36px 0px 24px;padding: 10px 10px 10px 18px;text-align: justify;">
- Segment-Tree 實作
+ 實作
 </h2>
 <ul>
  <li>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Build Tree</u></b></font></pre>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">這邊我用 c++ 概略作介紹( a.k.a. 沒 run 過 )。基本上是 top-down 的 build 法，時間複雜度為 O(n)。</font></pre>
-  <pre><code class="language-c++" style="width: 95%;">    // Node 資料結構
-    struct segTreeNode {
-        int begin;
-        int end;
-        int sum;
-        segTreeNode* left;
-        segTreeNode* right;
-    }
-</code></pre>
-  <pre><code class="language-c++" style="width: 95%;">    // Build
-    segTreeNode buildSegTree(int begin, int end, vector&lt;int&gt;&amp; nums) {
-        // 若 begin = end，代表是 leaf。
-        if (begin == end) return segTreeNode(begin,end,nums[begin],NULL,NULL);
-
-        // 分割
-        int mid = (begin + end) / 2;
-        segTreeNode left = buildSegTree(begin, mid, nums);
-        segTreeNode right = buildSegTree(mid+1, end, nums);
-        return segTreeNode(begin, end, segTree, left.sum+right.sum, &amp;left, &amp;right);
-        // 最後 return 的 node 為 root
-    }
+  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Topological Ordering</u></b></font></pre>
+  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">拿課程擋修規則為例，有必須先修的課程及後修的課程，將其完整排列出來視為 Topological Ordering。</font></pre>
+  <pre><code class="language-c++" style="width: 95%;">    // 課程 1 須先修 : None
+    // 課程 2 須先修 : 課程 1
+    // 課程 3 須先修 : 課程 1, 課程 2
+    // 課程 4 須先修 : None
+    // 
+    // Gragh:
+    // 課程 1 -&gt; 課程 2
+    //        ↘   ↓
+    // 課程 4    課程 3
+    //
+    // Topological Ordering:
+    //  1) 1 2 3 4
+    //  2) 4 1 2 3
+    //  3) 1 4 2 3
+    //  4) 1 2 4 3
+    // 兩個都行，只要順序符合規則就好 (按這個例子，課程 4 的排序位置無關緊要)
 </code></pre>
  </li>
 </ul>
 <ul>
  <li>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Update tree</u></b></font></pre>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">時間複雜度為 O(log n)。</font></pre>
-  <pre><code class="language-c++" style="width: 95%;">    // Update
-    segTreeNode updateSegTree(segTreeNode&amp; node, int index, int val) {
+  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Topological Sort ( Kahn's Algorithm  )</u></b></font></pre>
+  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">排序時，首先要找到第一個點 (課程 1 或課程 4)。第一個點有一個特別之處，就是<span style="color: #e06666;"><b><em>沒有人指向他</em></b></span>。找出來該第一點後，把其指向的連接也跟著去掉。使下一次課程 2 變為第一個點。以此排序。</font></pre>
+  <pre><code class="language-c++" style="width: 95%;">    // Gragh:
+    //         課程 2
+    //           ↓
+    // 課程 4   課程 3
+</code></pre>
+ </li>
+</ul>
+<ul>
+ <li>
+  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Code</u></b></font></pre>
+  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4"><a href="https://leetcode.com/problems/course-schedule/">題目</a>之範例解答</font></pre>
+  <pre><code class="language-c++" style="width: 95%;">    bool canFinish (int numCourses, vector&lt;vector&lt;int&gt;&gt;&amp; prerequisites) {
 
-        // 若是該 index 的 leaf。則更新其 sum
-        if (node.begin == node.end &amp;&amp; node.end == index) {
-            node.sum = val;
-            return;
+        // Kahn's Algorithm
+        // http://web.ntnu.edu.tw/~algo/DirectedAcyclicGraph.html
+
+        // adj 紀錄 node 連出去的所有 nodes
+        // ref 紀錄 node 被連的次數
+        vector&lt;vector&lt;int&gt;&gt; adj(numCourses, vector&lt;int&gt;());
+        vector&lt;int&gt; ref(numCourses, 0);
+
+        // init
+        for (auto&amp;v : prerequisites) {
+            ++ref[v[0]];
+            adj[v[1]].push_back(v[0]);
         }
 
-        // 若是中間 node 則分割往下繼續找
-        int mid = (node.begin+node.end)/2;
-        if (index &gt; mid)
-            updateSegTree(node.right, index, val);
-        else
-            updateSegTree(node.left, index, val);
+        // Every loop 都可以找到一個 first node, 需要找出 numCourses 個
+        for (int i = 0; i &lt; numCourses; ++i) {
 
-        // 最後更新 node's sum
-        node.sum = node.left-&gt;sum + node.right-&gt;sum;
-    }
-</code></pre>
- </li>
-</ul>
-<ul>
- <li>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Update tree</u></b></font></pre>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">時間複雜度為 O(log n)。</font></pre>
-  <pre><code class="language-c++" style="width: 95%;">    // Update
-    segTreeNode updateSegTree(segTreeNode&amp; node, int index, int val) {
+            // 一定有 node 的被連的次數為 0, 是為 first node
+            // 若所有 node 被連次數都 &gt; 0, 代表有 cycle
+            int head = 0;
+            while (head &lt; numCourses &amp;&amp; ref[head] != 0) ++head;
+            if (head == numCourses) return false;
 
-        // 若是該 index 的 leaf。則更新其 sum
-        if (node.begin == node.end &amp;&amp; node.end == index) {
-            node.sum = val;
-            return;
+            // 找過的 first node 要刪除, 設為 -1
+            // 把這次的 first node 所連出去 nodes 的 被連次數(ref) 減一
+            ref[head] = -1;
+            for (auto &amp; n : adj[head]) --ref[n];
         }
 
-        // 若是中間 node 則分割往下繼續找
-        int mid = (node.begin+node.end)/2;
-        if (index &gt; mid)
-            updateSegTree(node.right, index, val);
-        else
-            updateSegTree(node.left, index, val);
-
-        // 最後更新 node's sum
-        node.sum = node.left-&gt;sum + node.right-&gt;sum;
-    }
-</code></pre>
- </li>
-</ul>
-<ul>
- <li>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Sum</u></b></font></pre>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">時間複雜度為 O(log n + k)。</font></pre>
-  <pre><code class="language-c++" style="width: 95%;">    // Sum
-    int sum(segTreeNode&amp; node, int left, int right) {
-
-        // 若完美覆蓋區間，直接回傳。
-        if (node.begin == left &amp;&amp; node.end == right)
-            return node.sum;
-
-        int mid = (node.begin+node.end)/2;
-        // 要求區間完全在左邊
-        if (right &lt;= mid)
-            return sum(node.left, left, right);
-        // 要求區間完全在右邊
-        else if (left &gt; mid)
-            return sum(node.right, left, right);
-        // 兩邊都有
-        else
-            return sum(node.left, left, mid) + 
-                   sum(node.right, mid+1, right);
+        return true;
     }
 </code></pre>
  </li>
 </ul>
 <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;margin-top: 36px;"><font face="helvetica" size="4.5">參考資料 :</font></pre>
-<pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4.5">1.<a href="https://leetcode.com/problems/range-sum-query-mutable/">leetcode/hg3994 answer</a></font></pre>
-<pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4.5">2.<a href="https://www.youtube.com/watch?v=rYBtViWXYeI&amp;ab_channel=HuaHua">youtube中文講解</a></font></pre>
+<pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4.5">1.<a href="https://leetcode.com/problems/course-schedule/">leetcode-problem-course-schedule</a></font></pre>
+<pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4.5">2.<a href="http://web.ntnu.edu.tw/~algo/DirectedAcyclicGraph.html">http://web.ntnu.edu.tw/~algo/DirectedAcyclicGraph.html</a></font></pre>
