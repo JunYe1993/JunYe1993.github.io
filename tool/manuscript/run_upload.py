@@ -33,7 +33,7 @@ def saveConfig (config):
 
 def transferToHTML (markdownFile):
     try:
-        option = None if len(sys.argv) < 3 else sys.argv[2] 
+        option = None if len(sys.argv) < 3 else sys.argv[2]
         with open (markdownFile, "r", encoding="utf-8") as md:
             return m2html.transMDtoHTML(md.read(), option)
     except:
@@ -49,7 +49,7 @@ def getPostData (config, html):
     userTypeIn = input("Please enter the blod id%s:" % defaultStr)
     userTypeIn = userTypeIn.strip()
     retData['blog'] = {'id': userTypeIn if userTypeIn != "" or defaultStr == "" else config["blog"]["id"]}
-    
+
     defaultStr = ""
     if "title" in config:
         defaultStr = "(default: %s)" % (config["title"])
@@ -98,7 +98,7 @@ def run_upload (manuscriptFile):
     # get file & config
     config = loadConfig()
     html = transferToHTML(manuscriptFile)
-    
+
     # upload & return post id
     return uploadPost(getPostData(config, html), os.path.abspath(POST_DATA))
 

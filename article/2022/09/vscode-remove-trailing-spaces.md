@@ -2,9 +2,11 @@
  <div class="separator" style="clear: both;text-align: center;">
   <div class="separator" style="clear: both;text-align: center;">
    <div class="separator" style="clear: both;text-align: center;">
-    <a style="margin-left: 1em;margin-right: 1em;">
-     <img alt="'Tree.jpg'" border="0" data-original-height="1365" data-original-width="2048" height="424" src="https://junye1993.github.io/image/Development.jpg" width="640"/>
-    </a>
+    <div class="separator" style="clear: both;text-align: center;">
+     <a style="margin-left: 1em;margin-right: 1em;">
+      <img alt="'Tree.jpg'" border="0" data-original-height="1365" data-original-width="2048" height="424" src="https://junye1993.github.io/image/Development.jpg" width="640"/>
+     </a>
+    </div>
    </div>
   </div>
  </div>

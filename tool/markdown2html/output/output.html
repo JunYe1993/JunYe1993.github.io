@@ -1,89 +1,89 @@
 <div class="separator" style="clear: both;text-align: center;">
  <a style="margin-left: 1em;margin-right: 1em;">
-  <img alt="'Tree.jpg'" border="0" data-original-height="1365" data-original-width="2048" height="424" src="https://junye1993.github.io/image/Tree.jpg" width="640"/>
+  <img alt="'Development.jpg'" border="0" data-original-height="1365" data-original-width="2048" height="424" src="https://junye1993.github.io/image/Development.jpg" width="640"/>
  </a>
 </div>
 <h2 style="background-color: #e6edeb;border-left: 5px solid rgb(2, 180, 206);box-sizing: border-box;font-size: large;letter-spacing: 1.44px;line-height: 1.6em;margin: 16px 0px 24px;padding: 10px 10px 10px 18px;text-align: justify;">
- Directed Acyclic Graph (DAG) 介紹
+ MD5 Intro
 </h2>
-<pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">不同於 Tree 的無方向、無環，DAG 則是<span style="color: #e06666;"><b><em>有方向</em></b></span>、<span style="color: #e06666;"><b><em>無環</em></b></span>。DAG 特性是不斷地前進，有時分流、有時合流，日常常見的 DAG 為族譜、水流以及<a href="https://leetcode.com/problems/course-schedule/">課程擋修規則</a>。</font></pre>
+<pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">MD5 訊息摘要演算法（英語：MD5 Message-Digest Algorithm），一種被廣泛使用的密碼雜湊函式，可以產生出一個128位元（16個字元(BYTES)）的雜湊值（hash value），用於確保資訊傳輸完整一致。(<a href="https://zh.wikipedia.org/wiki/MD5">節自wiki</a>)</font></pre>
 <h2 style="background-color: #e6edeb;border-left: 5px solid rgb(2, 180, 206);box-sizing: border-box;font-size: large;letter-spacing: 1.44px;line-height: 1.6em;margin: 36px 0px 24px;padding: 10px 10px 10px 18px;text-align: justify;">
- 實作
+ 簡易 MD5 工具 : md5sum
 </h2>
+<pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">基本上 Unix, Linux 的作業系統都有預設 md5sum</font></pre>
 <ul>
  <li>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Topological Ordering</u></b></font></pre>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">拿課程擋修規則為例，有必須先修的課程及後修的課程，將其完整排列出來視為 Topological Ordering。</font></pre>
-  <pre><code class="language-c++" style="width: 95%;">    // 課程 1 須先修 : None
-    // 課程 2 須先修 : 課程 1
-    // 課程 3 須先修 : 課程 1, 課程 2
-    // 課程 4 須先修 : None
-    // 
-    // Gragh:
-    // 課程 1 -&gt; 課程 2
-    //        ↘   ↓
-    // 課程 4    課程 3
-    //
-    // Topological Ordering:
-    //  1) 1 2 3 4
-    //  2) 4 1 2 3
-    //  3) 1 4 2 3
-    //  4) 1 2 4 3
-    // 兩個都行，只要順序符合規則就好 (按這個例子，課程 4 的排序位置無關緊要)
+  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>md5sum 用法</u></b></font></pre>
+  <pre><code class="language-bash" style="width: 95%;">    # pipe
+    $ echo "123" | md5sum
+    ba1f2511fc30423bdbb183fe33f3dd0f  -
+
+    # 讀檔
+    $ md5sum .gitignore
+    247bc32fd24d78844194917cb32d556a  .gitignore
+
+    # check
+    $ md5sum .gitignore &gt; tmp.md5
+    $ md5sum -c tmp.md5
+    .gitignore: OK
+
+    # pipe check
+    $ echo "247bc32fd24d78844194917cb32d556a .gitignore" | md5sum -c
+    .gitignore: OK
 </code></pre>
  </li>
 </ul>
+<h2 style="background-color: #e6edeb;border-left: 5px solid rgb(2, 180, 206);box-sizing: border-box;font-size: large;letter-spacing: 1.44px;line-height: 1.6em;margin: 36px 0px 24px;padding: 10px 10px 10px 18px;text-align: justify;">
+ openssl/evp.h
+</h2>
+<pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">The EVP digest routines are a high level interface to message digests (<a href="https://linux.die.net/man/3/evp_md_type">節自 Linux man page</a>)。這裡註記一下 EVP 大概是代表 Envelope。雖然現在已經被改掉，但以前的 openssl/evp.h 的 #ifndef 是 HEADER_ENVELOPE_H。</font></pre>
 <ul>
  <li>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Topological Sort ( Kahn's Algorithm  )</u></b></font></pre>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4">排序時，首先要找到第一個點 (課程 1 或課程 4)。第一個點有一個特別之處，就是<span style="color: #e06666;"><b><em>沒有人指向他</em></b></span>。找出來該第一點後，把其指向的連接也跟著去掉。使下一次課程 2 變為第一個點。以此排序。</font></pre>
-  <pre><code class="language-c++" style="width: 95%;">    // Gragh:
-    //         課程 2
-    //           ↓
-    // 課程 4   課程 3
-</code></pre>
- </li>
-</ul>
-<ul>
- <li>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>Code</u></b></font></pre>
-  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4"><a href="https://leetcode.com/problems/course-schedule/">題目</a>之範例解答</font></pre>
-  <pre><code class="language-c++" style="width: 95%;">    bool canFinish (int numCourses, vector&lt;vector&lt;int&gt;&gt;&amp; prerequisites) {
+  <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4" style="background-color: #fff7e9;"><b><u>evp 大概的流程</u></b></font></pre>
+  <pre><code class="language-c++" style="width: 95%;">    #include &lt;stdio.h&gt;
+    #include &lt;string.h&gt;
+    #include &lt;openssl/evp.h&gt;
 
-        // Kahn's Algorithm
-        // http://web.ntnu.edu.tw/~algo/DirectedAcyclicGraph.html
+    int main(int argc, char *argv[])
+    {
+        EVP_MD_CTX *mdctx;
+        const EVP_MD *md;
+        char mess1[] = "Test Message\n";
+        char mess2[] = "Hello World\n";
+        unsigned char md_value[EVP_MAX_MD_SIZE];
+        unsigned int md_len, i;
 
-        // adj 紀錄 node 連出去的所有 nodes
-        // ref 紀錄 node 被連的次數
-        vector&lt;vector&lt;int&gt;&gt; adj(numCourses, vector&lt;int&gt;());
-        vector&lt;int&gt; ref(numCourses, 0);
-
-        // init
-        for (auto&amp;v : prerequisites) {
-            ++ref[v[0]];
-            adj[v[1]].push_back(v[0]);
+        if (argv[1] == NULL) {
+            printf("Usage: mdtest digestname\n");
+            exit(1);
         }
 
-        // Every loop 都可以找到一個 first node, 需要找出 numCourses 個
-        for (int i = 0; i &lt; numCourses; ++i) {
-
-            // 一定有 node 的被連的次數為 0, 是為 first node
-            // 若所有 node 被連次數都 &gt; 0, 代表有 cycle
-            int head = 0;
-            while (head &lt; numCourses &amp;&amp; ref[head] != 0) ++head;
-            if (head == numCourses) return false;
-
-            // 找過的 first node 要刪除, 設為 -1
-            // 把這次的 first node 所連出去 nodes 的 被連次數(ref) 減一
-            ref[head] = -1;
-            for (auto &amp; n : adj[head]) --ref[n];
+        OpenSSL_add_all_algorithms(); // 有可能有些 algo 沒有 load, ex. RSA-SHA1
+        md = EVP_get_digestbyname(argv[1]);
+        if (md == NULL) {
+            printf("Unknown message digest %s\n", argv[1]);
+            exit(1);
         }
 
-        return true;
+        mdctx = EVP_MD_CTX_new();
+        EVP_DigestInit_ex(mdctx, md, NULL); // _ex() 較有效率, 以前的 code 可能是 EVP_DigestInit()
+        EVP_DigestUpdate(mdctx, mess1, strlen(mess1));
+        EVP_DigestUpdate(mdctx, mess2, strlen(mess2));
+        EVP_DigestFinal_ex(mdctx, md_value, &amp;md_len);
+        EVP_MD_CTX_free(mdctx);
+
+        printf("Digest is: ");
+        for (i = 0; i &lt; md_len; i++)
+            printf("%02x", md_value[i]);
+        printf("\n");
+
+        exit(0);
     }
 </code></pre>
  </li>
 </ul>
 <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;margin-top: 36px;"><font face="helvetica" size="4.5">參考資料 :</font></pre>
-<pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4.5">1.<a href="https://leetcode.com/problems/course-schedule/">leetcode-problem-course-schedule</a></font></pre>
-<pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4.5">2.<a href="http://web.ntnu.edu.tw/~algo/DirectedAcyclicGraph.html">http://web.ntnu.edu.tw/~algo/DirectedAcyclicGraph.html</a></font></pre>
+<pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4.5">1.<a href="https://zh.wikipedia.org/wiki/MD5">MD5 wiki</a></font></pre>
+<pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4.5">2.<a href="https://zh.wikipedia.org/zh-tw/Md5sum">MD5SUM wiki</a></font></pre>
+<pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4.5">3.<a href="https://linux.die.net/man/3/evp_md_type">linux man page</a></font></pre>
+<pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><font face="helvetica" size="4.5">4.<a href="https://stackoverflow.com/questions/3055454/what-does-openssls-evp-mean">stackoverflow</a></font></pre>
